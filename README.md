@@ -3,6 +3,18 @@ Missing Teeth and Heart Disease Revisited: BRFSS 2018
 Paul G. Smith
 First created on Nov 5, 2019. Updated on Nov 06, 2019
 
+  - [Missing Teeth and Heart Disease Revisited: BRFSS
+    2018](#missing-teeth-and-heart-disease-revisited-brfss-2018)
+      - [Load Dependencies and Read in BRFSS 2018 Data
+        Set](#load-dependencies-and-read-in-brfss-2018-data-set)
+      - [Clean and make additional outcome and exposure
+        variables](#clean-and-make-additional-outcome-and-exposure-variables)
+      - [Clean and make additional confounder
+        variables](#clean-and-make-additional-confounder-variables)
+      - [Data reduction](#data-reduction)
+      - [Write out final clean data
+        set](#write-out-final-clean-data-set)
+
 ## Missing Teeth and Heart Disease Revisited: BRFSS 2018
 
 ### Load Dependencies and Read in BRFSS 2018 Data Set
@@ -795,8 +807,8 @@ one. This provides a data reduction view of each step.
   - 261,501 rows remained after missing data from sex, race, and age
     variables were removed. Also to replicate the orginal study data was
     retained only for those individuals over 50 years of age.
-  - 136,336 remained in the final data set after removing the missing
-    data from the remaining confounders.
+  - 204,042 rows remained in the final data set after removing the
+    missing data from the remaining confounders.
 
 <!-- end list -->
 

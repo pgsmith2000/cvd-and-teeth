@@ -4,7 +4,7 @@ author: "Paul G. Smith"
 date: '`r paste("First created on Nov 5, 2019. Updated on", format(Sys.Date(),"%b %d, %Y"))`'
 output: 
   github_document:
-    toc: false
+    toc: true
     html_preview: false
 ---
 
@@ -53,7 +53,7 @@ During data reduction missing data was removed from the data set one by one. Thi
 - 435,118 rows remained after the removal of missing data on the cardiovascular disease questions (dependent variable).
 _ 424,055 rows remained after removing missing data from the tooth loss questions (exposure variable.)
 - 261,501 rows remained after missing data from sex, race, and age variables were removed. Also to replicate the orginal study data was retained only for those individuals over 50 years of age.
-- 136,336 remained in the final data set after removing the missing data from the remaining confounders.
+- 204,042 rows remained in the final data set after removing the missing data from the remaining confounders.
 
 ```{r echo=TRUE, message=TRUE, warning=TRUE}
 source("175_Data reduction.R", echo = TRUE)
