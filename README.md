@@ -1,11 +1,13 @@
 Missing Teeth and Heart Disease Revisited: BRFSS 2018
 ================
 Paul G. Smith
-First created on Nov 5, 2019. Updated on Nov 05, 2019
+First created on Nov 5, 2019. Updated on Nov 06, 2019
 
 ## Missing Teeth and Heart Disease Revisited: BRFSS 2018
 
 ### Load Dependencies and Read in BRFSS 2018 Data Set
+
+### Data Preperation and Reduction
 
 ``` r
 source("100_Dependencies.R", echo = TRUE)
@@ -42,7 +44,7 @@ source("100_Dependencies.R", echo = TRUE)
     ##     impute
 
 ``` r
-source("101_Read in BRFSS XPT.R", echo = TRUE)
+source("105_Read in BRFSS XPT.R", echo = TRUE)
 ```
 
     ## 
@@ -105,877 +107,769 @@ source("101_Read in BRFSS XPT.R", echo = TRUE)
     ## [266] "X_MAM5022" "X_RFPAP34" "X_RFPSA22" "X_RFBLDS3" "X_COL10YR"
     ## [271] "X_HFOB3YR" "X_FS5YR"   "X_FOBTFS"  "X_CRCREC"  "X_AIDTST3"
     ## 
-    ## > colnames(BRFSS_a)[grep("age", tolower(colnames(BRFSS_a)))]
-    ## [1] "DIABAGE2"  "CNCRAGE"   "X_AGEG5YR" "X_AGE65YR" "X_AGE80"   "X_AGE_G"  
-    ## 
     ## > nrow(BRFSS_a)
     ## [1] 437436
 
-### Data Reduction
-
 ``` r
-source("105_Keep vars.R", echo = TRUE)
+source("110_Keep vars.R", echo = TRUE)
 ```
 
     ## 
-    ## > BRFSSVarList <- c("CVDINFR4", "RMVTETH4", "X_AGEG5YR", 
-    ## +     "X_DENVST3", "SEX1", "X_HISPANC", "X_MRACE1", "EDUCA", "INCOME2", 
-    ## +     "X_SMOKER3",  .... [TRUNCATED] 
+    ## > BRFSS_b <- BRFSS_a
     ## 
-    ## > BRFSS_b <- BRFSS_a[BRFSSVarList]
+    ## > BRFSSVarList <- c("CVDINFR4", "RMVTETH4", "SEX1", 
+    ## +     "X_HISPANC", "X_MRACE1", "X_AGEG5YR", "EDUCA", "INCOME2", 
+    ## +     "X_DENVST3", "DIABETE3", " ..." ... [TRUNCATED] 
+    ## 
+    ## > BRFSS_b <- BRFSS_b[BRFSSVarList]
     ## 
     ## > colnames(BRFSS_b)
-    ##  [1] "CVDINFR4"  "RMVTETH4"  "X_AGEG5YR" "X_DENVST3" "SEX1"     
-    ##  [6] "X_HISPANC" "X_MRACE1"  "EDUCA"     "INCOME2"   "X_SMOKER3"
-    ## [11] "DIABETE3"  "X_BMI5CAT" "EXERANY2" 
+    ##  [1] "CVDINFR4"  "RMVTETH4"  "SEX1"      "X_HISPANC" "X_MRACE1" 
+    ##  [6] "X_AGEG5YR" "EDUCA"     "INCOME2"   "X_DENVST3" "DIABETE3" 
+    ## [11] "X_SMOKER3" "EXERANY2"  "X_BMI5CAT"
     ## 
     ## > nrow(BRFSS_b)
     ## [1] 437436
 
-### Apply Exclusion and final Reduction
-
 ``` r
-source("110_Apply exclusions_make_key_variable.R", echo = TRUE)
+source("115_Make outcome exposure vars.R", echo = TRUE)
 ```
 
     ## 
-    ## > nrow(BRFSS_b)
-    ## [1] 437436
+    ## > BRFSS_c <- BRFSS_b
     ## 
-    ## > BRFSS_c <- subset(BRFSS_b, X_AGEG5YR > 6)
+    ## > BRFSS_c$CVDINFR5 <- 9
     ## 
-    ## > nrow(BRFSS_c)
-    ## [1] 284329
+    ## > BRFSS_c$CVDINFR5[BRFSS_c$CVDINFR4 == 1] <- 0
+    ## 
+    ## > BRFSS_c$CVDINFR5[BRFSS_c$CVDINFR4 == 2] <- 1
+    ## 
+    ## > table(BRFSS_c$CVDINFR4, BRFSS_c$CVDINFR5)
+    ##    
+    ##          0      1      9
+    ##   1  26412      0      0
+    ##   2      0 408706      0
+    ##   7      0      0   2055
+    ##   9      0      0    240
     ## 
     ## > BRFSS_c$RMVTETH5 <- 9
     ## 
-    ## > BRFSS_c$RMVTETH5[BRFSS_c$RMVTETH4 == 8] <- 1
+    ## > BRFSS_c$RMVTETH5[BRFSS_c$RMVTETH4 == 8] <- 0
     ## 
-    ## > BRFSS_c$RMVTETH5[BRFSS_c$RMVTETH4 == 1] <- 2
+    ## > BRFSS_c$RMVTETH5[BRFSS_c$RMVTETH4 == 1] <- 1
     ## 
-    ## > BRFSS_c$RMVTETH5[BRFSS_c$RMVTETH4 == 2] <- 3
+    ## > BRFSS_c$RMVTETH5[BRFSS_c$RMVTETH4 == 2] <- 2
     ## 
-    ## > BRFSS_c$RMVTETH5[BRFSS_c$RMVTETH4 == 3] <- 4
+    ## > BRFSS_c$RMVTETH5[BRFSS_c$RMVTETH4 == 3] <- 3
     ## 
     ## > table(BRFSS_c$RMVTETH4, BRFSS_c$RMVTETH5)
     ##    
-    ##          1      2      3      4      9
-    ##   1      0  92845      0      0      0
-    ##   2      0      0  45288      0      0
-    ##   3      0      0      0  27444      0
-    ##   7      0      0      0      0   8387
-    ##   8 109714      0      0      0      0
-    ##   9      0      0      0      0    623
+    ##          0      1      2      3      9
+    ##   1      0 127234      0      0      0
+    ##   2      0      0  51635      0      0
+    ##   3      0      0      0  29430      0
+    ##   7      0      0      0      0   9687
+    ##   8 218715      0      0      0      0
+    ##   9      0      0      0      0    707
+
+``` r
+source("120_Make sex race vars.R", echo = TRUE)
+```
+
     ## 
-    ## > BRFSS_d <- subset(BRFSS_c, RMVTETH5 < 5)
+    ## > BRFSS_c$SEX2 <- 9
     ## 
-    ## > nrow(BRFSS_d)
-    ## [1] 275291
+    ## > BRFSS_c$SEX2[BRFSS_c$SEX1 == 1] <- 1
     ## 
-    ## > BRFSS_d$CVDINFR5 <- 9
+    ## > BRFSS_c$SEX2[BRFSS_c$SEX1 == 2] <- 0
     ## 
-    ## > BRFSS_d$CVDINFR5[BRFSS_d$CVDINFR4 == 1] <- 0
-    ## 
-    ## > BRFSS_d$CVDINFR5[BRFSS_d$CVDINFR4 == 2] <- 1
-    ## 
-    ## > table(BRFSS_d$CVDINFR4, BRFSS_d$CVDINFR5)
+    ## > table(BRFSS_c$SEX1, BRFSS_c$SEX2)
     ##    
     ##          0      1      9
-    ##   1  23361      0      0
-    ##   2      0 250437      0
-    ##   7      0      0   1377
-    ##   9      0      0    116
+    ##   1      0 197412      0
+    ##   2 238911      0      0
+    ##   7      0      0    431
+    ##   9      0      0    682
     ## 
-    ## > BRFSS_e <- subset(BRFSS_d, CVDINFR5 < 2)
+    ## > BRFSS_c$MALE <- 0
     ## 
-    ## > table(BRFSS_e$CVDINFR4, BRFSS_e$CVDINFR5)
+    ## > BRFSS_c$MALE[BRFSS_c$SEX2 == 1] <- 1
+    ## 
+    ## > table(BRFSS_c$SEX2, BRFSS_c$MALE)
     ##    
     ##          0      1
-    ##   1  23361      0
-    ##   2      0 250437
+    ##   0 238911      0
+    ##   1      0 197412
+    ##   9   1113      0
     ## 
-    ## > nrow(BRFSS_e)
-    ## [1] 273798
+    ## > BRFSS_c$HISPANIC <- 9
     ## 
-    ## > table(BRFSS_e$RMVTETH5)
+    ## > BRFSS_c$HISPANIC[BRFSS_c$X_HISPANC == 1] <- 1
     ## 
-    ##      1      2      3      4 
-    ## 109271  92422  44955  27150 
+    ## > BRFSS_c$HISPANIC[BRFSS_c$X_HISPANC == 2] <- 0
     ## 
-    ## > (table(BRFSS_e$RMVTETH5)/nrow(BRFSS_e)) * 100
+    ## > table(BRFSS_c$X_HISPANC, BRFSS_c$HISPANIC)
+    ##    
+    ##          0      1      9
+    ##   1      0  36941      0
+    ##   2 395932      0      0
+    ##   9      0      0   4563
     ## 
-    ##        1        2        3        4 
-    ## 39.90935 33.75554 16.41904  9.91607 
+    ## > BRFSS_c$RACEGRP <- 9
     ## 
-    ## > table(BRFSS_e$CVDINFR5)
+    ## > BRFSS_c$RACEGRP[BRFSS_c$X_MRACE1 == 1 & BRFSS_c$HISPANIC == 
+    ## +     0] <- 0
     ## 
-    ##      0      1 
-    ##  23361 250437 
+    ## > BRFSS_c$RACEGRP[BRFSS_c$X_MRACE1 == 2 & BRFSS_c$HISPANIC == 
+    ## +     0] <- 1
     ## 
-    ## > (table(BRFSS_e$CVDINFR5)/nrow(BRFSS_e)) * 100
+    ## > BRFSS_c$RACEGRP[BRFSS_c$X_MRACE1 == 3 & BRFSS_c$HISPANIC == 
+    ## +     0] <- 4
     ## 
-    ##         0         1 
-    ##  8.532203 91.467797
-
-### Make Categorical Variables
+    ## > BRFSS_c$RACEGRP[BRFSS_c$X_MRACE1 == 4 & BRFSS_c$HISPANIC == 
+    ## +     0] <- 3
+    ## 
+    ## > BRFSS_c$RACEGRP[BRFSS_c$X_MRACE1 == 5 & BRFSS_c$HISPANIC == 
+    ## +     0] <- 4
+    ## 
+    ## > BRFSS_c$RACEGRP[BRFSS_c$X_MRACE1 == 6 & BRFSS_c$HISPANIC == 
+    ## +     0] <- 4
+    ## 
+    ## > BRFSS_c$RACEGRP[BRFSS_c$X_MRACE1 == 7 & BRFSS_c$HISPANIC == 
+    ## +     0] <- 4
+    ## 
+    ## > BRFSS_c$RACEGRP[BRFSS_c$HISPANIC == 1] <- 2
+    ## 
+    ## > sum(table(BRFSS_b$X_MRACE1)[1])
+    ## [1] 345711
+    ## 
+    ## > sum(table(BRFSS_b$X_MRACE1)[2])
+    ## [1] 37862
+    ## 
+    ## > sum(table(BRFSS_b$X_MRACE1)[3])
+    ## [1] 9131
+    ## 
+    ## > sum(table(BRFSS_b$X_MRACE1)[4])
+    ## [1] 10258
+    ## 
+    ## > sum(table(BRFSS_b$X_MRACE1)[5])
+    ## [1] 2617
+    ## 
+    ## > sum(table(BRFSS_b$X_MRACE1)[6])
+    ## [1] 11641
+    ## 
+    ## > sum(table(BRFSS_b$X_MRACE1)[7])
+    ## [1] 9572
+    ## 
+    ## > sum(table(BRFSS_b$X_MRACE1)[8])
+    ## [1] 4253
+    ## 
+    ## > sum(table(BRFSS_b$X_MRACE1)[9])
+    ## [1] 6359
+    ## 
+    ## > table(BRFSS_b$X_MRACE1)
+    ## 
+    ##      1      2      3      4      5      6      7     77     99 
+    ## 345711  37862   9131  10258   2617  11641   9572   4253   6359 
+    ## 
+    ## > BRFSS_c$BLACK <- 0
+    ## 
+    ## > BRFSS_c$ASIAN <- 0
+    ## 
+    ## > BRFSS_c$OTHRACE <- 0
+    ## 
+    ## > BRFSS_c$BLACK[BRFSS_c$RACEGRP == 1] <- 1
+    ## 
+    ## > BRFSS_c$ASIAN[BRFSS_c$RACEGRP == 3] <- 1
+    ## 
+    ## > BRFSS_c$OTHRACE[BRFSS_c$RACEGRP == 4] <- 1
+    ## 
+    ## > table(BRFSS_c$RACEGRP, BRFSS_c$BLACK)
+    ##    
+    ##          0      1
+    ##   0 324797      0
+    ##   1      0  35930
+    ##   2  36941      0
+    ##   3   9904      0
+    ##   4  21383      0
+    ##   9   8481      0
+    ## 
+    ## > table(BRFSS_c$RACEGRP, BRFSS_c$ASIAN)
+    ##    
+    ##          0      1
+    ##   0 324797      0
+    ##   1  35930      0
+    ##   2  36941      0
+    ##   3      0   9904
+    ##   4  21383      0
+    ##   9   8481      0
+    ## 
+    ## > table(BRFSS_c$RACEGRP, BRFSS_c$OTHRACE)
+    ##    
+    ##          0      1
+    ##   0 324797      0
+    ##   1  35930      0
+    ##   2  36941      0
+    ##   3   9904      0
+    ##   4      0  21383
+    ##   9   8481      0
 
 ``` r
-source("115_Make categorical variables.R", echo = TRUE)
+source("125_Make age  educ income vars.R", echo = TRUE)
 ```
 
     ## 
-    ## > str(BRFSS_e)
-    ## 'data.frame':    273798 obs. of  15 variables:
-    ##  $ CVDINFR4 : num  2 2 2 2 2 2 2 2 2 2 ...
-    ##  $ RMVTETH4 : num  1 1 8 8 2 8 1 2 1 3 ...
-    ##  $ X_AGEG5YR: num  13 10 12 8 13 8 11 12 10 11 ...
-    ##  $ X_DENVST3: num  1 2 1 1 1 1 2 1 1 2 ...
-    ##  $ SEX1     : num  2 1 2 1 1 2 2 2 2 1 ...
-    ##  $ X_HISPANC: num  2 2 2 2 2 2 2 2 2 2 ...
-    ##  $ X_MRACE1 : num  1 1 1 1 1 1 1 2 1 1 ...
-    ##  $ EDUCA    : num  6 4 6 4 4 5 4 3 3 5 ...
-    ##  $ INCOME2  : num  6 3 8 8 4 6 4 2 2 7 ...
-    ##  $ X_SMOKER3: num  4 4 4 3 3 4 4 4 4 4 ...
-    ##  $ DIABETE3 : num  3 3 3 1 3 3 1 3 1 3 ...
-    ##  $ X_BMI5CAT: num  2 3 2 3 3 4 4 4 4 4 ...
-    ##  $ EXERANY2 : num  2 1 1 2 2 1 2 2 1 1 ...
-    ##  $ RMVTETH5 : num  2 2 1 1 3 1 2 3 2 4 ...
-    ##  $ CVDINFR5 : num  1 1 1 1 1 1 1 1 1 1 ...
+    ## > BRFSS_c$AGEG5YR2 <- 9
     ## 
-    ## > head(BRFSS_e)
-    ##    CVDINFR4 RMVTETH4 X_AGEG5YR X_DENVST3 SEX1 X_HISPANC X_MRACE1 EDUCA
-    ## 1         2        1        13         1    2         2        1     6
-    ## 4         2        1        10         2    1         2        1     4
-    ## 7         2        8        12         1    2         2        1     6
-    ## 9         2        8         8         1    1         2        1     4
-    ## 11        2        2        13         1    1         2        1     4
-    ## 12        2        8         8         1    2         2        1     5
-    ##    INCOME2 X_SMOKER3 DIABETE3 X_BMI5CAT EXERANY2 RMVTETH5 CVDINFR5
-    ## 1        6         4        3         2        2        2        1
-    ## 4        3         4        3         3        1        2        1
-    ## 7        8         4        3         2        1        1        1
-    ## 9        8         3        1         3        2        1        1
-    ## 11       4         3        3         3        2        3        1
-    ## 12       6         4        3         4        1        1        1
+    ## > BRFSS_c$AGEG5YR2[BRFSS_c$X_AGEG5YR > 6 & BRFSS_c$X_AGEG5YR < 
+    ## +     9] <- 0
     ## 
-    ## > tail(BRFSS_e)
-    ##        CVDINFR4 RMVTETH4 X_AGEG5YR X_DENVST3 SEX1 X_HISPANC X_MRACE1 EDUCA
-    ## 437429        2        2        10         2    2         1        1     5
-    ## 437430        2        8         7         2    1         1        1     4
-    ## 437432        2        2        11         2    2         1        1     5
-    ## 437433        2        1        10         9    2         1        1     6
-    ## 437434        2        2        12         2    2         1        6     2
-    ## 437435        2        1        12         2    2         1        1     6
-    ##        INCOME2 X_SMOKER3 DIABETE3 X_BMI5CAT EXERANY2 RMVTETH5 CVDINFR5
-    ## 437429       3         4        3         3        1        3        1
-    ## 437430       3         4        3         3        2        1        1
-    ## 437432      77         4        3         1        1        3        1
-    ## 437433       5         4        3        NA        1        2        1
-    ## 437434       1         3        3         4        2        3        1
-    ## 437435       3         1        4         3        1        2        1
+    ## > BRFSS_c$AGEG5YR2[BRFSS_c$X_AGEG5YR > 8 & BRFSS_c$X_AGEG5YR < 
+    ## +     11] <- 1
     ## 
-    ## > BRFSS_f <- BRFSS_e
+    ## > BRFSS_c$AGEG5YR2[BRFSS_c$X_AGEG5YR > 10 & BRFSS_c$X_AGEG5YR < 
+    ## +     13] <- 2
     ## 
-    ## > BRFSS_f$SEX <- 9
+    ## > BRFSS_c$AGEG5YR2[BRFSS_c$X_AGEG5YR == 13] <- 3
     ## 
-    ## > BRFSS_f$SEX[BRFSS_f$SEX1 == 1] <- 1
-    ## 
-    ## > BRFSS_f$SEX[BRFSS_f$SEX1 == 2] <- 2
-    ## 
-    ## > table(BRFSS_f$SEX)
-    ## 
-    ##      1      2      9 
-    ## 118634 154490    674 
-    ## 
-    ## > BRFSS_g <- subset(BRFSS_b, )
-    ## 
-    ## > BRFSS_f$MALE <- 0
-    ## 
-    ## > BRFSS_f$MALE[BRFSS_f$SEX == 1] <- 1
-    ## 
-    ## > table(BRFSS_f$MALE, BRFSS_f$SEX)
-    ##    
-    ##          1      2      9
-    ##   0      0 154490    674
-    ##   1 118634      0      0
-    ## 
-    ## > BRFSS_f$HISPANIC <- 0
-    ## 
-    ## > BRFSS_f$HISPANIC[BRFSS_f$X_HISPANC == 1] <- 1
-    ## 
-    ## > table(BRFSS_f$HISPANIC, BRFSS_f$X_HISPANC)
-    ##    
-    ##          1      2      9
-    ##   0      0 256847   2997
-    ##   1  13954      0      0
-    ## 
-    ## > BRFSS_f$RACEGRP <- 9
-    ## 
-    ## > BRFSS_f$RACEGRP[BRFSS_f$X_MRACE1 == 1] <- 1
-    ## 
-    ## > BRFSS_f$RACEGRP[BRFSS_f$X_MRACE1 == 2] <- 2
-    ## 
-    ## > BRFSS_f$RACEGRP[BRFSS_f$X_MRACE1 == 3] <- 3
-    ## 
-    ## > BRFSS_f$RACEGRP[BRFSS_f$X_MRACE1 == 4] <- 4
-    ## 
-    ## > BRFSS_f$RACEGRP[BRFSS_f$X_MRACE1 == 5] <- 5
-    ## 
-    ## > BRFSS_f$RACEGRP[BRFSS_f$X_MRACE1 == 6 | BRFSS_f$X_MRACE1 == 
-    ## +     7] <- 6
-    ## 
-    ## > table(BRFSS_f$RACEGRP, BRFSS_f$X_MRACE1)
-    ##    
-    ##          1      2      3      4      5      6      7     77     99
-    ##   1 227375      0      0      0      0      0      0      0      0
-    ##   2      0  21215      0      0      0      0      0      0      0
-    ##   3      0      0   4784      0      0      0      0      0      0
-    ##   4      0      0      0   3871      0      0      0      0      0
-    ##   5      0      0      0      0   1066      0      0      0      0
-    ##   6      0      0      0      0      0   5292   4572      0      0
-    ##   9      0      0      0      0      0      0      0   1523   4096
-    ## 
-    ## > BRFSS_f$BLACK <- 0
-    ## 
-    ## > BRFSS_f$ASIAN <- 0
-    ## 
-    ## > BRFSS_f$OTHRACE <- 0
-    ## 
-    ## > BRFSS_f$BLACK[BRFSS_f$RACEGRP == 2] <- 1
-    ## 
-    ## > table(BRFSS_f$RACEGRP, BRFSS_f$BLACK)
-    ##    
-    ##          0      1
-    ##   1 227375      0
-    ##   2      0  21215
-    ##   3   4784      0
-    ##   4   3871      0
-    ##   5   1066      0
-    ##   6   9864      0
-    ##   9   5623      0
-    ## 
-    ## > BRFSS_f$ASIAN[BRFSS_f$RACEGRP == 4] <- 1
-    ## 
-    ## > table(BRFSS_f$RACEGRP, BRFSS_f$ASIAN)
-    ##    
-    ##          0      1
-    ##   1 227375      0
-    ##   2  21215      0
-    ##   3   4784      0
-    ##   4      0   3871
-    ##   5   1066      0
-    ##   6   9864      0
-    ##   9   5623      0
-    ## 
-    ## > BRFSS_f$OTHRACE[BRFSS_f$RACEGRP == 3 | BRFSS_f$RACEGRP == 
-    ## +     5 | BRFSS_f$RACEGRP == 6 | BRFSS_f$RACEGRP == 7] <- 1
-    ## 
-    ## > table(BRFSS_f$RACEGRP, BRFSS_f$OTHRACE)
-    ##    
-    ##          0      1
-    ##   1 227375      0
-    ##   2  21215      0
-    ##   3      0   4784
-    ##   4   3871      0
-    ##   5      0   1066
-    ##   6      0   9864
-    ##   9   5623      0
-    ## 
-    ## > BRFSS_f$AGE[BRFSS_f$X_AGEG5YR < 9] <- 1
-    ## 
-    ## > BRFSS_f$AGE[BRFSS_f$X_AGEG5YR > 8 & BRFSS_f$X_AGEG5YR < 
-    ## +     11] <- 2
-    ## 
-    ## > BRFSS_f$AGE[BRFSS_f$X_AGEG5YR > 10] <- 3
-    ## 
-    ## > table(BRFSS_f$X_AGEG5YR, BRFSS_f$AGE)
+    ## > table(BRFSS_c$X_AGEG5YR, BRFSS_c$AGEG5YR2)
     ##     
-    ##          1     2     3
-    ##   7  34378     0     0
-    ##   8  41209     0     0
-    ##   9      0 45797     0
-    ##   10     0 45915     0
-    ##   11     0     0 39322
-    ##   12     0     0 27257
-    ##   13     0     0 32231
-    ##   14     0     0  7689
+    ##          0     1     2     3     9
+    ##   1      0     0     0     0 26005
+    ##   2      0     0     0     0 22286
+    ##   3      0     0     0     0 24269
+    ##   4      0     0     0     0 26118
+    ##   5      0     0     0     0 25583
+    ##   6      0     0     0     0 28846
+    ##   7  35060     0     0     0     0
+    ##   8  42160     0     0     0     0
+    ##   9      0 46994     0     0     0
+    ##   10     0 47329     0     0     0
+    ##   11     0     0 40930     0     0
+    ##   12     0     0 28668     0     0
+    ##   13     0     0     0 34716     0
+    ##   14     0     0     0     0  8472
     ## 
-    ## > BRFSS_f$AGE1 <- 0
+    ## > BRFSS_c$AGE1 <- 0
     ## 
-    ## > BRFSS_f$AGE2 <- 0
+    ## > BRFSS_c$AGE2 <- 0
     ## 
-    ## > BRFSS_f$AGE3 <- 0
+    ## > BRFSS_c$AGE3 <- 0
     ## 
-    ## > BRFSS_f$AGE1[BRFSS_f$AGE == 1] <- 1
+    ## > BRFSS_c$AGE4 <- 0
     ## 
-    ## > table(BRFSS_f$AGE, BRFSS_f$AGE1)
+    ## > BRFSS_c$AGE1[BRFSS_c$AGEG5YR2 == 0] <- 1
+    ## 
+    ## > BRFSS_c$AGE2[BRFSS_c$AGEG5YR2 == 1] <- 1
+    ## 
+    ## > BRFSS_c$AGE3[BRFSS_c$AGEG5YR2 == 2] <- 1
+    ## 
+    ## > BRFSS_c$AGE4[BRFSS_c$AGEG5YR2 == 3] <- 1
+    ## 
+    ## > table(BRFSS_c$AGEG5YR2, BRFSS_c$AGE1)
     ##    
     ##          0      1
-    ##   1      0  75587
-    ##   2  91712      0
-    ##   3 106499      0
+    ##   0      0  77220
+    ##   1  94323      0
+    ##   2  69598      0
+    ##   3  34716      0
+    ##   9 161579      0
     ## 
-    ## > BRFSS_f$AGE2[BRFSS_f$AGE == 2] <- 1
-    ## 
-    ## > table(BRFSS_f$AGE, BRFSS_f$AGE2)
+    ## > table(BRFSS_c$AGEG5YR2, BRFSS_c$AGE2)
     ##    
     ##          0      1
-    ##   1  75587      0
-    ##   2      0  91712
-    ##   3 106499      0
+    ##   0  77220      0
+    ##   1      0  94323
+    ##   2  69598      0
+    ##   3  34716      0
+    ##   9 161579      0
     ## 
-    ## > BRFSS_f$AGE3[BRFSS_f$AGE == 3] <- 1
-    ## 
-    ## > table(BRFSS_f$AGE, BRFSS_f$AGE3)
+    ## > table(BRFSS_c$AGEG5YR2, BRFSS_c$AGE3)
     ##    
     ##          0      1
-    ##   1  75587      0
-    ##   2  91712      0
-    ##   3      0 106499
+    ##   0  77220      0
+    ##   1  94323      0
+    ##   2      0  69598
+    ##   3  34716      0
+    ##   9 161579      0
     ## 
-    ## > BRFSS_f$EDGRP <- 9
-    ## 
-    ## > BRFSS_f$EDGRP[BRFSS_f$EDUCA < 4] <- 1
-    ## 
-    ## > BRFSS_f$EDGRP[BRFSS_f$EDUCA == 4] <- 2
-    ## 
-    ## > BRFSS_f$EDGRP[BRFSS_f$EDUCA == 5] <- 3
-    ## 
-    ## > BRFSS_f$EDGRP[BRFSS_f$EDUCA == 6] <- 4
-    ## 
-    ## > table(BRFSS_f$EDUCA, BRFSS_f$EDGRP)
-    ##    
-    ##          1      2      3      4      9
-    ##   1    383      0      0      0      0
-    ##   2   6518      0      0      0      0
-    ##   3  12900      0      0      0      0
-    ##   4      0  75498      0      0      0
-    ##   5      0      0  74082      0      0
-    ##   6      0      0      0 103387      0
-    ##   9      0      0      0      0   1024
-    ## 
-    ## > BRFSS_f$LOWED <- 0
-    ## 
-    ## > BRFSS_f$HIGHSCOOL <- 0
-    ## 
-    ## > BRFSS_f$SOMECOL <- 0
-    ## 
-    ## > BRFSS_f$COLLEGE <- 0
-    ## 
-    ## > BRFSS_f$LOWED[BRFSS_f$EDGRP == 1] <- 1
-    ## 
-    ## > BRFSS_f$HIGHSCOOL[BRFSS_f$EDGR == 2] <- 1
-    ## 
-    ## > BRFSS_f$SOMECOL[BRFSS_f$EDGR == 3] <- 1
-    ## 
-    ## > BRFSS_f$COLLEGE[BRFSS_f$EDGR == 4] <- 1
-    ## 
-    ## > table(BRFSS_f$EDGRP, BRFSS_f$LOWED)
+    ## > table(BRFSS_c$AGEG5YR2, BRFSS_c$AGE4)
     ##    
     ##          0      1
-    ##   1      0  19801
-    ##   2  75498      0
-    ##   3  74082      0
-    ##   4 103387      0
-    ##   9   1030      0
+    ##   0  77220      0
+    ##   1  94323      0
+    ##   2  69598      0
+    ##   3      0  34716
+    ##   9 161579      0
     ## 
-    ## > table(BRFSS_f$EDGRP, BRFSS_f$HIGHSCOOL)
+    ## > BRFSS_c$EDGRP <- 9
+    ## 
+    ## > BRFSS_c$EDGRP[BRFSS_c$EDUCA < 4] <- 0
+    ## 
+    ## > BRFSS_c$EDGRP[BRFSS_c$EDUCA == 4] <- 1
+    ## 
+    ## > BRFSS_c$EDGRP[BRFSS_c$EDUCA == 5] <- 2
+    ## 
+    ## > BRFSS_c$EDGRP[BRFSS_c$EDUCA == 6] <- 3
+    ## 
+    ## > table(BRFSS_b$EDUCA, BRFSS_c$EDGRP)
+    ##    
+    ##          0      1      2      3      9
+    ##   1    666      0      0      0      0
+    ##   2  10446      0      0      0      0
+    ##   3  21456      0      0      0      0
+    ##   4      0 119038      0      0      0
+    ##   5      0      0 119980      0      0
+    ##   6      0      0      0 164229      0
+    ##   9      0      0      0      0   1587
+    ## 
+    ## > BRFSS_c$LOWED <- 0
+    ## 
+    ## > BRFSS_c$HIGHSCHOOL <- 0
+    ## 
+    ## > BRFSS_c$SOMECOLL <- 0
+    ## 
+    ## > BRFSS_c$COLLEGE <- 0
+    ## 
+    ## > BRFSS_c$LOWED[BRFSS_c$EDGRP == 0] <- 1
+    ## 
+    ## > BRFSS_c$HIGHSCHOOL[BRFSS_c$EDGRP == 1] <- 1
+    ## 
+    ## > BRFSS_c$SOMECOLL[BRFSS_c$EDGRP == 2] <- 1
+    ## 
+    ## > BRFSS_c$COLLEGE[BRFSS_c$EDGRP == 3] <- 1
+    ## 
+    ## > table(BRFSS_c$EDGRP, BRFSS_c$LOWED)
     ##    
     ##          0      1
-    ##   1  19801      0
-    ##   2      0  75498
-    ##   3  74082      0
-    ##   4 103387      0
-    ##   9   1030      0
+    ##   0      0  32568
+    ##   1 119038      0
+    ##   2 119980      0
+    ##   3 164229      0
+    ##   9   1621      0
     ## 
-    ## > table(BRFSS_f$EDGRP, BRFSS_f$SOMECOL)
+    ## > table(BRFSS_c$EDGRP, BRFSS_c$HIGHSCHOOL)
     ##    
     ##          0      1
-    ##   1  19801      0
-    ##   2  75498      0
-    ##   3      0  74082
-    ##   4 103387      0
-    ##   9   1030      0
+    ##   0  32568      0
+    ##   1      0 119038
+    ##   2 119980      0
+    ##   3 164229      0
+    ##   9   1621      0
     ## 
-    ## > table(BRFSS_f$EDGRP, BRFSS_f$COLLEGE)
+    ## > table(BRFSS_c$EDGRP, BRFSS_c$SOMECOLL)
     ##    
     ##          0      1
-    ##   1  19801      0
-    ##   2  75498      0
-    ##   3  74082      0
-    ##   4      0 103387
-    ##   9   1030      0
+    ##   0  32568      0
+    ##   1 119038      0
+    ##   2      0 119980
+    ##   3 164229      0
+    ##   9   1621      0
     ## 
-    ## > BRFSS_f$INCOME3 <- 9
+    ## > table(BRFSS_c$EDGRP, BRFSS_c$COLLEGE)
+    ##    
+    ##          0      1
+    ##   0  32568      0
+    ##   1 119038      0
+    ##   2 119980      0
+    ##   3      0 164229
+    ##   9   1621      0
     ## 
-    ## > BRFSS_f$INCOME3[BRFSS_f$INCOME2 < 3] <- 1
+    ## > BRFSS_c$INCOME3 <- 9
     ## 
-    ## > BRFSS_f$INCOME3[BRFSS_f$INCOME2 > 2 & BRFSS_f$INCOME2 < 
-    ## +     5] <- 2
+    ## > BRFSS_c$INCOME3[BRFSS_c$INCOME2 < 3] <- 0
     ## 
-    ## > BRFSS_f$INCOME3[BRFSS_f$INCOME2 > 4 & BRFSS_f$INCOME2 < 
-    ## +     6] <- 3
+    ## > BRFSS_c$INCOME3[BRFSS_c$INCOME2 > 2 & BRFSS_c$INCOME2 < 
+    ## +     5] <- 1
     ## 
-    ## > BRFSS_f$INCOME3[BRFSS_f$INCOME2 == 6] <- 4
+    ## > BRFSS_c$INCOME3[BRFSS_c$INCOME2 > 4 & BRFSS_c$INCOME2 < 
+    ## +     6] <- 2
     ## 
-    ## > BRFSS_f$INCOME3[BRFSS_f$INCOME2 > 6 & BRFSS_f$INCOME2 < 
-    ## +     9] <- 5
+    ## > BRFSS_c$INCOME3[BRFSS_c$INCOME2 > 5 & BRFSS_c$INCOME2 < 
+    ## +     7] <- 3
     ## 
-    ## > table(BRFSS_f$INCOME2, BRFSS_f$INCOME3)
+    ## > BRFSS_c$INCOME3[BRFSS_c$INCOME2 > 6 & BRFSS_c$INCOME2 < 
+    ## +     9] <- 4
+    ## 
+    ## > table(BRFSS_c$INCOME2, BRFSS_c$INCOME3)
     ##     
-    ##          1     2     3     4     5     9
-    ##   1   9565     0     0     0     0     0
-    ##   2  12302     0     0     0     0     0
-    ##   3      0 16266     0     0     0     0
-    ##   4      0 20342     0     0     0     0
-    ##   5      0     0 24249     0     0     0
-    ##   6      0     0     0 31763     0     0
-    ##   7      0     0     0     0 36639     0
-    ##   8      0     0     0     0 72393     0
-    ##   77     0     0     0     0     0 18506
-    ##   99     0     0     0     0     0 29593
+    ##           0      1      2      3      4      9
+    ##   1   16762      0      0      0      0      0
+    ##   2   18034      0      0      0      0      0
+    ##   3       0  25850      0      0      0      0
+    ##   4       0  32218      0      0      0      0
+    ##   5       0      0  37830      0      0      0
+    ##   6       0      0      0  49558      0      0
+    ##   7       0      0      0      0  58098      0
+    ##   8       0      0      0      0 122968      0
+    ##   77      0      0      0      0      0  33279
+    ##   99      0      0      0      0      0  38445
     ## 
-    ## > BRFSS_f$INC1 <- 0
+    ## > BRFSS_c$INC1 <- 0
     ## 
-    ## > BRFSS_f$INC2 <- 0
+    ## > BRFSS_c$INC2 <- 0
     ## 
-    ## > BRFSS_f$INC3 <- 0
+    ## > BRFSS_c$INC3 <- 0
     ## 
-    ## > BRFSS_f$INC4 <- 0
+    ## > BRFSS_c$INC4 <- 0
     ## 
-    ## > BRFSS_f$INC1[BRFSS_f$INCOME3 == 1] <- 1
+    ## > BRFSS_c$INC5 <- 0
     ## 
-    ## > BRFSS_f$INC2[BRFSS_f$INCOME3 == 2] <- 1
+    ## > BRFSS_c$INC1[BRFSS_c$INCOME3 == 0] <- 1
     ## 
-    ## > BRFSS_f$INC3[BRFSS_f$INCOME3 == 3] <- 1
+    ## > BRFSS_c$INC2[BRFSS_c$INCOME3 == 1] <- 1
     ## 
-    ## > BRFSS_f$INC4[BRFSS_f$INCOME3 == 4] <- 1
+    ## > BRFSS_c$INC3[BRFSS_c$INCOME3 == 2] <- 1
     ## 
-    ## > BRFSS_f$INC5[BRFSS_f$INCOME3 == 5] <- 1
+    ## > BRFSS_c$INC4[BRFSS_c$INCOME3 == 3] <- 1
     ## 
-    ## > table(BRFSS_f$INCOME3, BRFSS_f$INC1)
+    ## > BRFSS_c$INC5[BRFSS_c$INCOME3 == 4] <- 1
+    ## 
+    ## > table(BRFSS_c$INCOME3, BRFSS_c$INC1)
     ##    
     ##          0      1
-    ##   1      0  21867
-    ##   2  36608      0
-    ##   3  24249      0
-    ##   4  31763      0
-    ##   5 109032      0
-    ##   9  50279      0
+    ##   0      0  34796
+    ##   1  58068      0
+    ##   2  37830      0
+    ##   3  49558      0
+    ##   4 181066      0
+    ##   9  76118      0
     ## 
-    ## > table(BRFSS_f$INCOME3, BRFSS_f$INC2)
+    ## > table(BRFSS_c$INCOME3, BRFSS_c$INC2)
     ##    
     ##          0      1
-    ##   1  21867      0
-    ##   2      0  36608
-    ##   3  24249      0
-    ##   4  31763      0
-    ##   5 109032      0
-    ##   9  50279      0
+    ##   0  34796      0
+    ##   1      0  58068
+    ##   2  37830      0
+    ##   3  49558      0
+    ##   4 181066      0
+    ##   9  76118      0
     ## 
-    ## > table(BRFSS_f$INCOME3, BRFSS_f$INC3)
+    ## > table(BRFSS_c$INCOME3, BRFSS_c$INC3)
     ##    
     ##          0      1
-    ##   1  21867      0
-    ##   2  36608      0
-    ##   3      0  24249
-    ##   4  31763      0
-    ##   5 109032      0
-    ##   9  50279      0
+    ##   0  34796      0
+    ##   1  58068      0
+    ##   2      0  37830
+    ##   3  49558      0
+    ##   4 181066      0
+    ##   9  76118      0
     ## 
-    ## > table(BRFSS_f$INCOME3, BRFSS_f$INC4)
+    ## > table(BRFSS_c$INCOME3, BRFSS_c$INC4)
     ##    
     ##          0      1
-    ##   1  21867      0
-    ##   2  36608      0
-    ##   3  24249      0
-    ##   4      0  31763
-    ##   5 109032      0
-    ##   9  50279      0
+    ##   0  34796      0
+    ##   1  58068      0
+    ##   2  37830      0
+    ##   3      0  49558
+    ##   4 181066      0
+    ##   9  76118      0
     ## 
-    ## > table(BRFSS_f$INCOME3, BRFSS_f$INC5)
-    ##    
-    ##          1
-    ##   1      0
-    ##   2      0
-    ##   3      0
-    ##   4      0
-    ##   5 109032
-    ##   9      0
-    ## 
-    ## > BRFSS_f$DENVST[BRFSS_f$X_DENVST3 == 1] <- 1
-    ## 
-    ## > BRFSS_f$NODENVST[BRFSS_f$X_DENVST3 == 2] <- 1
-    ## 
-    ## > table(BRFSS_f$X_DENVST3, BRFSS_f$DENVST)
-    ##    
-    ##          1
-    ##   1 189676
-    ##   2      0
-    ##   9      0
-    ## 
-    ## > table(BRFSS_f$X_DENVST3, BRFSS_f$NODENVST)
-    ##    
-    ##         1
-    ##   1     0
-    ##   2 81445
-    ##   9     0
-    ## 
-    ## > BRFSS_f$SMK <- 9
-    ## 
-    ## > BRFSS_f$SMK[BRFSS_f$X_SMOKER3 < 3] <- 3
-    ## 
-    ## > BRFSS_f$SMK[BRFSS_f$X_SMOKER3 == 3] <- 2
-    ## 
-    ## > BRFSS_f$SMK[BRFSS_f$X_SMOKER3 == 4] <- 1
-    ## 
-    ## > table(BRFSS_f$X_SMOKER3, BRFSS_f$SMK)
-    ##    
-    ##          1      2      3      9
-    ##   1      0      0  24384      0
-    ##   2      0      0   8789      0
-    ##   3      0  89174      0      0
-    ##   4 141915      0      0      0
-    ##   9      0      0      0   9536
-    ## 
-    ## > BRFSS_f$NEVERSMK <- 0
-    ## 
-    ## > BRFSS_f$FRMRSMK <- 0
-    ## 
-    ## > BRFSS_f$SMOKE <- 0
-    ## 
-    ## > BRFSS_f$NEVERSMK[BRFSS_f$SMK == 1] <- 1
-    ## 
-    ## > BRFSS_f$FRMRSMK[BRFSS_f$SMK == 2] <- 1
-    ## 
-    ## > BRFSS_f$SMOKE[BRFSS_f$SMK == 3] <- 1
-    ## 
-    ## > BRFSS_f$DIABETE4 <- 9
-    ## 
-    ## > BRFSS_f$DIABETE4[BRFSS_f$DIABETE3 == 1] <- 1
-    ## 
-    ## > BRFSS_f$DIABETE4[BRFSS_f$DIABETE3 > 1 & BRFSS_f$DIABETE3 < 
-    ## +     5] <- 2
-    ## 
-    ## > table(BRFSS_f$DIABETE3, BRFSS_f$DIABETE4)
-    ##    
-    ##          1      2      9
-    ##   1  51226      0      0
-    ##   2      0   1604      0
-    ##   3      0 214321      0
-    ##   4      0   6307      0
-    ##   7      0      0    281
-    ##   9      0      0     59
-    ## 
-    ## > BRFSS_f$HASDIABETES <- 0
-    ## 
-    ## > BRFSS_f$NODIABETES <- 0
-    ## 
-    ## > BRFSS_f$HASDIABETES[BRFSS_f$DIABETE4 == 1] <- 1
-    ## 
-    ## > BRFSS_f$NODIABETES[BRFSS_f$DIABETE4 == 2] <- 1
-    ## 
-    ## > table(BRFSS_f$DIABETE4, BRFSS_f$HASDIABETES)
+    ## > table(BRFSS_c$INCOME3, BRFSS_c$INC5)
     ##    
     ##          0      1
-    ##   1      0  51226
-    ##   2 222232      0
-    ##   9    340      0
-    ## 
-    ## > table(BRFSS_f$DIABETE4, BRFSS_f$NODIABETES)
-    ##    
-    ##          0      1
-    ##   1  51226      0
-    ##   2      0 222232
-    ##   9    340      0
-    ## 
-    ## > BRFSS_f$PA <- 9
-    ## 
-    ## > BRFSS_f$PA[BRFSS_f$EXERANY2 == 1] <- 1
-    ## 
-    ## > BRFSS_f$PA[BRFSS_f$EXERANY2 == 2] <- 2
-    ## 
-    ## > table(BRFSS_f$PA, BRFSS_f$EXERANY2)
-    ##    
-    ##          1      2      7      9
-    ##   1 196927      0      0      0
-    ##   2      0  76437      0      0
-    ##   9      0      0    332    100
-    ## 
-    ## > BRFSS_f$NOEXER <- 0
-    ## 
-    ## > BRFSS_f$NOEXER[BRFSS_f$PA == 2] <- 1
-    ## 
-    ## > table(BRFSS_f$NOEXER, BRFSS_f$PA)
-    ##    
-    ##          1      2      9
-    ##   0 196927      0    434
-    ##   1      0  76437      0
-    ## 
-    ## > BRFSS_f$BMICAT <- 9
-    ## 
-    ## > BRFSS_f$BMICAT[BRFSS_f$X_BMI5CAT == 1] <- 1
-    ## 
-    ## > BRFSS_f$BMICAT[BRFSS_f$X_BMI5CAT == 2] <- 2
-    ## 
-    ## > BRFSS_f$BMICAT[BRFSS_f$X_BMI5CAT == 3] <- 3
-    ## 
-    ## > BRFSS_f$BMICAT[BRFSS_f$X_BMI5CAT == 4] <- 4
-    ## 
-    ## > table(BRFSS_f$BMICAT, BRFSS_f$X_BMI5CAT)
-    ##    
-    ##         1     2     3     4
-    ##   1  3852     0     0     0
-    ##   2     0 73226     0     0
-    ##   3     0     0 95146     0
-    ##   4     0     0     0 81396
-    ##   9     0     0     0     0
-    ## 
-    ## > BRFSS_f$UNDWT <- 0
-    ## 
-    ## > BRFSS_f$OVWT <- 0
-    ## 
-    ## > BRFSS_f$OBESE <- 0
-    ## 
-    ## > BRFSS_f$UNDWT[BRFSS_f$BMICAT == 1] <- 1
-    ## 
-    ## > table(BRFSS_f$UNDWT, BRFSS_f$BMICAT)
-    ##    
-    ##         1     2     3     4     9
-    ##   0     0 73226 95146 81396 20178
-    ##   1  3852     0     0     0     0
-    ## 
-    ## > BRFSS_f$OVWT[BRFSS_f$BMICAT == 3] <- 1
-    ## 
-    ## > table(BRFSS_f$OVWT, BRFSS_f$BMICAT)
-    ##    
-    ##         1     2     3     4     9
-    ##   0  3852 73226     0 81396 20178
-    ##   1     0     0 95146     0     0
-    ## 
-    ## > BRFSS_f$OBESE[BRFSS_f$BMICAT == 4] <- 1
-    ## 
-    ## > table(BRFSS_f$OBESE, BRFSS_f$BMICAT)
-    ##    
-    ##         1     2     3     4     9
-    ##   0  3852 73226 95146     0 20178
-    ##   1     0     0     0 81396     0
-    ## 
-    ## > str(BRFSS_f)
-    ## 'data.frame':    273798 obs. of  52 variables:
-    ##  $ CVDINFR4   : num  2 2 2 2 2 2 2 2 2 2 ...
-    ##  $ RMVTETH4   : num  1 1 8 8 2 8 1 2 1 3 ...
-    ##  $ X_AGEG5YR  : num  13 10 12 8 13 8 11 12 10 11 ...
-    ##  $ X_DENVST3  : num  1 2 1 1 1 1 2 1 1 2 ...
-    ##  $ SEX1       : num  2 1 2 1 1 2 2 2 2 1 ...
-    ##  $ X_HISPANC  : num  2 2 2 2 2 2 2 2 2 2 ...
-    ##  $ X_MRACE1   : num  1 1 1 1 1 1 1 2 1 1 ...
-    ##  $ EDUCA      : num  6 4 6 4 4 5 4 3 3 5 ...
-    ##  $ INCOME2    : num  6 3 8 8 4 6 4 2 2 7 ...
-    ##  $ X_SMOKER3  : num  4 4 4 3 3 4 4 4 4 4 ...
-    ##  $ DIABETE3   : num  3 3 3 1 3 3 1 3 1 3 ...
-    ##  $ X_BMI5CAT  : num  2 3 2 3 3 4 4 4 4 4 ...
-    ##  $ EXERANY2   : num  2 1 1 2 2 1 2 2 1 1 ...
-    ##  $ RMVTETH5   : num  2 2 1 1 3 1 2 3 2 4 ...
-    ##  $ CVDINFR5   : num  1 1 1 1 1 1 1 1 1 1 ...
-    ##  $ SEX        : num  2 1 2 1 1 2 2 2 2 1 ...
-    ##  $ MALE       : num  0 1 0 1 1 0 0 0 0 1 ...
-    ##  $ HISPANIC   : num  0 0 0 0 0 0 0 0 0 0 ...
-    ##  $ RACEGRP    : num  1 1 1 1 1 1 1 2 1 1 ...
-    ##  $ BLACK      : num  0 0 0 0 0 0 0 1 0 0 ...
-    ##  $ ASIAN      : num  0 0 0 0 0 0 0 0 0 0 ...
-    ##  $ OTHRACE    : num  0 0 0 0 0 0 0 0 0 0 ...
-    ##  $ AGE        : num  3 2 3 1 3 1 3 3 2 3 ...
-    ##  $ AGE1       : num  0 0 0 1 0 1 0 0 0 0 ...
-    ##  $ AGE2       : num  0 1 0 0 0 0 0 0 1 0 ...
-    ##  $ AGE3       : num  1 0 1 0 1 0 1 1 0 1 ...
-    ##  $ EDGRP      : num  4 2 4 2 2 3 2 1 1 3 ...
-    ##  $ LOWED      : num  0 0 0 0 0 0 0 1 1 0 ...
-    ##  $ HIGHSCOOL  : num  0 1 0 1 1 0 1 0 0 0 ...
-    ##  $ SOMECOL    : num  0 0 0 0 0 1 0 0 0 1 ...
-    ##  $ COLLEGE    : num  1 0 1 0 0 0 0 0 0 0 ...
-    ##  $ INCOME3    : num  4 2 5 5 2 4 2 1 1 5 ...
-    ##  $ INC1       : num  0 0 0 0 0 0 0 1 1 0 ...
-    ##  $ INC2       : num  0 1 0 0 1 0 1 0 0 0 ...
-    ##  $ INC3       : num  0 0 0 0 0 0 0 0 0 0 ...
-    ##  $ INC4       : num  1 0 0 0 0 1 0 0 0 0 ...
-    ##  $ INC5       : num  NA NA 1 1 NA NA NA NA NA 1 ...
-    ##  $ DENVST     : num  1 NA 1 1 1 1 NA 1 1 NA ...
-    ##  $ NODENVST   : num  NA 1 NA NA NA NA 1 NA NA 1 ...
-    ##  $ SMK        : num  1 1 1 2 2 1 1 1 1 1 ...
-    ##  $ NEVERSMK   : num  1 1 1 0 0 1 1 1 1 1 ...
-    ##  $ FRMRSMK    : num  0 0 0 1 1 0 0 0 0 0 ...
-    ##  $ SMOKE      : num  0 0 0 0 0 0 0 0 0 0 ...
-    ##  $ DIABETE4   : num  2 2 2 1 2 2 1 2 1 2 ...
-    ##  $ HASDIABETES: num  0 0 0 1 0 0 1 0 1 0 ...
-    ##  $ NODIABETES : num  1 1 1 0 1 1 0 1 0 1 ...
-    ##  $ PA         : num  2 1 1 2 2 1 2 2 1 1 ...
-    ##  $ NOEXER     : num  1 0 0 1 1 0 1 1 0 0 ...
-    ##  $ BMICAT     : num  2 3 2 3 3 4 4 4 4 4 ...
-    ##  $ UNDWT      : num  0 0 0 0 0 0 0 0 0 0 ...
-    ##  $ OVWT       : num  0 1 0 1 1 0 0 0 0 0 ...
-    ##  $ OBESE      : num  0 0 0 0 0 1 1 1 1 1 ...
-    ## 
-    ## > head(BRFSS_f)
-    ##    CVDINFR4 RMVTETH4 X_AGEG5YR X_DENVST3 SEX1 X_HISPANC X_MRACE1 EDUCA
-    ## 1         2        1        13         1    2         2        1     6
-    ## 4         2        1        10         2    1         2        1     4
-    ## 7         2        8        12         1    2         2        1     6
-    ## 9         2        8         8         1    1         2        1     4
-    ## 11        2        2        13         1    1         2        1     4
-    ## 12        2        8         8         1    2         2        1     5
-    ##    INCOME2 X_SMOKER3 DIABETE3 X_BMI5CAT EXERANY2 RMVTETH5 CVDINFR5 SEX
-    ## 1        6         4        3         2        2        2        1   2
-    ## 4        3         4        3         3        1        2        1   1
-    ## 7        8         4        3         2        1        1        1   2
-    ## 9        8         3        1         3        2        1        1   1
-    ## 11       4         3        3         3        2        3        1   1
-    ## 12       6         4        3         4        1        1        1   2
-    ##    MALE HISPANIC RACEGRP BLACK ASIAN OTHRACE AGE AGE1 AGE2 AGE3 EDGRP
-    ## 1     0        0       1     0     0       0   3    0    0    1     4
-    ## 4     1        0       1     0     0       0   2    0    1    0     2
-    ## 7     0        0       1     0     0       0   3    0    0    1     4
-    ## 9     1        0       1     0     0       0   1    1    0    0     2
-    ## 11    1        0       1     0     0       0   3    0    0    1     2
-    ## 12    0        0       1     0     0       0   1    1    0    0     3
-    ##    LOWED HIGHSCOOL SOMECOL COLLEGE INCOME3 INC1 INC2 INC3 INC4 INC5 DENVST
-    ## 1      0         0       0       1       4    0    0    0    1   NA      1
-    ## 4      0         1       0       0       2    0    1    0    0   NA     NA
-    ## 7      0         0       0       1       5    0    0    0    0    1      1
-    ## 9      0         1       0       0       5    0    0    0    0    1      1
-    ## 11     0         1       0       0       2    0    1    0    0   NA      1
-    ## 12     0         0       1       0       4    0    0    0    1   NA      1
-    ##    NODENVST SMK NEVERSMK FRMRSMK SMOKE DIABETE4 HASDIABETES NODIABETES PA
-    ## 1        NA   1        1       0     0        2           0          1  2
-    ## 4         1   1        1       0     0        2           0          1  1
-    ## 7        NA   1        1       0     0        2           0          1  1
-    ## 9        NA   2        0       1     0        1           1          0  2
-    ## 11       NA   2        0       1     0        2           0          1  2
-    ## 12       NA   1        1       0     0        2           0          1  1
-    ##    NOEXER BMICAT UNDWT OVWT OBESE
-    ## 1       1      2     0    0     0
-    ## 4       0      3     0    1     0
-    ## 7       0      2     0    0     0
-    ## 9       1      3     0    1     0
-    ## 11      1      3     0    1     0
-    ## 12      0      4     0    0     1
-    ## 
-    ## > tail(BRFSS_f)
-    ##        CVDINFR4 RMVTETH4 X_AGEG5YR X_DENVST3 SEX1 X_HISPANC X_MRACE1 EDUCA
-    ## 437429        2        2        10         2    2         1        1     5
-    ## 437430        2        8         7         2    1         1        1     4
-    ## 437432        2        2        11         2    2         1        1     5
-    ## 437433        2        1        10         9    2         1        1     6
-    ## 437434        2        2        12         2    2         1        6     2
-    ## 437435        2        1        12         2    2         1        1     6
-    ##        INCOME2 X_SMOKER3 DIABETE3 X_BMI5CAT EXERANY2 RMVTETH5 CVDINFR5 SEX
-    ## 437429       3         4        3         3        1        3        1   2
-    ## 437430       3         4        3         3        2        1        1   1
-    ## 437432      77         4        3         1        1        3        1   2
-    ## 437433       5         4        3        NA        1        2        1   2
-    ## 437434       1         3        3         4        2        3        1   2
-    ## 437435       3         1        4         3        1        2        1   2
-    ##        MALE HISPANIC RACEGRP BLACK ASIAN OTHRACE AGE AGE1 AGE2 AGE3 EDGRP
-    ## 437429    0        1       1     0     0       0   2    0    1    0     3
-    ## 437430    1        1       1     0     0       0   1    1    0    0     2
-    ## 437432    0        1       1     0     0       0   3    0    0    1     3
-    ## 437433    0        1       1     0     0       0   2    0    1    0     4
-    ## 437434    0        1       6     0     0       1   3    0    0    1     1
-    ## 437435    0        1       1     0     0       0   3    0    0    1     4
-    ##        LOWED HIGHSCOOL SOMECOL COLLEGE INCOME3 INC1 INC2 INC3 INC4 INC5
-    ## 437429     0         0       1       0       2    0    1    0    0   NA
-    ## 437430     0         1       0       0       2    0    1    0    0   NA
-    ## 437432     0         0       1       0       9    0    0    0    0   NA
-    ## 437433     0         0       0       1       3    0    0    1    0   NA
-    ## 437434     1         0       0       0       1    1    0    0    0   NA
-    ## 437435     0         0       0       1       2    0    1    0    0   NA
-    ##        DENVST NODENVST SMK NEVERSMK FRMRSMK SMOKE DIABETE4 HASDIABETES
-    ## 437429     NA        1   1        1       0     0        2           0
-    ## 437430     NA        1   1        1       0     0        2           0
-    ## 437432     NA        1   1        1       0     0        2           0
-    ## 437433     NA       NA   1        1       0     0        2           0
-    ## 437434     NA        1   2        0       1     0        2           0
-    ## 437435     NA        1   3        0       0     1        2           0
-    ##        NODIABETES PA NOEXER BMICAT UNDWT OVWT OBESE
-    ## 437429          1  1      0      3     0    1     0
-    ## 437430          1  2      1      3     0    1     0
-    ## 437432          1  1      0      1     1    0     0
-    ## 437433          1  1      0      9     0    0     0
-    ## 437434          1  2      1      4     0    0     1
-    ## 437435          1  1      0      3     0    1     0
-
-### Write Out Data Set
+    ##   0  34796      0
+    ##   1  58068      0
+    ##   2  37830      0
+    ##   3  49558      0
+    ##   4      0 181066
+    ##   9  76118      0
 
 ``` r
-source("190_Write out analytic.R", echo = TRUE)
+source("130_Make dent diabetes smoker vars.R", echo = TRUE)
 ```
 
     ## 
-    ## > BRFSS <- BRFSS_f
+    ## > BRFSS_c$DENVST4 <- 9
     ## 
-    ## > write.csv(BRFSS, file = "./data/BRFSS.csv")
+    ## > BRFSS_c$DENVST4[BRFSS_c$X_DENVST3 == 1] <- 0
+    ## 
+    ## > BRFSS_c$DENVST4[BRFSS_c$X_DENVST3 == 2] <- 1
+    ## 
+    ## > table(BRFSS_c$X_DENVST3, BRFSS_c$DENVST4)
+    ##    
+    ##          0      1      9
+    ##   1 296047      0      0
+    ##   2      0 136629      0
+    ##   9      0      0   4760
+    ## 
+    ## > BRFSS_c$NODENVST <- 0
+    ## 
+    ## > BRFSS_c$NODENVST[BRFSS_c$DENVST4 == 1] <- 1
+    ## 
+    ## > table(BRFSS_c$DENVST4, BRFSS_c$NODENVST)
+    ##    
+    ##          0      1
+    ##   0 296047      0
+    ##   1      0 136629
+    ##   9   4760      0
+    ## 
+    ## > BRFSS_c$DIABETE4 <- 9
+    ## 
+    ## > BRFSS_c$DIABETE4[BRFSS_c$DIABETE3 > 1 & BRFSS_c$DIABETE3 < 
+    ## +     7] <- 0
+    ## 
+    ## > BRFSS_c$DIABETE4[BRFSS_c$DIABETE3 == 1] <- 1
+    ## 
+    ## > table(BRFSS_b$DIABETE3, BRFSS_c$DIABETE4)
+    ##    
+    ##          0      1      9
+    ##   1      0  60703      0
+    ##   2   3857      0      0
+    ##   3 363757      0      0
+    ##   4   8263      0      0
+    ##   7      0      0    567
+    ##   9      0      0    265
+    ## 
+    ## > BRFSS_c$NODIABETE <- 0
+    ## 
+    ## > BRFSS_c$NODIABETE[BRFSS_c$DIABETE4 == 0] <- 1
+    ## 
+    ## > table(BRFSS_c$DIABETE4, BRFSS_c$NODIABETE)
+    ##    
+    ##          0      1
+    ##   0      0 375877
+    ##   1  60703      0
+    ##   9    856      0
+    ## 
+    ## > BRFSS_c$SMOKER4 <- 9
+    ## 
+    ## > BRFSS_c$SMOKER4[BRFSS_c$X_SMOKER3 == 4] <- 0
+    ## 
+    ## > BRFSS_c$SMOKER4[BRFSS_c$X_SMOKER3 == 3] <- 1
+    ## 
+    ## > BRFSS_c$SMOKER4[BRFSS_c$X_SMOKER3 < 3] <- 2
+    ## 
+    ## > table(BRFSS_c$X_SMOKER3, BRFSS_c$SMOKER4)
+    ##    
+    ##          0      1      2      9
+    ##   1      0      0  43633      0
+    ##   2      0      0  17639      0
+    ##   3      0 118754      0      0
+    ##   4 240594      0      0      0
+    ##   9      0      0      0  16816
+    ## 
+    ## > BRFSS_c$NEVERSMK <- 0
+    ## 
+    ## > BRFSS_c$FRMRSMK <- 0
+    ## 
+    ## > BRFSS_c$SMOKE <- 0
+    ## 
+    ## > BRFSS_c$NEVERSMK[BRFSS_c$SMOKER4 == 0] <- 1
+    ## 
+    ## > BRFSS_c$FRMRSMK[BRFSS_c$SMOKER4 == 1] <- 1
+    ## 
+    ## > BRFSS_c$SMOKE[BRFSS_c$SMOKER4 == 2] <- 1
+    ## 
+    ## > table(BRFSS_c$SMOKER4, BRFSS_c$NEVERSMK)
+    ##    
+    ##          0      1
+    ##   0      0 240594
+    ##   1 118754      0
+    ##   2  61272      0
+    ##   9  16816      0
+    ## 
+    ## > table(BRFSS_c$SMOKER4, BRFSS_c$FRMRSMK)
+    ##    
+    ##          0      1
+    ##   0 240594      0
+    ##   1      0 118754
+    ##   2  61272      0
+    ##   9  16816      0
+    ## 
+    ## > table(BRFSS_c$SMOKER4, BRFSS_c$SMOKE)
+    ##    
+    ##          0      1
+    ##   0 240594      0
+    ##   1 118754      0
+    ##   2      0  61272
+    ##   9  16816      0
+
+``` r
+source("135_Make exer bmi vars.R", echo = TRUE)
+```
+
+    ## 
+    ## > BRFSS_c$EXERANY3 <- 9
+    ## 
+    ## > BRFSS_c$EXERANY3[BRFSS_c$EXERANY2 == 1] <- 1
+    ## 
+    ## > BRFSS_c$EXERANY3[BRFSS_c$EXERANY2 == 2] <- 0
+    ## 
+    ## > table(BRFSS_c$EXERANY2, BRFSS_c$EXERANY3)
+    ##    
+    ##          0      1      9
+    ##   1      0 326472      0
+    ##   2 110269      0      0
+    ##   7      0      0    482
+    ##   9      0      0    188
+    ## 
+    ## > BRFSS_c$NOEXER <- 0
+    ## 
+    ## > BRFSS_c$NOEXER[BRFSS_c$EXERANY3 == 0] <- 1
+    ## 
+    ## > table(BRFSS_c$EXERANY3, BRFSS_c$NOEXER)
+    ##    
+    ##          0      1
+    ##   0      0 110269
+    ##   1 326472      0
+    ##   9    695      0
+    ## 
+    ## > BRFSS_c$BMICAT <- 9
+    ## 
+    ## > BRFSS_c$BMICAT[BRFSS_c$X_BMI5CAT == 1] <- 0
+    ## 
+    ## > BRFSS_c$BMICAT[BRFSS_c$X_BMI5CAT == 2] <- 1
+    ## 
+    ## > BRFSS_c$BMICAT[BRFSS_c$X_BMI5CAT == 3] <- 2
+    ## 
+    ## > BRFSS_c$BMICAT[BRFSS_c$X_BMI5CAT == 4] <- 3
+    ## 
+    ## > table(BRFSS_c$X_BMI5CAT, BRFSS_c$BMICAT)
+    ##    
+    ##          0      1      2      3      9
+    ##   1   6776      0      0      0      0
+    ##   2      0 123522      0      0      0
+    ##   3      0      0 143878      0      0
+    ##   4      0      0      0 127998      0
+    ## 
+    ## > BRFSS_c$UNDWT <- 0
+    ## 
+    ## > BRFSS_c$OVWT <- 0
+    ## 
+    ## > BRFSS_c$OBESE <- 0
+    ## 
+    ## > BRFSS_c$UNDWT[BRFSS_c$BMICAT == 0] <- 1
+    ## 
+    ## > BRFSS_c$OVWT[BRFSS_c$BMICAT == 2] <- 1
+    ## 
+    ## > BRFSS_c$OBESE[BRFSS_c$BMICAT == 3] <- 1
+    ## 
+    ## > table(BRFSS_c$BMICAT, BRFSS_c$UNDWT)
+    ##    
+    ##          0      1
+    ##   0      0   6776
+    ##   1 123522      0
+    ##   2 143878      0
+    ##   3 127998      0
+    ##   9  35262      0
+    ## 
+    ## > table(BRFSS_c$BMICAT, BRFSS_c$OVWT)
+    ##    
+    ##          0      1
+    ##   0   6776      0
+    ##   1 123522      0
+    ##   2      0 143878
+    ##   3 127998      0
+    ##   9  35262      0
+    ## 
+    ## > table(BRFSS_c$BMICAT, BRFSS_c$OBESE)
+    ##    
+    ##          0      1
+    ##   0   6776      0
+    ##   1 123522      0
+    ##   2 143878      0
+    ##   3      0 127998
+    ##   9  35262      0
+
+``` r
+source("175_Data reduction.R", echo = TRUE)
+```
+
+    ## 
+    ## > BRFSS_d <- subset(BRFSS_c, BRFSS_c$CVDINFR5 != 9)
+    ## 
+    ## > nrow(BRFSS_d)
+    ## [1] 435118
+    ## 
+    ## > BRFSS_e <- subset(BRFSS_d, BRFSS_d$RMVTETH5 != 9)
+    ## 
+    ## > nrow(BRFSS_d)
+    ## [1] 435118
+    ## 
+    ## > BRFSS_f <- subset(BRFSS_e, BRFSS_e$SEX2 != 9)
+    ## 
+    ## > nrow(BRFSS_f)
+    ## [1] 424055
+    ## 
+    ## > BRFSS_g <- subset(BRFSS_f, BRFSS_f$HISPANIC != 9)
+    ## 
+    ## > nrow(BRFSS_g)
+    ## [1] 420069
+    ## 
+    ## > BRFSS_h <- subset(BRFSS_g, BRFSS_g$RACEGRP != 9)
+    ## 
+    ## > nrow(BRFSS_h)
+    ## [1] 416463
+    ## 
+    ## > BRFSS_i <- subset(BRFSS_h, BRFSS_h$AGEG5YR2 != 9)
+    ## 
+    ## > nrow(BRFSS_i)
+    ## [1] 261501
+    ## 
+    ## > BRFSS_j <- subset(BRFSS_i, BRFSS_i$EDGRP != 9)
+    ## 
+    ## > nrow(BRFSS_j)
+    ## [1] 261078
+    ## 
+    ## > BRFSS_k <- subset(BRFSS_j, BRFSS_j$INCOME3 != 9)
+    ## 
+    ## > nrow(BRFSS_d)
+    ## [1] 435118
+    ## 
+    ## > BRFSS_l <- subset(BRFSS_k, BRFSS_k$DENVST4 != 9)
+    ## 
+    ## > nrow(BRFSS_l)
+    ## [1] 215471
+    ## 
+    ## > BRFSS_m <- subset(BRFSS_l, BRFSS_l$DIABETE4 != 9)
+    ## 
+    ## > nrow(BRFSS_m)
+    ## [1] 215276
+    ## 
+    ## > BRFSS_n <- subset(BRFSS_m, BRFSS_m$SMOKER4 != 9)
+    ## 
+    ## > nrow(BRFSS_n)
+    ## [1] 211253
+    ## 
+    ## > BRFSS_o <- subset(BRFSS_n, BRFSS_n$EXERANY3 != 9)
+    ## 
+    ## > nrow(BRFSS_o)
+    ## [1] 211029
+    ## 
+    ## > BRFSS_p <- subset(BRFSS_o, BRFSS_o$BMICAT != 9)
+    ## 
+    ## > nrow(BRFSS_p)
+    ## [1] 204042
+
+``` r
+source("190_Write out data.R", echo = TRUE)
+```
+
+    ## 
+    ## > BRFSS <- BRFSS_p
+    ## 
+    ## > write.csv(BRFSS, file = "./data/BRFSS.csv", row.names = FALSE)
     ## 
     ## > nrow(BRFSS)
-    ## [1] 273798
+    ## [1] 204042
     ## 
     ## > ncol(BRFSS)
     ## [1] 52
     ## 
     ## > colnames(BRFSS)
-    ##  [1] "CVDINFR4"    "RMVTETH4"    "X_AGEG5YR"   "X_DENVST3"   "SEX1"       
-    ##  [6] "X_HISPANC"   "X_MRACE1"    "EDUCA"       "INCOME2"     "X_SMOKER3"  
-    ## [11] "DIABETE3"    "X_BMI5CAT"   "EXERANY2"    "RMVTETH5"    "CVDINFR5"   
-    ## [16] "SEX"         "MALE"        "HISPANIC"    "RACEGRP"     "BLACK"      
-    ## [21] "ASIAN"       "OTHRACE"     "AGE"         "AGE1"        "AGE2"       
-    ## [26] "AGE3"        "EDGRP"       "LOWED"       "HIGHSCOOL"   "SOMECOL"    
-    ## [31] "COLLEGE"     "INCOME3"     "INC1"        "INC2"        "INC3"       
-    ## [36] "INC4"        "INC5"        "DENVST"      "NODENVST"    "SMK"        
-    ## [41] "NEVERSMK"    "FRMRSMK"     "SMOKE"       "DIABETE4"    "HASDIABETES"
-    ## [46] "NODIABETES"  "PA"          "NOEXER"      "BMICAT"      "UNDWT"      
-    ## [51] "OVWT"        "OBESE"      
+    ##  [1] "CVDINFR4"   "RMVTETH4"   "SEX1"       "X_HISPANC"  "X_MRACE1"  
+    ##  [6] "X_AGEG5YR"  "EDUCA"      "INCOME2"    "X_DENVST3"  "DIABETE3"  
+    ## [11] "X_SMOKER3"  "EXERANY2"   "X_BMI5CAT"  "CVDINFR5"   "RMVTETH5"  
+    ## [16] "SEX2"       "MALE"       "HISPANIC"   "RACEGRP"    "BLACK"     
+    ## [21] "ASIAN"      "OTHRACE"    "AGEG5YR2"   "AGE1"       "AGE2"      
+    ## [26] "AGE3"       "AGE4"       "EDGRP"      "LOWED"      "HIGHSCHOOL"
+    ## [31] "SOMECOLL"   "COLLEGE"    "INCOME3"    "INC1"       "INC2"      
+    ## [36] "INC3"       "INC4"       "INC5"       "DENVST4"    "NODENVST"  
+    ## [41] "DIABETE4"   "NODIABETE"  "SMOKER4"    "NEVERSMK"   "FRMRSMK"   
+    ## [46] "SMOKE"      "EXERANY3"   "NOEXER"     "BMICAT"     "UNDWT"     
+    ## [51] "OVWT"       "OBESE"     
     ## 
     ## > data_dictionary <- describe(BRFSS)
     ## 
     ## > sink("./documentation/data_dictionary.txt", append = TRUE)
-
-### Calculate Frequency Totals
-
-``` r
-source("200_Calculate totals.R", echo = TRUE)
-```
-
-    ## 
-    ## > BRFSS <- read.csv(file = "./data/BRFSS.csv", header = TRUE, 
-    ## +     sep = ",")
-    ## 
-    ## > nrow(BRFSS)
-    ## [1] 273798
-    ## 
-    ## > TeethFreq <- table(BRFSS$RMVTETH5)
-    ## 
-    ## > TeethFreq
-    ## 
-    ##      1      2      3      4 
-    ## 109271  92422  44955  27150 
-    ## 
-    ## > write.csv(TeethFreq, file = "./data/teethFreq.csv")
-    ## 
-    ## > TeethFreq/nrow(BRFSS) * 100
-    ## 
-    ##        1        2        3        4 
-    ## 39.90935 33.75554 16.41904  9.91607 
-    ## 
-    ## > cvdFreq <- table(BRFSS$CVDINFR5)
-    ## 
-    ## > cvdFreq
-    ## 
-    ##      0      1 
-    ##  23361 250437 
-    ## 
-    ## > write.csv(cvdFreq, file = "./data/cvdFreq.csv")
-    ## 
-    ## > table(BRFSS$CVDINFR5, BRFSS$RMVTETH5)
-    ##    
-    ##          1      2      3      4
-    ##   0   5446   7072   5957   4886
-    ##   1 103825  85350  38998  22264

@@ -18,4 +18,14 @@ cvdFreq
 
 write.csv(cvdFreq, file = "./data/cvdFreq.csv")
 
+cvd_teethFreq <- table(BRFSS$CVDINFR5, BRFSS$RMVTETH5)
+write.csv(cvd_teethFreq, file = "./data/cvd_teethFreq.csv")
+
 table(BRFSS$CVDINFR5, BRFSS$RMVTETH5)
+
+# look at sex
+sexFreq <- table(BRFSS$SEX)
+write.csv(sexFreq, file = "./data/sexFreq.csv")
+
+# race group
+table(BRFSS$RACEGRP)
