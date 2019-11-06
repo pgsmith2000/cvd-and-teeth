@@ -7,8 +7,6 @@ First created on Nov 5, 2019. Updated on Nov 06, 2019
 
 ### Load Dependencies and Read in BRFSS 2018 Data Set
 
-### Data Preperation and Reduction
-
 ``` r
 source("100_Dependencies.R", echo = TRUE)
 ```
@@ -131,6 +129,8 @@ source("110_Keep vars.R", echo = TRUE)
     ## > nrow(BRFSS_b)
     ## [1] 437436
 
+### Clean and make additional outcome and exposure variables
+
 ``` r
 source("115_Make outcome exposure vars.R", echo = TRUE)
 ```
@@ -171,6 +171,8 @@ source("115_Make outcome exposure vars.R", echo = TRUE)
     ##   7      0      0      0      0   9687
     ##   8 218715      0      0      0      0
     ##   9      0      0      0      0    707
+
+### Clean and make additional confounder variables
 
 ``` r
 source("120_Make sex race vars.R", echo = TRUE)
@@ -772,6 +774,32 @@ source("135_Make exer bmi vars.R", echo = TRUE)
     ##   3      0 127998
     ##   9  35262      0
 
+### Data reduction
+
+Initial input data set from the CDC contained data on 437,436
+individuals and included 275 variables (917 MB).
+
+13 variables were selected from this data set for further refinement.
+Several of these variables were recoded into new variables, and
+additional indicator variables were made for use in the data analysis
+(regression) phase. The final data sets included ?? variables.
+
+During data reduction missing data was removed from the data set one by
+one. This provides a data reduction view of each step.
+
+  - The initial data set contained 437,436 rows (917 MB)
+  - 435,118 rows remained after the removal of missing data on the
+    cardiovascular disease questions (dependent variable). \_ 424,055
+    rows remained after removing missing data from the tooth loss
+    questions (exposure variable.)
+  - 261,501 rows remained after missing data from sex, race, and age
+    variables were removed. Also to replicate the orginal study data was
+    retained only for those individuals over 50 years of age.
+  - 136,336 remained in the final data set after removing the missing
+    data from the remaining confounders.
+
+<!-- end list -->
+
 ``` r
 source("175_Data reduction.R", echo = TRUE)
 ```
@@ -841,6 +869,12 @@ source("175_Data reduction.R", echo = TRUE)
     ## 
     ## > nrow(BRFSS_p)
     ## [1] 204042
+
+### Write out final clean data set
+
+The final data set was written to a file with variable (column) names to
+speed up further analyses. The individual analyses files will only load
+the reduced file from this point on.
 
 ``` r
 source("190_Write out data.R", echo = TRUE)
