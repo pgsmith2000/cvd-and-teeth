@@ -1,0 +1,59 @@
+---
+title: "Missing Teeth and Heart Disease Revisited: BRFSS 2018"
+author: "Paul G. Smith"
+date: '`r paste("First created on Nov 5, 2019. Updated on", format(Sys.Date(),"%b %d, %Y"))`'
+output: 
+  github_document:
+    toc: false
+    html_preview: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Missing Teeth and Heart Disease Revisited: BRFSS 2018
+
+### Load Dependencies and Read in BRFSS 2018 Data Set
+
+```{r echo=TRUE, message=TRUE, warning=TRUE}
+source("100_Dependencies.R", echo = TRUE)
+source("101_Read in BRFSS XPT.R", echo = TRUE)
+
+```
+
+### Data Reduction
+
+```{r echo=TRUE, message=TRUE, warning=TRUE}
+source("105_Keep vars.R", echo = TRUE)
+
+```
+
+### Apply Exclusion and final Reduction
+
+```{r echo=TRUE, message=TRUE, warning=TRUE}
+source("110_Apply exclusions_make_key_variable.R", echo = TRUE)
+
+```
+
+### Make Categorical Variables
+
+```{r echo=TRUE, message=TRUE, warning=TRUE}
+source("115_Make categorical variables.R", echo = TRUE)
+
+```
+
+### Write Out Data Set
+
+```{r echo=TRUE, message=TRUE, warning=TRUE}
+source("190_Write out analytic.R", echo = TRUE)
+
+```
+
+
+### Calculate Frequency Totals
+
+```{r echo=TRUE, message=TRUE, warning=TRUE}
+source("200_Calculate totals.R", echo = TRUE)
+
+```
