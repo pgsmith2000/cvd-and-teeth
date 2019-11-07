@@ -1,32 +1,26 @@
 # read in analytic table
-analytic <- read.csv(file="./data/analytic.csv", header=TRUE, sep=",")
-
-# load MASS library
-library(MASS)
+BRFSS <- read.csv(file="./data/BRFSS.csv", header=TRUE, sep=",")
 
 # make table
-AlcTbl = table(analytic$ASTHMA4, analytic$ALCGRP) 
+teethTbl = table(BRFSS$CVDINFR5, BRFSS$RMVTETH5) 
 
 # run test
-chisq.test(AlcTbl)  
+chisq.test(teethTbl)  
 
-# make macro
-library(gtools)
-
+# make macro (using gtools)
 ChiTest <- defmacro(VarName, TblName, expr={
-TblName = table(analytic$ASTHMA4, analytic$VarName); 
+TblName = table(BRFSS$CVDINFR5, BRFSS$VarName); 
 chisq.test(TblName)})
 
-ChiTest(ALCGRP, AlcTbl)
-ChiTest(X_AGE_G, AgeTbl)
-ChiTest(SEX, SexTbl)
-ChiTest(X_HISPANC, HispTbl)
-ChiTest(RACEGRP, RaceTbl)
-ChiTest(MARGRP, MarTbl)
-ChiTest(EDGROUP, EdTbl)
-ChiTest(INCOME3, IncTbl)
-ChiTest(BMICAT, BMITbl)
-ChiTest(SMOKGRP, SmokTbl)
-ChiTest(EXERANY3, ExerTbl)
-ChiTest(HLTHPLN2, HlthPlnTbl)
-ChiTest(GENHLTH2, GenHlthTbl)
+ChiTest(RMVTETH5, teethTbl)
+ChiTest(SEX2, sexTbl)
+ChiTest(HISPANIC, hispanicTbl)
+ChiTest(RACEGRP, raceTbl)
+ChiTest(AGEG5YR2, ageTbl)
+ChiTest(EDGRP, eduTbl)
+ChiTest(INCOME3, EdTbl)
+ChiTest(DENVST4, denvstTbl)
+ChiTest(DIABETE4, diabTbl)
+ChiTest(SMOKER4, smokeTbl)
+ChiTest(EXERANY3, exerTbl)
+ChiTest(BMICAT, bmiTbl)

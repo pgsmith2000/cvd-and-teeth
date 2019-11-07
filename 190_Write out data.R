@@ -1,6 +1,8 @@
 # Write out analytic dataset
-BRFSS <- BRFSS_p
+BRFSS <- BRFSS_f
 write.csv(BRFSS, file = "./data/BRFSS.csv", row.names = FALSE)
+
+str(BRFSS)
 
 # Note the number of columns (variables) and rows (records/cases)
 nrow(BRFSS)

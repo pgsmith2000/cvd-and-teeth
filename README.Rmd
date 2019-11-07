@@ -68,3 +68,26 @@ The final data set was written to a file with variable (column) names to speed u
 source("190_Write out data.R", echo = TRUE)
 
 ```
+
+### Compute Frequencies for Table 1
+
+- Overall Frequencies
+- Cardiovascular Disease Frequencies
+- No Cardiovascular Disease Frequencies
+
+```{r echo=TRUE, message=TRUE, warning=TRUE}
+source("200_Calculate totals.R", echo = TRUE)
+source("210_Table 1 overall frequencies.R", echo = TRUE)
+source("215_Table 1 cv frequencies.R", echo = TRUE)
+source("220_Table 1 nocv frequencies.R", echo = TRUE)
+
+```
+
+### Chi-Squares for Each Variable
+
+```{r echo=TRUE, message=TRUE, warning=TRUE}
+source("230_Table 1 chi squares.R", echo = TRUE)
+
+```
+
+All Chi-Squares appear significant p < 0.001

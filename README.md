@@ -14,6 +14,9 @@ First created on Nov 5, 2019. Updated on Nov 06, 2019
       - [Data reduction](#data-reduction)
       - [Write out final clean data
         set](#write-out-final-clean-data-set)
+      - [Compute Frequencies for Table
+        1](#compute-frequencies-for-table-1)
+      - [Chi-Squares for Each Variable](#chi-squares-for-each-variable)
 
 ## Missing Teeth and Heart Disease Revisited: BRFSS 2018
 
@@ -52,6 +55,19 @@ source("100_Dependencies.R", echo = TRUE)
     ## The following object is masked from 'package:Hmisc':
     ## 
     ##     impute
+
+    ## 
+    ## > library(gtools)
+
+    ## 
+    ## Attaching package: 'gtools'
+
+    ## The following object is masked from 'package:e1071':
+    ## 
+    ##     permutations
+
+    ## 
+    ## > library(MASS)
 
 ``` r
 source("105_Read in BRFSS XPT.R", echo = TRUE)
@@ -817,70 +833,20 @@ source("175_Data reduction.R", echo = TRUE)
 ```
 
     ## 
-    ## > BRFSS_d <- subset(BRFSS_c, BRFSS_c$CVDINFR5 != 9)
+    ## > BRFSS_d <- subset(BRFSS_c, BRFSS_c$AGEG5YR2 != 9)
     ## 
     ## > nrow(BRFSS_d)
-    ## [1] 435118
+    ## [1] 275857
     ## 
-    ## > BRFSS_e <- subset(BRFSS_d, BRFSS_d$RMVTETH5 != 9)
+    ## > BRFSS_e <- subset(BRFSS_d, BRFSS_d$CVDINFR5 != 9)
     ## 
-    ## > nrow(BRFSS_d)
-    ## [1] 435118
+    ## > nrow(BRFSS_e)
+    ## [1] 274309
     ## 
-    ## > BRFSS_f <- subset(BRFSS_e, BRFSS_e$SEX2 != 9)
+    ## > BRFSS_f <- subset(BRFSS_e, BRFSS_e$RMVTETH5 != 9)
     ## 
     ## > nrow(BRFSS_f)
-    ## [1] 424055
-    ## 
-    ## > BRFSS_g <- subset(BRFSS_f, BRFSS_f$HISPANIC != 9)
-    ## 
-    ## > nrow(BRFSS_g)
-    ## [1] 420069
-    ## 
-    ## > BRFSS_h <- subset(BRFSS_g, BRFSS_g$RACEGRP != 9)
-    ## 
-    ## > nrow(BRFSS_h)
-    ## [1] 416463
-    ## 
-    ## > BRFSS_i <- subset(BRFSS_h, BRFSS_h$AGEG5YR2 != 9)
-    ## 
-    ## > nrow(BRFSS_i)
-    ## [1] 261501
-    ## 
-    ## > BRFSS_j <- subset(BRFSS_i, BRFSS_i$EDGRP != 9)
-    ## 
-    ## > nrow(BRFSS_j)
-    ## [1] 261078
-    ## 
-    ## > BRFSS_k <- subset(BRFSS_j, BRFSS_j$INCOME3 != 9)
-    ## 
-    ## > nrow(BRFSS_d)
-    ## [1] 435118
-    ## 
-    ## > BRFSS_l <- subset(BRFSS_k, BRFSS_k$DENVST4 != 9)
-    ## 
-    ## > nrow(BRFSS_l)
-    ## [1] 215471
-    ## 
-    ## > BRFSS_m <- subset(BRFSS_l, BRFSS_l$DIABETE4 != 9)
-    ## 
-    ## > nrow(BRFSS_m)
-    ## [1] 215276
-    ## 
-    ## > BRFSS_n <- subset(BRFSS_m, BRFSS_m$SMOKER4 != 9)
-    ## 
-    ## > nrow(BRFSS_n)
-    ## [1] 211253
-    ## 
-    ## > BRFSS_o <- subset(BRFSS_n, BRFSS_n$EXERANY3 != 9)
-    ## 
-    ## > nrow(BRFSS_o)
-    ## [1] 211029
-    ## 
-    ## > BRFSS_p <- subset(BRFSS_o, BRFSS_o$BMICAT != 9)
-    ## 
-    ## > nrow(BRFSS_p)
-    ## [1] 204042
+    ## [1] 266109
 
 ### Write out final clean data set
 
@@ -893,12 +859,67 @@ source("190_Write out data.R", echo = TRUE)
 ```
 
     ## 
-    ## > BRFSS <- BRFSS_p
+    ## > BRFSS <- BRFSS_f
     ## 
     ## > write.csv(BRFSS, file = "./data/BRFSS.csv", row.names = FALSE)
     ## 
+    ## > str(BRFSS)
+    ## 'data.frame':    266109 obs. of  52 variables:
+    ##  $ CVDINFR4  : num  2 2 2 2 2 2 2 2 2 2 ...
+    ##  $ RMVTETH4  : num  1 1 8 8 2 8 1 2 1 3 ...
+    ##  $ SEX1      : num  2 1 2 1 1 2 2 2 2 1 ...
+    ##  $ X_HISPANC : num  2 2 2 2 2 2 2 2 2 2 ...
+    ##  $ X_MRACE1  : num  1 1 1 1 1 1 1 2 1 1 ...
+    ##  $ X_AGEG5YR : num  13 10 12 8 13 8 11 12 10 11 ...
+    ##  $ EDUCA     : num  6 4 6 4 4 5 4 3 3 5 ...
+    ##  $ INCOME2   : num  6 3 8 8 4 6 4 2 2 7 ...
+    ##  $ X_DENVST3 : num  1 2 1 1 1 1 2 1 1 2 ...
+    ##  $ DIABETE3  : num  3 3 3 1 3 3 1 3 1 3 ...
+    ##  $ X_SMOKER3 : num  4 4 4 3 3 4 4 4 4 4 ...
+    ##  $ EXERANY2  : num  2 1 1 2 2 1 2 2 1 1 ...
+    ##  $ X_BMI5CAT : num  2 3 2 3 3 4 4 4 4 4 ...
+    ##  $ CVDINFR5  : num  1 1 1 1 1 1 1 1 1 1 ...
+    ##  $ RMVTETH5  : num  1 1 0 0 2 0 1 2 1 3 ...
+    ##  $ SEX2      : num  0 1 0 1 1 0 0 0 0 1 ...
+    ##  $ MALE      : num  0 1 0 1 1 0 0 0 0 1 ...
+    ##  $ HISPANIC  : num  0 0 0 0 0 0 0 0 0 0 ...
+    ##  $ RACEGRP   : num  0 0 0 0 0 0 0 1 0 0 ...
+    ##  $ BLACK     : num  0 0 0 0 0 0 0 1 0 0 ...
+    ##  $ ASIAN     : num  0 0 0 0 0 0 0 0 0 0 ...
+    ##  $ OTHRACE   : num  0 0 0 0 0 0 0 0 0 0 ...
+    ##  $ AGEG5YR2  : num  3 1 2 0 3 0 2 2 1 2 ...
+    ##  $ AGE1      : num  0 0 0 1 0 1 0 0 0 0 ...
+    ##  $ AGE2      : num  0 1 0 0 0 0 0 0 1 0 ...
+    ##  $ AGE3      : num  0 0 1 0 0 0 1 1 0 1 ...
+    ##  $ AGE4      : num  1 0 0 0 1 0 0 0 0 0 ...
+    ##  $ EDGRP     : num  3 1 3 1 1 2 1 0 0 2 ...
+    ##  $ LOWED     : num  0 0 0 0 0 0 0 1 1 0 ...
+    ##  $ HIGHSCHOOL: num  0 1 0 1 1 0 1 0 0 0 ...
+    ##  $ SOMECOLL  : num  0 0 0 0 0 1 0 0 0 1 ...
+    ##  $ COLLEGE   : num  1 0 1 0 0 0 0 0 0 0 ...
+    ##  $ INCOME3   : num  3 1 4 4 1 3 1 0 0 4 ...
+    ##  $ INC1      : num  0 0 0 0 0 0 0 1 1 0 ...
+    ##  $ INC2      : num  0 1 0 0 1 0 1 0 0 0 ...
+    ##  $ INC3      : num  0 0 0 0 0 0 0 0 0 0 ...
+    ##  $ INC4      : num  1 0 0 0 0 1 0 0 0 0 ...
+    ##  $ INC5      : num  0 0 1 1 0 0 0 0 0 1 ...
+    ##  $ DENVST4   : num  0 1 0 0 0 0 1 0 0 1 ...
+    ##  $ NODENVST  : num  0 1 0 0 0 0 1 0 0 1 ...
+    ##  $ DIABETE4  : num  0 0 0 1 0 0 1 0 1 0 ...
+    ##  $ NODIABETE : num  1 1 1 0 1 1 0 1 0 1 ...
+    ##  $ SMOKER4   : num  0 0 0 1 1 0 0 0 0 0 ...
+    ##  $ NEVERSMK  : num  1 1 1 0 0 1 1 1 1 1 ...
+    ##  $ FRMRSMK   : num  0 0 0 1 1 0 0 0 0 0 ...
+    ##  $ SMOKE     : num  0 0 0 0 0 0 0 0 0 0 ...
+    ##  $ EXERANY3  : num  0 1 1 0 0 1 0 0 1 1 ...
+    ##  $ NOEXER    : num  1 0 0 1 1 0 1 1 0 0 ...
+    ##  $ BMICAT    : num  1 2 1 2 2 3 3 3 3 3 ...
+    ##  $ UNDWT     : num  0 0 0 0 0 0 0 0 0 0 ...
+    ##  $ OVWT      : num  0 1 0 1 1 0 0 0 0 0 ...
+    ##  $ OBESE     : num  0 0 0 0 0 1 1 1 1 1 ...
+    ## 
     ## > nrow(BRFSS)
-    ## [1] 204042
+    ## [1] 266109
     ## 
     ## > ncol(BRFSS)
     ## [1] 52
@@ -919,3 +940,326 @@ source("190_Write out data.R", echo = TRUE)
     ## > data_dictionary <- describe(BRFSS)
     ## 
     ## > sink("./documentation/data_dictionary.txt", append = TRUE)
+
+### Compute Frequencies for Table 1
+
+  - Overall Frequencies
+  - Cardiovascular Disease Frequencies
+  - No Cardiovascular Disease Frequencies
+
+<!-- end list -->
+
+``` r
+source("200_Calculate totals.R", echo = TRUE)
+```
+
+    ## 
+    ## > BRFSS <- read.csv(file = "./data/BRFSS.csv", header = TRUE, 
+    ## +     sep = ",")
+    ## 
+    ## > nrow(BRFSS)
+    ## [1] 266109
+    ## 
+    ## > TeethFreq <- table(BRFSS$RMVTETH5)
+    ## 
+    ## > TeethFreq
+    ## 
+    ##      0      1      2      3 
+    ## 104802  90192  44317  26798 
+    ## 
+    ## > write.csv(TeethFreq, file = "./data/teethFreq.csv")
+    ## 
+    ## > TeethFreq/nrow(BRFSS) * 100
+    ## 
+    ##        0        1        2        3 
+    ## 39.38311 33.89288 16.65370 10.07031 
+    ## 
+    ## > cvdFreq <- table(BRFSS$CVDINFR5)
+    ## 
+    ## > cvdFreq
+    ## 
+    ##      0      1 
+    ##  23039 243070 
+    ## 
+    ## > write.csv(cvdFreq, file = "./data/cvdFreq.csv")
+    ## 
+    ## > cvd_teethFreq <- table(BRFSS$CVDINFR5, BRFSS$RMVTETH5)
+    ## 
+    ## > write.csv(cvd_teethFreq, file = "./data/cvd_teethFreq.csv")
+    ## 
+    ## > table(BRFSS$CVDINFR5, BRFSS$RMVTETH5)
+    ##    
+    ##         0     1     2     3
+    ##   0  5328  6968  5901  4842
+    ##   1 99474 83224 38416 21956
+    ## 
+    ## > sexFreq <- table(BRFSS$SEX)
+    ## 
+    ## > write.csv(sexFreq, file = "./data/sexFreq.csv")
+    ## 
+    ## > table(BRFSS$RACEGRP)
+    ## 
+    ##      0      1      2      3      4      9 
+    ## 214057  19936  13614   3513  10771   4218
+
+``` r
+source("210_Table 1 overall frequencies.R", echo = TRUE)
+```
+
+    ## 
+    ## > BRFSS <- read.csv(file = "./data/BRFSS.csv", header = TRUE, 
+    ## +     sep = ",")
+    ## 
+    ## > cvdFreq <- table(BRFSS$CVDINFR5)
+    ## 
+    ## > cvdFreq
+    ## 
+    ##      0      1 
+    ##  23039 243070 
+    ## 
+    ## > write.csv(cvdFreq, file = "./data/overall/cvdFreq.csv")
+    ## 
+    ## > FreqTbl <- defmacro(OutputTable, InputVar, CSVTable, 
+    ## +     expr = {
+    ## +         OutputTable <- table(InputVar)
+    ## +         write.csv(OutputTable, file  .... [TRUNCATED] 
+    ## 
+    ## > FreqTbl(teethFreq, BRFSS$RMVTETH5, "teeth")
+    ## 
+    ## > FreqTbl(sexFreq, BRFSS$SEX2, "sex")
+    ## 
+    ## > FreqTbl(hispFreq, BRFSS$HISPANIC, "hispanic")
+    ## 
+    ## > FreqTbl(raceFreq, BRFSS$RACEGRP, "race")
+    ## 
+    ## > FreqTbl(sexFreq, BRFSS$AGEG5YR2, "age")
+    ## 
+    ## > FreqTbl(eduFreq, BRFSS$EDGRP, "edu")
+    ## 
+    ## > FreqTbl(incFreq, BRFSS$INCOME3, "inc")
+    ## 
+    ## > FreqTbl(denvstFreq, BRFSS$DENVST4, "denvst")
+    ## 
+    ## > FreqTbl(diabFreq, BRFSS$DIABETE4, "diab")
+    ## 
+    ## > FreqTbl(smokeFreq, BRFSS$SMOKER4, "smoke")
+    ## 
+    ## > FreqTbl(exFreq, BRFSS$EXERANY3, "ex")
+    ## 
+    ## > FreqTbl(bmiFreq, BRFSS$BMICAT, "bmi")
+
+``` r
+source("215_Table 1 cv frequencies.R", echo = TRUE)
+```
+
+    ## 
+    ## > BRFSS <- read.csv(file = "./data/BRFSS.csv", header = TRUE, 
+    ## +     sep = ",")
+    ## 
+    ## > cv_only <- subset(BRFSS, CVDINFR5 == 0)
+    ## 
+    ## > table(cv_only$RMVTETH5)
+    ## 
+    ##    0    1    2    3 
+    ## 5328 6968 5901 4842 
+    ## 
+    ## > nrow(cv_only)
+    ## [1] 23039
+    ## 
+    ## > FreqTbl <- defmacro(OutputTable, InputVar, CSVTable, 
+    ## +     expr = {
+    ## +         OutputTable <- table(InputVar)
+    ## +         write.csv(OutputTable, file  .... [TRUNCATED] 
+    ## 
+    ## > FreqTbl(teethFreq, cv_only$RMVTETH5, "teeth")
+    ## 
+    ## > FreqTbl(sexFreq, cv_only$SEX2, "sex")
+    ## 
+    ## > FreqTbl(hispFreq, cv_only$HISPANIC, "hispanic")
+    ## 
+    ## > FreqTbl(raceFreq, cv_only$RACEGRP, "race")
+    ## 
+    ## > FreqTbl(sexFreq, cv_only$AGEG5YR2, "age")
+    ## 
+    ## > FreqTbl(eduFreq, cv_only$EDGRP, "edu")
+    ## 
+    ## > FreqTbl(incFreq, cv_only$INCOME3, "inc")
+    ## 
+    ## > FreqTbl(denvstFreq, cv_only$DENVST4, "denvst")
+    ## 
+    ## > FreqTbl(diabFreq, cv_only$DIABETE4, "diab")
+    ## 
+    ## > FreqTbl(smokeFreq, cv_only$SMOKER4, "smoke")
+    ## 
+    ## > FreqTbl(exFreq, cv_only$EXERANY3, "ex")
+    ## 
+    ## > FreqTbl(bmiFreq, cv_only$BMICAT, "bmi")
+
+``` r
+source("220_Table 1 nocv frequencies.R", echo = TRUE)
+```
+
+    ## 
+    ## > BRFSS <- read.csv(file = "./data/BRFSS.csv", header = TRUE, 
+    ## +     sep = ",")
+    ## 
+    ## > nocv_only <- subset(BRFSS, CVDINFR5 == 1)
+    ## 
+    ## > table(nocv_only$RMVTETH5)
+    ## 
+    ##     0     1     2     3 
+    ## 99474 83224 38416 21956 
+    ## 
+    ## > nrow(nocv_only)
+    ## [1] 243070
+    ## 
+    ## > FreqTbl <- defmacro(OutputTable, InputVar, CSVTable, 
+    ## +     expr = {
+    ## +         OutputTable <- table(InputVar)
+    ## +         write.csv(OutputTable, file  .... [TRUNCATED] 
+    ## 
+    ## > FreqTbl(teethFreq, nocv_only$RMVTETH5, "teeth")
+    ## 
+    ## > FreqTbl(sexFreq, nocv_only$SEX2, "sex")
+    ## 
+    ## > FreqTbl(hispFreq, nocv_only$HISPANIC, "hispanic")
+    ## 
+    ## > FreqTbl(raceFreq, nocv_only$RACEGRP, "race")
+    ## 
+    ## > FreqTbl(ageFreq, nocv_only$AGEG5YR2, "age")
+    ## 
+    ## > FreqTbl(eduFreq, nocv_only$EDGRP, "edu")
+    ## 
+    ## > FreqTbl(incFreq, nocv_only$INCOME3, "inc")
+    ## 
+    ## > FreqTbl(denvstFreq, nocv_only$DENVST4, "denvst")
+    ## 
+    ## > FreqTbl(diabFreq, nocv_only$DIABETE4, "diab")
+    ## 
+    ## > FreqTbl(smokeFreq, nocv_only$SMOKER4, "smoke")
+    ## 
+    ## > FreqTbl(exFreq, nocv_only$EXERANY3, "ex")
+    ## 
+    ## > FreqTbl(bmiFreq, nocv_only$BMICAT, "bmi")
+
+### Chi-Squares for Each Variable
+
+``` r
+source("230_Table 1 chi squares.R", echo = TRUE)
+```
+
+    ## 
+    ## > BRFSS <- read.csv(file = "./data/BRFSS.csv", header = TRUE, 
+    ## +     sep = ",")
+    ## 
+    ## > teethTbl = table(BRFSS$CVDINFR5, BRFSS$RMVTETH5)
+    ## 
+    ## > chisq.test(teethTbl)
+    ## 
+    ##  Pearson's Chi-squared test
+    ## 
+    ## data:  teethTbl
+    ## X-squared = 6008.5, df = 3, p-value < 2.2e-16
+    ## 
+    ## 
+    ## > ChiTest <- defmacro(VarName, TblName, expr = {
+    ## +     TblName = table(BRFSS$CVDINFR5, BRFSS$VarName)
+    ## +     chisq.test(TblName)
+    ## + })
+    ## 
+    ## > ChiTest(RMVTETH5, teethTbl)
+    ## 
+    ##  Pearson's Chi-squared test
+    ## 
+    ## data:  teethTbl
+    ## X-squared = 6008.5, df = 3, p-value < 2.2e-16
+    ## 
+    ## 
+    ## > ChiTest(SEX2, sexTbl)
+    ## 
+    ##  Pearson's Chi-squared test
+    ## 
+    ## data:  sexTbl
+    ## X-squared = 2852.8, df = 2, p-value < 2.2e-16
+    ## 
+    ## 
+    ## > ChiTest(HISPANIC, hispanicTbl)
+    ## 
+    ##  Pearson's Chi-squared test
+    ## 
+    ## data:  hispanicTbl
+    ## X-squared = 33.897, df = 2, p-value = 4.358e-08
+    ## 
+    ## 
+    ## > ChiTest(RACEGRP, raceTbl)
+    ## 
+    ##  Pearson's Chi-squared test
+    ## 
+    ## data:  raceTbl
+    ## X-squared = 330.57, df = 5, p-value < 2.2e-16
+    ## 
+    ## 
+    ## > ChiTest(AGEG5YR2, ageTbl)
+    ## 
+    ##  Pearson's Chi-squared test
+    ## 
+    ## data:  ageTbl
+    ## X-squared = 3482.2, df = 3, p-value < 2.2e-16
+    ## 
+    ## 
+    ## > ChiTest(EDGRP, eduTbl)
+    ## 
+    ##  Pearson's Chi-squared test
+    ## 
+    ## data:  eduTbl
+    ## X-squared = 2193.5, df = 4, p-value < 2.2e-16
+    ## 
+    ## 
+    ## > ChiTest(INCOME3, EdTbl)
+    ## 
+    ##  Pearson's Chi-squared test
+    ## 
+    ## data:  EdTbl
+    ## X-squared = 3066.2, df = 5, p-value < 2.2e-16
+    ## 
+    ## 
+    ## > ChiTest(DENVST4, denvstTbl)
+    ## 
+    ##  Pearson's Chi-squared test
+    ## 
+    ## data:  denvstTbl
+    ## X-squared = 2535.8, df = 2, p-value < 2.2e-16
+    ## 
+    ## 
+    ## > ChiTest(DIABETE4, diabTbl)
+    ## 
+    ##  Pearson's Chi-squared test
+    ## 
+    ## data:  diabTbl
+    ## X-squared = 4665.9, df = 2, p-value < 2.2e-16
+    ## 
+    ## 
+    ## > ChiTest(SMOKER4, smokeTbl)
+    ## 
+    ##  Pearson's Chi-squared test
+    ## 
+    ## data:  smokeTbl
+    ## X-squared = 2661.8, df = 3, p-value < 2.2e-16
+    ## 
+    ## 
+    ## > ChiTest(EXERANY3, exerTbl)
+    ## 
+    ##  Pearson's Chi-squared test
+    ## 
+    ## data:  exerTbl
+    ## X-squared = 1668, df = 2, p-value < 2.2e-16
+    ## 
+    ## 
+    ## > ChiTest(BMICAT, bmiTbl)
+    ## 
+    ##  Pearson's Chi-squared test
+    ## 
+    ## data:  bmiTbl
+    ## X-squared = 640.78, df = 4, p-value < 2.2e-16
+
+All Chi-Squares appear significant p \< 0.001

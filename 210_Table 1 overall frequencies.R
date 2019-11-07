@@ -1,20 +1,10 @@
-# read in analytic table
-analytic <- read.csv(file="./data/analytic.csv", header=TRUE, sep=",")
+# read in data
+BRFSS <- read.csv(file="./data/BRFSS.csv", header=TRUE, sep=",")
 
 # Start by making frequencies per category
-AsthmaFreq <- table(analytic$ASTHMA4)
-AsthmaFreq
-write.csv(AsthmaFreq, file = "./data/overall/AsthmaFreq.csv")
-
-AlcFreq <- table(analytic$ALCGRP)
-AlcFreq 
-write.csv(AlcFreq , file = "./data/overall/AlcFreq.csv")
-
-# USING MACROS
-
-# install package gtools
-# then call up library
-library(gtools)
+cvdFreq <- table(BRFSS$CVDINFR5)
+cvdFreq
+write.csv(cvdFreq, file = "./data/overall/cvdFreq.csv")
 
 # use defmacro to define the macro
 FreqTbl <-defmacro(OutputTable, InputVar, CSVTable, 
@@ -23,19 +13,19 @@ OutputTable <- table(InputVar);
 write.csv(OutputTable, file = paste0("./data/overall/", CSVTable, ".csv"))
 })
 
-FreqTbl (AlcFreq, analytic$ALCGRP, "Alc")
-FreqTbl (AgeFreq, analytic$X_AGE_G, "Age")
-FreqTbl (SexFreq, analytic$SEX, "Sex")
-FreqTbl (HispFreq, analytic$X_HISPANC, "Hisp")
-FreqTbl (RaceFreq, analytic$RACEGRP, "Race")
-FreqTbl (MaritalFreq, analytic$MARGRP, "Mar")
-FreqTbl (EdFreq, analytic$EDGROUP, "Ed")
-FreqTbl (IncFreq, analytic$INCOME3, "Inc")
-FreqTbl (BMIFreq, analytic$BMICAT, "BMI")
-FreqTbl (SmokeFreq, analytic$SMOKGRP, "Smok")
-FreqTbl (ExerFreq, analytic$EXERANY3, "Exer")
-FreqTbl (HlthPlanFreq, analytic$HLTHPLN2, "HlthPln")
-FreqTbl (GenHlthFreq, analytic$GENHLTH2, "GenHlth")
+FreqTbl (teethFreq, BRFSS$RMVTETH5, "teeth")
+FreqTbl (sexFreq, BRFSS$SEX2, "sex")
+FreqTbl (hispFreq, BRFSS$HISPANIC, "hispanic")
+FreqTbl (raceFreq, BRFSS$RACEGRP, "race")
+FreqTbl (sexFreq, BRFSS$AGEG5YR2, "age")
+FreqTbl (eduFreq, BRFSS$EDGRP, "edu")
+FreqTbl (incFreq, BRFSS$INCOME3, "inc")
+FreqTbl (denvstFreq, BRFSS$DENVST4, "denvst")
+FreqTbl (diabFreq, BRFSS$DIABETE4, "diab")
+FreqTbl (smokeFreq, BRFSS$SMOKER4, "smoke")
+FreqTbl (exFreq, BRFSS$EXERANY3, "ex")
+FreqTbl (bmiFreq, BRFSS$BMICAT, "bmi")
+
 
 
 
