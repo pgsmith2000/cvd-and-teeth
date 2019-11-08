@@ -3,20 +3,16 @@ Preparing the Data
 Paul G. Smith
 First created on Nov 7, 2019. Updated on Nov 07, 2019
 
-  - [Preparing the Data](#preparing-the-data)
-      - [Step 1: Read in the BRFSS 2018 survey data set and only keep
-        key
-        variables](#step-1-read-in-the-brfss-2018-survey-data-set-and-only-keep-key-variables)
-      - [Step 2: Re-code and create dummy
-        variables](#step-2-re-code-and-create-dummy-variables)
-      - [Step 3: Data reduction](#step-3-data-reduction)
+  - [Step 1: Read in the BRFSS 2018 survey data set and only keep key
+    variables](#step-1-read-in-the-brfss-2018-survey-data-set-and-only-keep-key-variables)
+  - [Step 2: Re-code and create dummy
+    variables](#step-2-re-code-and-create-dummy-variables)
+  - [Step 3: Data reduction](#step-3-data-reduction)
       - [Data reduction results](#data-reduction-results)
       - [Write out final data set for further
         analyses](#write-out-final-data-set-for-further-analyses)
 
-## Preparing the Data
-
-### Step 1: Read in the BRFSS 2018 survey data set and only keep key variables
+## Step 1: Read in the BRFSS 2018 survey data set and only keep key variables
 
 ``` r
 source("../code/100_Dependencies.R", echo = TRUE)
@@ -153,7 +149,7 @@ source("../code/110_Keep vars.R", echo = TRUE)
     ## > nrow(BRFSS_b)
     ## [1] 437436
 
-### Step 2: Re-code and create dummy variables
+## Step 2: Re-code and create dummy variables
 
 The next step in the process is to recode the variables from the BRFSS
 2018 survey to better suit these analyses, and to create some additional
@@ -806,21 +802,25 @@ source("../code/135_Make exer bmi vars.R", echo = TRUE)
     ##   3      0 127998
     ##   9  35262      0
 
-### Step 3: Data reduction
+## Step 3: Data reduction
 
 Now that the data are clean and reorganize, data reduction is possible.
 The original BRFSS 2018 Survey data included data on 437436 participants
 and 275 variables.
 
-Data reduction occured in 3 phases: 1. Duplicating the authors of the
-original 2010 analysis, the sample population was limited to adults over
-50 years of age. BRFSS 2018 data for participants with age\<50 were
-removed. 2. Records that did not include valid data on the dependent
-(outcome) variable were also excluded. BRFSS 2018 data without valid
-cardiovascular disease data in CVDINFR5 were removed. 3. Records that
-did not include valid data on the independent (exposure) variable were
-excluded as well. BRFSS 2018 data without valid missing teeth data in
-RMVTETH5 were removed.
+Data reduction occured in 3 phases:
+
+1.  Duplicating the authors of the original 2010 analysis, the sample
+    population was limited to adults over 50 years of age. BRFSS 2018
+    data for participants with age\<50 were removed.
+2.  Records that did not include valid data on the dependent (outcome)
+    variable were also excluded. BRFSS 2018 data without valid
+    cardiovascular disease data in CVDINFR5 were removed.
+3.  Records that did not include valid data on the independent
+    (exposure) variable were excluded as well. BRFSS 2018 data without
+    valid missing teeth data in RMVTETH5 were removed.
+
+<!-- end list -->
 
 ``` r
 source("../code/175_Data reduction.R", echo = TRUE)

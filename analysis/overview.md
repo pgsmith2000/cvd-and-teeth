@@ -45,11 +45,13 @@ reduced from over 440,000 records to approximately 266,000 records. The
 
 The three main products of this process included:
 
-  - The Main Data Dictionary \[Excel - 34 KB\]
-  - A small Data Dictionary Supplement \[Text - 15 KB\]
-  - The final BRFSS Reduced Data Set \[CSV - 27 MB\]
+  - The Main **[Data Dictionary](../output/Data_Dictionary.xlsx)**
+  - A small **[Data Dictionary
+    Supplement](../output/data_dictionary.txt)**
+  - The final **[BRFSS Reduced Data Set](../output/BRFSS.csv)**
 
-For the detailed coding and results, explore the Stage 1 Analysis.
+For the detailed coding and results, explore the **[Stage 1
+Analysis](preparing-the-data.md).**
 
 ### Stage 2: Example Descriptive Analysis
 

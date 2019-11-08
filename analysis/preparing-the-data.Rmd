@@ -12,9 +12,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Preparing the Data
-
-### Step 1: Read in the BRFSS 2018 survey data set and only keep key variables
+## Step 1: Read in the BRFSS 2018 survey data set and only keep key variables
 
 ```{r echo=TRUE}
 source("../code/100_Dependencies.R", echo = TRUE)
@@ -23,7 +21,7 @@ source("../code/110_Keep vars.R", echo = TRUE)
 
 ```
 
-### Step 2: Re-code and create dummy variables
+## Step 2: Re-code and create dummy variables
 
 The next step in the process is to recode the variables from the BRFSS 2018 survey to better suit these analyses, and to create some additional dummy (indicator) variables for use in a linear regression analysis. Dummy variables are useful because they enable us to use a single regression equation to represent multiple groups.
 
@@ -38,11 +36,12 @@ source("../code/135_Make exer bmi vars.R", echo = TRUE)
 
 ```
 
-### Step 3: Data reduction
+## Step 3: Data reduction
 
 Now that the data are clean and reorganize, data reduction is possible. The original BRFSS 2018 Survey data included data on `r nrow(BRFSS_a)` participants and `r ncol(BRFSS_a)` variables.
 
 Data reduction occured in 3 phases:
+
 1. Duplicating the authors of the original 2010 analysis, the sample population was limited to adults over 50 years of age. BRFSS 2018 data for participants with age<50 were removed.
 2. Records that did not include valid data on the dependent (outcome) variable were also excluded. BRFSS 2018 data without valid cardiovascular disease data in CVDINFR5 were removed.
 3. Records that did not include valid data on the independent (exposure) variable were excluded as well. BRFSS 2018 data without valid missing teeth data in RMVTETH5 were removed.
