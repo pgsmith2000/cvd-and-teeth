@@ -1,0 +1,12 @@
+---
+title: "About"
+output:
+  workflowr::wflow_html:
+    toc: false
+editor_options:
+  chunk_output_type: console
+---
+
+A demonstration of my r programming, project organization, analysis, and documentation process in R. This analysis uses data from the 2018 Behavioral Risk Factor Surveillance System  (BRFSS) annual survey of over 400,000 respondents to a telephone interview conducted by the Centers for Disease Control and Prevention (CDC) and made publically available on the [BRFSS 2010 web site](https://www.cdc.gov/brfss/annual_data/annual_2018.html).
+
+The original study results by R. C. Wiener and U. Sambamoorthi can be found at https://www.ncbi.nlm.nih.gov/pubmed/24624297.

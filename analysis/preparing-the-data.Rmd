@@ -1,0 +1,72 @@
+---
+title: "Preparing the Data"
+author: "Paul G. Smith"
+date: '`r paste("First created on Nov 7, 2019. Updated on", format(Sys.Date(),"%b %d, %Y"))`'
+output: 
+  github_document:
+    toc: true
+    html_preview: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Preparing the Data
+
+### Step 1: Read in the BRFSS 2018 survey data set and only keep key variables
+
+```{r echo=TRUE}
+source("../code/100_Dependencies.R", echo = TRUE)
+source("../code/105_Read in BRFSS XPT.R", echo = TRUE)
+source("../code/110_Keep vars.R", echo = TRUE)
+
+```
+
+### Step 2: Re-code and create dummy variables
+
+The next step in the process is to recode the variables from the BRFSS 2018 survey to better suit these analyses, and to create some additional dummy (indicator) variables for use in a linear regression analysis. Dummy variables are useful because they enable us to use a single regression equation to represent multiple groups.
+
+While the BRFSS data set used here is relatively clean, some of the additional recoding allowed for some additional cleaning. Particularly, don't know/refused/missing data was consistently recoded.
+
+```{r echo=TRUE}
+source("../code/115_Make outcome exposure vars.R", echo = TRUE)
+source("../code/120_Make sex race vars.R", echo = TRUE)
+source("../code/125_Make age  educ income vars.R", echo = TRUE)
+source("../code/130_Make dent diabetes smoker vars.R", echo = TRUE)
+source("../code/135_Make exer bmi vars.R", echo = TRUE)
+
+```
+
+### Step 3: Data reduction
+
+Now that the data are clean and reorganize, data reduction is possible. The original BRFSS 2018 Survey data included data on `r nrow(BRFSS_a)` participants and `r ncol(BRFSS_a)` variables.
+
+Data reduction occured in 3 phases:
+1. Duplicating the authors of the original 2010 analysis, the sample population was limited to adults over 50 years of age. BRFSS 2018 data for participants with age<50 were removed.
+2. Records that did not include valid data on the dependent (outcome) variable were also excluded. BRFSS 2018 data without valid cardiovascular disease data in CVDINFR5 were removed.
+3. Records that did not include valid data on the independent (exposure) variable were excluded as well. BRFSS 2018 data without valid missing teeth data in RMVTETH5 were removed.
+
+```{r echo=TRUE}
+source("../code/175_Data reduction.R", echo = TRUE)
+
+```
+
+### Data reduction results
+
+As stated above this inital BRFSS 2018 Survey data included records on `r nrow(BRFSS_a)` participants and `r ncol(BRFSS_a)` variables. Each of the steps resulted in making the data set smaller
+
+1. Removing participants under 50 eliminated `r nrow(BRFSS_d)-nrow(BRFSS_a)` records.
+2. Removing participants with invalid dependent (outcome) variable data eliminated `r nrow(BRFSS_e)-nrow(BRFSS_d)` records.
+3. Removing participants with invalid independent (exposure) variable data eliminated `r nrow(BRFSS_e)-nrow(BRFSS_d)` records.
+
+### Write out final data set for further analyses
+
+The final data set included data on `r nrow(BRFSS_e)` variables and `r nrow(BRFSS_e)` participant. This final (and much smaller) data set was saved to speed up further analyses by requiring the loading of this data file.
+
+```{r echo=TRUE}
+source("../code/190_Write out data.R", echo = TRUE)
+
+```
+
+This concluded the data cleaning, wrangling, and preparation of the data set
