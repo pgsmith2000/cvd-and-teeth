@@ -1,6 +1,5 @@
 ---
 title: "Revisiting the Cross-Sectional Association Between Missing Teeth and Cardiovascular Disease: BRFSS 2018"
-author: "Paul G. Smith"
 date: '`r paste("First created on Nov 7, 2019. Updated on", format(Sys.Date(),"%b %d, %Y"))`'
 output: 
   github_document:
@@ -12,8 +11,6 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
-## Revisiting the Cross-Sectional Association Between Missing Teeth and Cardiovascular Disease: BRFSS 2018
 
 The relationship between oral health and cardiovascular disease has been an important area of research in the last decade. The objective of the current study is to perform an analysis of BRFSS 2018 data based on the previously published work of R. Constance Wiener and Usha Sambamoorthi from 2010. **This analysis is meant to be an example of the data analysis and R programming techniques required to perform both a descriptive and regression analysis of publically available data.**
 

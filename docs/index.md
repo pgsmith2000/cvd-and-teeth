@@ -1,18 +1,12 @@
 Revisiting the Cross-Sectional Association Between Missing Teeth and
 Cardiovascular Disease: BRFSS 2018
 ================
-Paul G. Smith
 First created on Nov 7, 2019. Updated on Nov 07, 2019
 
-  - [Revisiting the Cross-Sectional Association Between Missing Teeth
-    and Cardiovascular Disease: BRFSS
-    2018](#revisiting-the-cross-sectional-association-between-missing-teeth-and-cardiovascular-disease-brfss-2018)
-      - [Stage 1: Data Preparation, Cleaning, and
-        Reduction](#stage-1-data-preparation-cleaning-and-reduction)
-      - [Stage 2: Example Descriptive
-        Analysis](#stage-2-example-descriptive-analysis)
-
-## Revisiting the Cross-Sectional Association Between Missing Teeth and Cardiovascular Disease: BRFSS 2018
+  - [Stage 1: Data Preparation, Cleaning, and
+    Reduction](#stage-1-data-preparation-cleaning-and-reduction)
+  - [Stage 2: Example Descriptive
+    Analysis](#stage-2-example-descriptive-analysis)
 
 The relationship between oral health and cardiovascular disease has been
 an important area of research in the last decade. The objective of the
