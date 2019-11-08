@@ -9,8 +9,8 @@ First created on Nov 7, 2019. Updated on Nov 07, 2019
     variables](#step-2-re-code-and-create-dummy-variables)
   - [Step 3: Data reduction](#step-3-data-reduction)
       - [Data reduction results](#data-reduction-results)
-      - [Write out final data set for further
-        analyses](#write-out-final-data-set-for-further-analyses)
+  - [Step 4: Write out final data set for further
+    analyses](#step-4-write-out-final-data-set-for-further-analyses)
 
 ## Step 1: Read in the BRFSS 2018 survey data set and only keep key variables
 
@@ -854,7 +854,7 @@ making the data set smaller
 3.  Removing participants with invalid independent (exposure) variable
     data eliminated -1548 records.
 
-### Write out final data set for further analyses
+## Step 4: Write out final data set for further analyses
 
 The final data set included data on 274309 variables and 274309
 participant. This final (and much smaller) data set was saved to speed
@@ -949,3 +949,5 @@ source("../code/190_Write out data.R", echo = TRUE)
 
 This concluded the data cleaning, wrangling, and preparation of the data
 set
+
+Return to the **[Main Overview](overview.md)**
