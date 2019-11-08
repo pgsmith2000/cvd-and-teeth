@@ -41,7 +41,9 @@ analysis), the data needed some additonal cleaning and reduction. The
 final result was a data set of 52 variables (compared to the 275
 variables in the total set). In addition, the number of records was
 reduced from over 440,000 records to approximately 266,000 records. The
-2018 BRFSS Codebook CDC \[PDF - 10 MB\] was a key tool in this process.
+**[2018 BRFSS Codebook
+CDC](https://www.cdc.gov/brfss/annual_data/2018/pdf/codebook18_llcp-v2-508.pdf)**
+was a key tool in this process.
 
 The three main products of this process included:
 
