@@ -848,11 +848,11 @@ As stated above this inital BRFSS 2018 Survey data included records on
 437436 participants and 275 variables. Each of the steps resulted in
 making the data set smaller
 
-1.  Removing participants under 50 eliminated -161579 records.
+1.  Removing participants under 50 eliminated 161579 records.
 2.  Removing participants with invalid dependent (outcome) variable data
-    eliminated -1548 records.
+    eliminated 1548 records.
 3.  Removing participants with invalid independent (exposure) variable
-    data eliminated -1548 records.
+    data eliminated 1548 records.
 
 ## Step 4: Write out final data set for further analyses
 
@@ -950,4 +950,4 @@ source("../code/190_Write out data.R", echo = TRUE)
 This concluded the data cleaning, wrangling, and preparation of the data
 set.
 
-Return to the **[Main Overview](index.md)**
+Return to the **[Main Overview](index.html)**
