@@ -21,3 +21,6 @@ a regression analysis using R.
 
 For more information about the original study check out the published
 article at: <https://www.ncbi.nlm.nih.gov/pubmed/24624297>
+
+View the **[Analysis
+Overview](https://github.com/pgsmith2000/toothheart/blob/master/analysis/overview.md)**
