@@ -11,7 +11,6 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
 The relationship between oral health and cardiovascular disease has been an important area of research in the last decade. The objective of the current study is to perform an analysis of BRFSS 2018 data based on the previously published work of R. Constance Wiener and Usha Sambamoorthi from 2010. **This analysis is meant to be an example of the data analysis and R programming techniques required to perform both a descriptive and regression analysis of publically available data.**
 
 In their orignal 2010 analysis, Weiner and Sambamoorth evaluated the association of cardiovascular disease and the number of missing teeth as a risk indicator. In this analysis, the 2018 BRFSS data and initial variables from that study will be used as the basis for demonstrating the products and coding required for (1) an descriptive analysis and (2) a regression analysis using R.
@@ -32,4 +31,4 @@ For the detailed coding and results, explore the **[Stage 1 Analysis](preparing-
 
 ### Stage 2: Example Descriptive Analysis
 
-To Come…
+More to come..

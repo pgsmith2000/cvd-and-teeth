@@ -948,6 +948,6 @@ source("../code/190_Write out data.R", echo = TRUE)
     ## > sink("../output/data_dictionary.txt", append = TRUE)
 
 This concluded the data cleaning, wrangling, and preparation of the data
-set
+set.
 
 Return to the **[Main Overview](index.md)**

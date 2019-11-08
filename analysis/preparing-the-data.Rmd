@@ -63,13 +63,11 @@ As stated above this inital BRFSS 2018 Survey data included records on `r nrow(B
 
 The final data set included data on `r nrow(BRFSS_e)` variables and `r nrow(BRFSS_e)` participant. This final (and much smaller) data set was saved to speed up further analyses by requiring the loading of this data file.
 
-
-
 ```{r echo=TRUE}
 source("../code/190_Write out data.R", echo = TRUE)
 
 ```
 
-This concluded the data cleaning, wrangling, and preparation of the data set
+This concluded the data cleaning, wrangling, and preparation of the data set.
 
 Return to the **[Main Overview](index.md)**
