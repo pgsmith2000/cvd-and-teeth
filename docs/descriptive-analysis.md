@@ -244,7 +244,8 @@ source("../code/206_Confounder plots.R", echo = TRUE)
     ## 
     ## > g <- arrangeGrob(p1, p2, p3, p4, nrow = 2, ncol = 2)
     ## 
-    ## > ggsave(file = "../output/figures/confounders.png")
+    ## > ggsave(file = "../output/figures/confounders.png", 
+    ## +     g)
 
     ## Saving 7 x 5 in image
 
@@ -307,6 +308,15 @@ source("../code/207_More confounder plots.R", echo = TRUE)
     ## Saving 7 x 5 in image
 
 ![](descriptive-analysis_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->
+
+![Key Variable Plots](../output/figures/key_variables.png
+"Key Variable Plots")
+
+![Confounder Plots](../output/figures/confounders.png
+"Confounder Plots")
+
+![More Confounder Plots](../output/figures/more_confounders.png
+"More Confounder Plots")
 
 ## Step 3: Frequency Calculations for Table 1
 
