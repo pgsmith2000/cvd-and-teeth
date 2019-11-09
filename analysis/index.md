@@ -52,8 +52,8 @@ Analysis](preparing-the-data.html).**
 
 ### Stage 2: Example Descriptive Analysis
 
-To see the detailed coding and results, explore the \*\*[Stage 2
-Descriptive Analysis](descriptive-analysis.html)
+To see the detailed coding and results, explore the **[Stage 2
+Descriptive Analysis](descriptive-analysis.html)**
 
 ### Stage 3: Linear Regression
 
