@@ -309,13 +309,16 @@ source("../code/207_More confounder plots.R", echo = TRUE)
 
 ![](descriptive-analysis_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->
 
-![Key Variable Plots](../output/figures/key_variables.png
+![Key Variable
+Plots](https://pgsmith2000.github.io/toothheart/output/figures/key_variables.png
 "Key Variable Plots")
 
-![Confounder Plots](../output/figures/confounders.png
+![Confounder
+Plots](https://pgsmith2000.github.io/toothheart/output/figures/confounders.png
 "Confounder Plots")
 
-![More Confounder Plots](../output/figures/more_confounders.png
+![More Confounder
+Plots](https://pgsmith2000.github.io/toothheart/output/figures/more_confounders.png
 "More Confounder Plots")
 
 ## Step 3: Frequency Calculations for Table 1
