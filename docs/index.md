@@ -1,12 +1,13 @@
 Revisiting the Cross-Sectional Association Between Missing Teeth and
 Cardiovascular Disease: BRFSS 2018
 ================
-First created on Nov 7, 2019. Updated on Nov 07, 2019
+First created on Nov 7, 2019. Updated on Nov 08, 2019
 
   - [Stage 1: Data Preparation, Cleaning, and
     Reduction](#stage-1-data-preparation-cleaning-and-reduction)
   - [Stage 2: Example Descriptive
     Analysis](#stage-2-example-descriptive-analysis)
+  - [Stage 3: Linear Regression](#stage-3-linear-regression)
 
 The relationship between oral health and cardiovascular disease has been
 an important area of research in the last decade. The objective of the
@@ -52,3 +53,8 @@ Analysis](preparing-the-data.html).**
 ### Stage 2: Example Descriptive Analysis
 
 More to come..
+
+### Stage 3: Linear Regression
+
+For the detailed coding and results, explore the **[Stage 3 Linear
+Regression](linear-regression.html).**
