@@ -34,6 +34,12 @@ source("../code/207_More confounder plots.R", echo = TRUE)
 
 ```
 
+![Key Variable Plots](../output/figures/key_variables.png "Key Variable Plots")
+
+![Confounder Plots](../output/figures/confounders.png "Confounder Plots")
+
+![More Confounder Plots](../output/figures/more_confounders.png "More Confounder Plots")
+
 ## Step 3: Frequency Calculations for Table 1
 
 Next, the frequencies were calculated for each variable. These result appear in table 1 below.

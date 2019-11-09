@@ -53,4 +53,4 @@ p4 <- p4 + geom_bar(color = "Black") +
 grid.arrange(p1, p2, p3, p4, nrow=2, ncol=2)
 
 g <- arrangeGrob(p1, p2, p3, p4, nrow=2, ncol=2) #generates g
-ggsave(file="../output/figures/confounders.png")
+ggsave(file="../output/figures/confounders.png", g) #saves g

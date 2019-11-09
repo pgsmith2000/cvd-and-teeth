@@ -45,7 +45,7 @@ p4 <- p4 + geom_bar(color = "Black") +
   scale_fill_brewer(palette = "Blues") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45)) +
-  labs(title="RBMI Category",
+  labs(title="BMI Category",
        x="", y="")
 
 # print plots
