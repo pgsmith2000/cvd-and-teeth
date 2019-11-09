@@ -1,4 +1,4 @@
-# recode exercise variable
+# recode exerise variable
 BRFSS_c$EXERANY3 <- 9
 BRFSS_c$EXERANY3[BRFSS_c$EXERANY2 == 1] <- 1
 BRFSS_c$EXERANY3[BRFSS_c$EXERANY2 == 2] <- 0

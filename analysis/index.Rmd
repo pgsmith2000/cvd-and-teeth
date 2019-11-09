@@ -32,3 +32,7 @@ For the detailed coding and results, explore the **[Stage 1 Analysis](preparing-
 ### Stage 2: Example Descriptive Analysis
 
 More to come..
+
+### Stage 3: Linear Regression
+
+For the detailed coding and results, explore the **[Stage 3 Linear Regression](linear-regression.html).**

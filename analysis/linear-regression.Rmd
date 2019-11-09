@@ -1,0 +1,30 @@
+---
+title: "Linear Regression"
+date: '`r paste("First created on Nov 8, 2019. Updated on", format(Sys.Date(),"%b %d, %Y"))`'
+output: 
+  github_document:
+    toc: true
+    html_preview: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Step 1: Load Libraries
+
+```{r echo=TRUE}
+source("../code/100_Dependencies.R", echo = TRUE)
+
+```
+
+## Step 2: Run Linear Regression Models
+
+```{r echo=TRUE}
+source("../code/260_Linear regression models.R", echo = TRUE)
+
+```
+
+This concluded the linear regression modeling.
+
+Return to the **[Main Overview](index.html)**

@@ -1,6 +1,5 @@
 ---
 title: "Preparing the Data"
-author: "Paul G. Smith"
 date: '`r paste("First created on Nov 7, 2019. Updated on", format(Sys.Date(),"%b %d, %Y"))`'
 output: 
   github_document:
