@@ -67,9 +67,11 @@ source("../code/230_Table 1 chi squares.R", echo = TRUE)
 
 ```
 
-### Step 5: Chi-Square Significance Testing
+### Step 5: Create Final Table 1
 
--- image goes here 
+The table below shows the participant counts (frequencies) from the descriptive analysis arrange in a complet Table 1. The table also shows relative percentages, and chi-square significance values. All variables were significant at the p<0.001 level.
+
+![Table 1](https://pgsmith2000.github.io/toothheart/output/figures/Table1.png "Key Table 1")
 
 This concluded the descriptive analysis.
 

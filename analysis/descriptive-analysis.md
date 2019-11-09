@@ -9,8 +9,7 @@ First created on Nov 7, 2019. Updated on Nov 09, 2019
     1](#step-3-frequency-calculations-for-table-1)
       - [Step 4: Calculation of
         Chi-Squares](#step-4-calculation-of-chi-squares)
-      - [Step 5: Chi-Square Significance
-        Testing](#step-5-chi-square-significance-testing)
+      - [Step 5: Create Final Table 1](#step-5-create-final-table-1)
 
 ## Step 1: Read in the BRFSS 2018 data set and check main variables
 
@@ -599,9 +598,16 @@ source("../code/230_Table 1 chi squares.R", echo = TRUE)
     ## data:  bmiTbl
     ## X-squared = 640.78, df = 4, p-value < 2.2e-16
 
-### Step 5: Chi-Square Significance Testing
+### Step 5: Create Final Table 1
 
-– image goes here
+The table below shows the participant counts (frequencies) from the
+descriptive analysis arrange in a complet Table 1. The table also shows
+relative percentages, and chi-square significance values. All variables
+were significant at the p\<0.001 level.
+
+![Table
+1](https://pgsmith2000.github.io/toothheart/output/figures/Table1.png
+"Key Table 1")
 
 This concluded the descriptive analysis.
 
