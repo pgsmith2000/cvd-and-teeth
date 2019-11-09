@@ -1,16 +1,16 @@
 # read in data
-BRFSS <- read.csv(file="./data/BRFSS.csv", header=TRUE, sep=",")
+BRFSS <- read.csv(file="../output/BRFSS.csv", header=TRUE, sep=",")
 
 # Start by making frequencies per category
 cvdFreq <- table(BRFSS$CVDINFR5)
 cvdFreq
-write.csv(cvdFreq, file = "./data/overall/cvdFreq.csv")
+write.csv(cvdFreq, file = "../output/frequencies/overall/cvdFreq.csv")
 
 # use defmacro to define the macro
 FreqTbl <-defmacro(OutputTable, InputVar, CSVTable, 
 expr={
 OutputTable <- table(InputVar);
-write.csv(OutputTable, file = paste0("./data/overall/", CSVTable, ".csv"))
+write.csv(OutputTable, file = paste0("../output/frequencies/overall/", CSVTable, ".csv"))
 })
 
 FreqTbl (teethFreq, BRFSS$RMVTETH5, "teeth")

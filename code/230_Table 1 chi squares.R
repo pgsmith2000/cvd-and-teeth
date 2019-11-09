@@ -1,5 +1,5 @@
 # read in analytic table
-BRFSS <- read.csv(file="./data/BRFSS.csv", header=TRUE, sep=",")
+BRFSS <- read.csv(file="../data/BRFSS.csv", header=TRUE, sep=",")
 
 # make table
 teethTbl = table(BRFSS$CVDINFR5, BRFSS$RMVTETH5) 

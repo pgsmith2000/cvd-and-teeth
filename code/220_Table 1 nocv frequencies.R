@@ -1,5 +1,5 @@
 # read in data
-BRFSS <- read.csv(file="./data/BRFSS.csv", header=TRUE, sep=",")
+BRFSS <- read.csv(file="../output/BRFSS.csv", header=TRUE, sep=",")
 
 # subset dataset with only cv people
 nocv_only <- subset(BRFSS, CVDINFR5 == 1)
@@ -10,7 +10,7 @@ nrow(nocv_only)
 FreqTbl <-defmacro(OutputTable, InputVar, CSVTable, 
 expr={
 OutputTable <- table(InputVar);
-write.csv(OutputTable, file = paste0("./data/nocv_only/", CSVTable, ".csv"))
+write.csv(OutputTable, file = paste0("../output/frequencies/nocv_only/", CSVTable, ".csv"))
 })
 
 FreqTbl (teethFreq, nocv_only$RMVTETH5, "teeth")

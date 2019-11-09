@@ -68,3 +68,18 @@ percent(summary(full.model)$adj.r.squared)
 summary(model1)$adj.r.squared
 summary(model2)$adj.r.squared
 summary(full.model)$adj.r.squared
+
+# Model2 diagnostics
+layout(matrix(c(1,2,3,4),2,2)) # optional 4 graphs/page 
+plot(full.model, main = "Regression Full Model")
+
+#outlier test
+library(car)
+outlierTest(full.model)
+
+# Model fit for Model2
+library(gvlma)
+gvmodel <- gvlma(full.model) 
+summary(gvmodel)
+
+

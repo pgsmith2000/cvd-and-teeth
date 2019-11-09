@@ -1,7 +1,7 @@
 Revisiting the Cross-Sectional Association Between Missing Teeth and
 Cardiovascular Disease: BRFSS 2018
 ================
-First created on Nov 7, 2019. Updated on Nov 08, 2019
+First created on Nov 7, 2019. Updated on Nov 09, 2019
 
   - [Stage 1: Data Preparation, Cleaning, and
     Reduction](#stage-1-data-preparation-cleaning-and-reduction)
@@ -52,7 +52,8 @@ Analysis](preparing-the-data.html).**
 
 ### Stage 2: Example Descriptive Analysis
 
-More to come..
+To see the detailed coding and results, explore the \*\*[Stage 2
+Descriptive Analysis](descriptive-analysis.html)
 
 ### Stage 3: Linear Regression
 
