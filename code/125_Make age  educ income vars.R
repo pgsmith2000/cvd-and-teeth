@@ -5,6 +5,7 @@ BRFSS_c$AGEG5YR2[BRFSS_c$X_AGEG5YR > 8 &  BRFSS_c$X_AGEG5YR < 11] <- 1
 BRFSS_c$AGEG5YR2[BRFSS_c$X_AGEG5YR > 10 &  BRFSS_c$X_AGEG5YR < 13] <- 2
 BRFSS_c$AGEG5YR2[BRFSS_c$X_AGEG5YR == 13] <- 3
 
+# check the recoding
 table(BRFSS_c$X_AGEG5YR, BRFSS_c$AGEG5YR2)
 
 # make indicator variables
