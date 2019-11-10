@@ -8,7 +8,7 @@ First created on Nov 7, 2019. Updated on Nov 10, 2019
   - [Stage 2: Example Descriptive
     Analysis](#stage-2-example-descriptive-analysis)
   - [Stage 3: Linear Regression](#stage-3-linear-regression)
-  - [Stage 4: Logistical Regression](#stage-4-logistical-regression)
+  - [Stage 4: Logistic Regression](#stage-4-logistic-regression)
 
 The relationship between oral health and cardiovascular disease has been
 an important area of research in the last decade. The objective of the
@@ -74,13 +74,11 @@ a result and log regression will follow.
 For the detailed coding and results, explore the **[Stage 3 Linear
 Regression](linear-regression.html).**
 
-### Stage 4: Logistical Regression
+### Stage 4: Logistic Regression
 
-Two logistical regression models were constructed with the same
-parameters as Model1 and the Full Model used in the logistical model.
-This model results in a series of Odds ratios (with upper and lower
-limits).
+Two logistic regression models were constructed with the same parameters
+as Model1 and the Full Model used in the logistical model. This model
+resulted in a series of Odds ratios (with upper and lower limits).
 
-For the detailed coding and results from this logistical regression,
-explore the **[Stage 4 Logistical
-Regression](logistical-regression.html).**
+For the detailed coding and results from this logistic regression,
+explore the **[Stage 4 Logistic Regression](logistic-regression.html).**

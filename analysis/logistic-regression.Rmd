@@ -31,7 +31,7 @@ source("../code/265_Logistic regression models.R", echo = TRUE)
 
 ### Full Logistic Model Odds Ratio Plot
 
-![Logistic Model Odds Ratio Plot](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/OddsProbFullLogisticModel.png "Logistical Model Odds Ratio Plot")
+![Logistic Model Odds Ratio Plot](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/LogistModelOR.png "Logistic Model Odds Ratio Plot")
 
 This concluded the logistic regression modeling.
 
