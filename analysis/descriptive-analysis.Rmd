@@ -34,11 +34,11 @@ source("../code/207_More confounder plots.R", echo = TRUE)
 
 ```
 
-![Key Variable Plots](https://pgsmith2000.github.io/toothheart/output/figures/key_variables.png "Key Variable Plots")
+![Key Variable Plots](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/key_variables.png "Key Variable Plots")
 
-![Confounder Plots](https://pgsmith2000.github.io/toothheart/output/figures/confounders.png "Confounder Plots")
+![Confounder Plots](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/confounders.png "Confounder Plots")
 
-![More Confounder Plots](https://pgsmith2000.github.io/toothheart/output/figures/more_confounders.png "More Confounder Plots")
+![More Confounder Plots](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/more_confounders.png "More Confounder Plots")
 
 ## Step 3: Frequency Calculations for Table 1
 
@@ -71,7 +71,7 @@ source("../code/230_Table 1 chi squares.R", echo = TRUE)
 
 The table below shows the participant counts (frequencies) from the descriptive analysis arrange in a complet Table 1. The table also shows relative percentages, and chi-square significance values. All variables were significant at the p<0.001 level.
 
-![Table 1](https://pgsmith2000.github.io/toothheart/output/figures/Table1.png "Key Table 1")
+![Table 1](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/Table1.png "Table 1")
 
 This concluded the descriptive analysis.
 

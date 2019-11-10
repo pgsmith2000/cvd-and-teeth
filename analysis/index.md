@@ -8,6 +8,7 @@ First created on Nov 7, 2019. Updated on Nov 09, 2019
   - [Stage 2: Example Descriptive
     Analysis](#stage-2-example-descriptive-analysis)
   - [Stage 3: Linear Regression](#stage-3-linear-regression)
+  - [Stage 4: Log Regression](#stage-4-log-regression)
 
 The relationship between oral health and cardiovascular disease has been
 an important area of research in the last decade. The objective of the
@@ -51,10 +52,28 @@ Cleaning, and Reducing the Data](preparing-the-data.html).**
 
 ### Stage 2: Example Descriptive Analysis
 
+The key product of this analysis is a complete Table 1 documenting the
+frequency counts for each variable value (1) **overall** for all
+participants, and broken down for those (2) with **cardiovascular
+disease** and (3) with **no cardiovascular disease**. Histogram plots of
+each variable are also provided. And of course this section contains the
+detailed r-code that produces all of this. Chi-square analysis of all
+variables were significant at the p\<0.001 level.
+
 To see the detailed coding and results, explore the **[Stage 2
 Descriptive Analysis](descriptive-analysis.html)**
 
 ### Stage 3: Linear Regression
 
+A linear regression analyis is provided for 3 models. In addition a
+step-wise multiple regression was applied which retained everyone of the
+variables. However, none of these models were very good. The full model
+was best but only accounted for about 6% of the variance in the data. As
+a result and log regression will follow.
+
 For the detailed coding and results, explore the **[Stage 3 Linear
 Regression](linear-regression.html).**
+
+### Stage 4: Log Regression
+
+To come…

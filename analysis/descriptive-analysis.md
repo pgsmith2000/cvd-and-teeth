@@ -62,13 +62,15 @@ source("../code/100_Dependencies.R", echo = TRUE)
     ## 
     ## > library(ggplot2)
     ## 
-    ## > library(dotwhisker)
-    ## 
     ## > library(gridExtra)
     ## 
     ## > library(broom)
     ## 
     ## > library(scales)
+    ## 
+    ## > library(ggfortify)
+    ## 
+    ## > library(gvlma)
 
 ``` r
 source("../code/200_Calculate totals.R", echo = TRUE)
@@ -309,15 +311,15 @@ source("../code/207_More confounder plots.R", echo = TRUE)
 ![](descriptive-analysis_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->
 
 ![Key Variable
-Plots](https://pgsmith2000.github.io/toothheart/output/figures/key_variables.png
+Plots](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/key_variables.png
 "Key Variable Plots")
 
 ![Confounder
-Plots](https://pgsmith2000.github.io/toothheart/output/figures/confounders.png
+Plots](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/confounders.png
 "Confounder Plots")
 
 ![More Confounder
-Plots](https://pgsmith2000.github.io/toothheart/output/figures/more_confounders.png
+Plots](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/more_confounders.png
 "More Confounder Plots")
 
 ## Step 3: Frequency Calculations for Table 1
@@ -606,8 +608,8 @@ relative percentages, and chi-square significance values. All variables
 were significant at the p\<0.001 level.
 
 ![Table
-1](https://pgsmith2000.github.io/toothheart/output/figures/Table1.png
-"Key Table 1")
+1](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/Table1.png
+"Table 1")
 
 This concluded the descriptive analysis.
 

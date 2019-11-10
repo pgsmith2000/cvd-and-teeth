@@ -1193,19 +1193,19 @@ source("../code/260_Linear regression models.R", echo = TRUE)
 ### Model 1 Diagnostics
 
 ![Model 1
-Diagnostics](https://pgsmith2000.github.io/toothheart/output/figures/lmodel1diagnostics.png
+Diagnostics](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/lmodel1diagnostics.png
 "Model 1 Diagnostics")
 
 ### Model 2 Diagnostics
 
 ![Model 2
-Diagnostics](https://pgsmith2000.github.io/toothheart/output/figures/lmodel2diagnostics.png
+Diagnostics](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/lmodel2diagnostics.png
 "Model 2 Diagnostics")
 
 ### Full Model Diagnostics
 
 ![Full Model
-Diagnostics](https://pgsmith2000.github.io/toothheart/output/figures/lmfulldiagnostics.png
+Diagnostics](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/lmfulldiagnostics.png
 "Full Model Diagnostics")
 
 This concluded the linear regression modeling.

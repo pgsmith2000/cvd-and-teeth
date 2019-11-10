@@ -2,7 +2,9 @@ Revisiting the Cross-Sectional Association Between Missing Teeth and
 Cardiovascular Disease: BRFSS 2018
 ================
 Paul G. Smith
-First created on Nov 7, 2019. Updated on Nov 07, 2019
+First created on Nov 7, 2019. Updated on Nov 09, 2019
+
+**<https://pgsmith2000.github.io/cvd-and-teeth/>**
 
 The relationship between oral health and cardiovascular disease has been
 an important area of research in the last decade. The objective of the
@@ -23,4 +25,4 @@ For more information about the original study check out the published
 article at: <https://www.ncbi.nlm.nih.gov/pubmed/24624297>
 
 View the Analysis Overview at:
-\*(<https://pgsmith2000.github.io/toothheart/>)\*\*
+**<https://pgsmith2000.github.io/cvd-and-teeth/>**

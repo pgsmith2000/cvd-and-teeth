@@ -62,13 +62,15 @@ source("../code/100_Dependencies.R", echo = TRUE)
     ## 
     ## > library(ggplot2)
     ## 
-    ## > library(dotwhisker)
-    ## 
     ## > library(gridExtra)
     ## 
     ## > library(broom)
     ## 
     ## > library(scales)
+    ## 
+    ## > library(ggfortify)
+    ## 
+    ## > library(gvlma)
 
 ``` r
 source("../code/105_Read in BRFSS XPT.R", echo = TRUE)
@@ -843,7 +845,7 @@ making the data set smaller
     data eliminated 8200 records.
 
 ![Data
-Reduction](https://pgsmith2000.github.io/toothheart/output/figures/data_reduction.png
+Reduction](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/data_reduction.png
 "Data Reduction")
 
 ## Step 4: Write out final data set for further analyses

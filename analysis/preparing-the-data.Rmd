@@ -58,7 +58,7 @@ As stated above this inital BRFSS 2018 Survey data included records on `r nrow(B
 2. Removing participants with invalid dependent (outcome) variable data eliminated `r abs(nrow(BRFSS_e)-nrow(BRFSS_d))` records.
 3. Removing participants with invalid independent (exposure) variable data eliminated `r abs(nrow(BRFSS_f)-nrow(BRFSS_e))` records.
 
-![Data Reduction](https://pgsmith2000.github.io/toothheart/output/figures/data_reduction.png "Data Reduction")
+![Data Reduction](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/data_reduction.png "Data Reduction")
 
 ## Step 4: Write out final data set for further analyses
 
