@@ -7,7 +7,8 @@ library(e1071)
 library(gtools) # for creating macros
 library(MASS)   # for chi-square
 library(ggplot2)
-library(dotwhisker)
 library(gridExtra)
 library(broom)
 library(scales)
+library(ggfortify)
+library(gvlma)

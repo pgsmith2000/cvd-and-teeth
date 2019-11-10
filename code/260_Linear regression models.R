@@ -33,33 +33,15 @@ full.model <- lm(CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH +
                    NOEXER + UNDWT + OVWT + OBESE, data = BRFSS)
 summary(full.model)
 
-reduced.model <- step(full.model,
-                  direction = "backward")
-summary(reduced.model)
-
 tidy(model1)
 tidy(model2)
 tidy(full.model)
 tidy(fwd.model)
-tidy(reduced.model)
 
-write.csv(tidy(model1), file = "../output/TidyRegressionModel1.csv")
-write.csv(tidy(model2), file = "../output/TidyRegressionModel2.csv")
-write.csv(tidy(full.model), file = "../output/TidyRegressionModelFull.csv")
-write.csv(tidy(fwd.model), file = "../output/TidyRegressionModelFWD.csv")
-write.csv(tidy(reduced.model), file = "../output/TidyRegressionModelBKWD.csv")
-
-p1 <- dwplot(list(model1, model2, full.model),
-             vline = geom_vline(xintercept = 0, color = "grey60", linetype = 2)) +
-  theme_bw() + xlab("Coefficient Estimate") + ylab("") +
-  geom_vline(xintercept = 0, colour = "grey60", linetype = 2) +
-  ggtitle("Regression Coefficients by Model") +
-  theme(plot.title = element_text(face="bold"),
-        legend.position = c(0.007, 0.01),
-        legend.justification = c(0, 0), 
-        legend.background = element_rect(color="grey80"),
-        legend.title = element_blank()) 
-p1
+write.csv(tidy(model1), file = "../output/linear/TidyRegressionModel1.csv")
+write.csv(tidy(model2), file = "../output/linear/TidyRegressionModel2.csv")
+write.csv(tidy(full.model), file = "../output/linear/TidyRegressionModelFull.csv")
+write.csv(tidy(fwd.model), file = "../output/linear/TidyRegressionModelFWD.csv")
 
 percent(summary(model1)$adj.r.squared)
 percent(summary(model2)$adj.r.squared)
@@ -69,17 +51,22 @@ summary(model1)$adj.r.squared
 summary(model2)$adj.r.squared
 summary(full.model)$adj.r.squared
 
-# Model2 diagnostics
-layout(matrix(c(1,2,3,4),2,2)) # optional 4 graphs/page 
-plot(full.model, main = "Regression Full Model")
+dp1 <- autoplot(model1, label.size=3) + theme_minimal()
+ggsave(file="../output/figures/lmodel1diagnostics.png", dp1) #saves g
+dp2 <- autoplot(model2, label.size=3) + theme_minimal()
+ggsave(file="../output/figures/lmodel2diagnostics.png", dp2) #saves g
+dp3 <- autoplot(full.model, label.size=3) + theme_minimal()
+ggsave(file="../output/figures/lmfulldiagnostics.png", dp3) #saves g
 
-#outlier test
-library(car)
-outlierTest(full.model)
-
-# Model fit for Model2
-library(gvlma)
-gvmodel <- gvlma(full.model) 
+# Model fit for Model1
+gvmodel <- gvlma(model1) 
 summary(gvmodel)
 
+# Model fit for Model2
+gvmodel <- gvlma(model2) 
+summary(gvmodel)
+
+# Model fit for Full Model
+gvmodel <- gvlma(full.model) 
+summary(gvmodel)
 

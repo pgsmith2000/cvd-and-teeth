@@ -1,6 +1,6 @@
 Linear Regression
 ================
-First created on Nov 8, 2019. Updated on Nov 08, 2019
+First created on Nov 8, 2019. Updated on Nov 09, 2019
 
   - [Step 1: Load Libraries](#step-1-load-libraries)
   - [Step 2: Run Linear Regression
@@ -57,13 +57,15 @@ source("../code/100_Dependencies.R", echo = TRUE)
     ## 
     ## > library(ggplot2)
     ## 
-    ## > library(dotwhisker)
-    ## 
     ## > library(gridExtra)
     ## 
     ## > library(broom)
     ## 
     ## > library(scales)
+    ## 
+    ## > library(ggfortify)
+    ## 
+    ## > library(gvlma)
 
 ## Step 2: Run Linear Regression Models
 
@@ -90,7 +92,7 @@ source("../code/260_Linear regression models.R", echo = TRUE)
     ##  $ X_SMOKER3: int  4 4 4 3 3 4 4 4 4 4 ...
     ##  $ EXERANY2 : int  2 1 1 2 2 1 2 2 1 1 ...
     ##  $ X_BMI5CAT: int  2 3 2 3 3 4 4 4 4 4 ...
-    ##  $ CVDINFR5 : int  1 1 1 1 1 1 1 1 1 1 ...
+    ##  $ CVDINFR5 : int  0 0 0 0 0 0 0 0 0 0 ...
     ##  $ RMVTETH5 : int  1 1 0 0 2 0 1 2 1 3 ...
     ##  $ MOSTTEETH: int  1 1 0 0 0 0 1 0 1 0 ...
     ##  $ FEWTEETH : int  0 0 0 0 1 0 0 1 0 0 ...
@@ -155,14 +157,14 @@ source("../code/260_Linear regression models.R", echo = TRUE)
     ##  3rd Qu.:2.000   3rd Qu.:3.000   3rd Qu.:4.000   3rd Qu.:2.000  
     ##  Max.   :9.000   Max.   :9.000   Max.   :9.000   Max.   :9.000  
     ##                                                  NA's   :2      
-    ##    X_BMI5CAT        CVDINFR5         RMVTETH5        MOSTTEETH     
-    ##  Min.   :1.000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
-    ##  1st Qu.:2.000   1st Qu.:1.0000   1st Qu.:0.0000   1st Qu.:0.0000  
-    ##  Median :3.000   Median :1.0000   Median :1.0000   Median :0.0000  
-    ##  Mean   :3.006   Mean   :0.9134   Mean   :0.9741   Mean   :0.3389  
-    ##  3rd Qu.:4.000   3rd Qu.:1.0000   3rd Qu.:2.0000   3rd Qu.:1.0000  
-    ##  Max.   :4.000   Max.   :1.0000   Max.   :3.0000   Max.   :1.0000  
-    ##  NA's   :16949                                                     
+    ##    X_BMI5CAT        CVDINFR5          RMVTETH5        MOSTTEETH     
+    ##  Min.   :1.000   Min.   :0.00000   Min.   :0.0000   Min.   :0.0000  
+    ##  1st Qu.:2.000   1st Qu.:0.00000   1st Qu.:0.0000   1st Qu.:0.0000  
+    ##  Median :3.000   Median :0.00000   Median :1.0000   Median :0.0000  
+    ##  Mean   :3.006   Mean   :0.08658   Mean   :0.9741   Mean   :0.3389  
+    ##  3rd Qu.:4.000   3rd Qu.:0.00000   3rd Qu.:2.0000   3rd Qu.:1.0000  
+    ##  Max.   :4.000   Max.   :1.00000   Max.   :3.0000   Max.   :1.0000  
+    ##  NA's   :16949                                                      
     ##     FEWTEETH         NOTEETH            SEX2             MALE       
     ##  Min.   :0.0000   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
     ##  1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000  
@@ -245,12 +247,12 @@ source("../code/260_Linear regression models.R", echo = TRUE)
     ## 
     ## Residuals:
     ##      Min       1Q   Median       3Q      Max 
-    ## -0.95470  0.04530  0.08767  0.08767  0.17242 
+    ## -0.17242 -0.08767 -0.08767 -0.04530  0.95470 
     ## 
     ## Coefficients:
-    ##               Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)  0.9547000  0.0007598 1256.56   <2e-16 ***
-    ## RMVTETH5    -0.0423743  0.0005496  -77.11   <2e-16 ***
+    ##              Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept) 0.0453000  0.0007598   59.62   <2e-16 ***
+    ## RMVTETH5    0.0423743  0.0005496   77.11   <2e-16 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
@@ -269,14 +271,14 @@ source("../code/260_Linear regression models.R", echo = TRUE)
     ## 
     ## Residuals:
     ##      Min       1Q   Median       3Q      Max 
-    ## -0.94916  0.05084  0.07726  0.07726  0.18069 
+    ## -0.18069 -0.07726 -0.07726 -0.05084  0.94916 
     ## 
     ## Coefficients:
-    ##               Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)  0.9491613  0.0008588 1105.20   <2e-16 ***
-    ## NOTEETH     -0.1298464  0.0019032  -68.23   <2e-16 ***
-    ## FEWTEETH    -0.0823156  0.0015754  -52.25   <2e-16 ***
-    ## MOSTTEETH   -0.0264187  0.0012628  -20.92   <2e-16 ***
+    ##              Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept) 0.0508387  0.0008588   59.20   <2e-16 ***
+    ## NOTEETH     0.1298464  0.0019032   68.23   <2e-16 ***
+    ## FEWTEETH    0.0823156  0.0015754   52.25   <2e-16 ***
+    ## MOSTTEETH   0.0264187  0.0012628   20.92   <2e-16 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
@@ -852,37 +854,37 @@ source("../code/260_Linear regression models.R", echo = TRUE)
     ## 
     ## Residuals:
     ##      Min       1Q   Median       3Q      Max 
-    ## -1.05550  0.01636  0.06565  0.11897  0.37469 
+    ## -0.37469 -0.11897 -0.06565 -0.01636  1.05550 
     ## 
     ## Coefficients:
     ##              Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)  0.960277   0.002339 410.596  < 2e-16 ***
-    ## NODIABETE    0.069073   0.001407  49.103  < 2e-16 ***
-    ## NOTEETH     -0.062915   0.002116 -29.726  < 2e-16 ***
-    ## MALE        -0.057156   0.001099 -51.991  < 2e-16 ***
-    ## FEWTEETH    -0.035902   0.001673 -21.462  < 2e-16 ***
-    ## AGE3        -0.083418   0.001918 -43.483  < 2e-16 ***
-    ## AGE2        -0.049538   0.001512 -32.759  < 2e-16 ***
-    ## NODENVST    -0.016985   0.001288 -13.192  < 2e-16 ***
-    ## NOEXER      -0.017406   0.001244 -13.996  < 2e-16 ***
-    ## FRMRSMK     -0.026789   0.001199 -22.348  < 2e-16 ***
-    ## SMOKE       -0.034479   0.001793 -19.227  < 2e-16 ***
-    ## INC1        -0.037064   0.002141 -17.310  < 2e-16 ***
-    ## AGE1        -0.019320   0.001357 -14.234  < 2e-16 ***
-    ## INC2        -0.023720   0.001706 -13.900  < 2e-16 ***
-    ## BLACK        0.025684   0.002053  12.513  < 2e-16 ***
-    ## OTHRACE     -0.021897   0.002682  -8.163 3.28e-16 ***
-    ## OBESE       -0.011321   0.001393  -8.126 4.45e-16 ***
-    ## LOWED       -0.020631   0.002272  -9.082  < 2e-16 ***
-    ## HISPANIC     0.021033   0.002501   8.408  < 2e-16 ***
-    ## MOSTTEETH   -0.006902   0.001269  -5.440 5.32e-08 ***
-    ## COLLEGE      0.003831   0.001433   2.673 0.007522 ** 
-    ## ASIAN        0.021501   0.004633   4.641 3.47e-06 ***
-    ## INC3        -0.008899   0.001941  -4.585 4.55e-06 ***
-    ## INC4        -0.006672   0.001712  -3.897 9.74e-05 ***
-    ## UNDWT       -0.017320   0.004559  -3.799 0.000145 ***
-    ## OVWT        -0.003361   0.001301  -2.583 0.009809 ** 
-    ## SOMECOLL    -0.002666   0.001441  -1.850 0.064246 .  
+    ## (Intercept)  0.039723   0.002339  16.985  < 2e-16 ***
+    ## NODIABETE   -0.069073   0.001407 -49.103  < 2e-16 ***
+    ## NOTEETH      0.062915   0.002116  29.726  < 2e-16 ***
+    ## MALE         0.057156   0.001099  51.991  < 2e-16 ***
+    ## FEWTEETH     0.035902   0.001673  21.462  < 2e-16 ***
+    ## AGE3         0.083418   0.001918  43.483  < 2e-16 ***
+    ## AGE2         0.049538   0.001512  32.759  < 2e-16 ***
+    ## NODENVST     0.016985   0.001288  13.192  < 2e-16 ***
+    ## NOEXER       0.017406   0.001244  13.996  < 2e-16 ***
+    ## FRMRSMK      0.026789   0.001199  22.348  < 2e-16 ***
+    ## SMOKE        0.034479   0.001793  19.227  < 2e-16 ***
+    ## INC1         0.037064   0.002141  17.310  < 2e-16 ***
+    ## AGE1         0.019320   0.001357  14.234  < 2e-16 ***
+    ## INC2         0.023720   0.001706  13.900  < 2e-16 ***
+    ## BLACK       -0.025684   0.002053 -12.513  < 2e-16 ***
+    ## OTHRACE      0.021897   0.002682   8.163 3.28e-16 ***
+    ## OBESE        0.011321   0.001393   8.126 4.45e-16 ***
+    ## LOWED        0.020631   0.002272   9.082  < 2e-16 ***
+    ## HISPANIC    -0.021033   0.002501  -8.408  < 2e-16 ***
+    ## MOSTTEETH    0.006902   0.001269   5.440 5.32e-08 ***
+    ## COLLEGE     -0.003831   0.001433  -2.673 0.007522 ** 
+    ## ASIAN       -0.021501   0.004633  -4.641 3.47e-06 ***
+    ## INC3         0.008899   0.001941   4.585 4.55e-06 ***
+    ## INC4         0.006672   0.001712   3.897 9.74e-05 ***
+    ## UNDWT        0.017320   0.004559   3.799 0.000145 ***
+    ## OVWT         0.003361   0.001301   2.583 0.009809 ** 
+    ## SOMECOLL     0.002666   0.001441   1.850 0.064246 .  
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
@@ -906,123 +908,37 @@ source("../code/260_Linear regression models.R", echo = TRUE)
     ## 
     ## Residuals:
     ##      Min       1Q   Median       3Q      Max 
-    ## -1.05550  0.01636  0.06565  0.11897  0.37469 
+    ## -0.37469 -0.11897 -0.06565 -0.01636  1.05550 
     ## 
     ## Coefficients:
     ##              Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)  0.960277   0.002339 410.596  < 2e-16 ***
-    ## NOTEETH     -0.062915   0.002116 -29.726  < 2e-16 ***
-    ## FEWTEETH    -0.035902   0.001673 -21.462  < 2e-16 ***
-    ## MOSTTEETH   -0.006902   0.001269  -5.440 5.32e-08 ***
-    ## MALE        -0.057156   0.001099 -51.991  < 2e-16 ***
-    ## BLACK        0.025684   0.002053  12.513  < 2e-16 ***
-    ## HISPANIC     0.021033   0.002501   8.408  < 2e-16 ***
-    ## ASIAN        0.021501   0.004633   4.641 3.47e-06 ***
-    ## OTHRACE     -0.021897   0.002682  -8.163 3.28e-16 ***
-    ## AGE1        -0.019320   0.001357 -14.234  < 2e-16 ***
-    ## AGE2        -0.049538   0.001512 -32.759  < 2e-16 ***
-    ## AGE3        -0.083418   0.001918 -43.483  < 2e-16 ***
-    ## LOWED       -0.020631   0.002272  -9.082  < 2e-16 ***
-    ## SOMECOLL    -0.002666   0.001441  -1.850 0.064246 .  
-    ## COLLEGE      0.003831   0.001433   2.673 0.007522 ** 
-    ## INC1        -0.037064   0.002141 -17.310  < 2e-16 ***
-    ## INC2        -0.023720   0.001706 -13.900  < 2e-16 ***
-    ## INC3        -0.008899   0.001941  -4.585 4.55e-06 ***
-    ## INC4        -0.006672   0.001712  -3.897 9.74e-05 ***
-    ## NODENVST    -0.016985   0.001288 -13.192  < 2e-16 ***
-    ## NODIABETE    0.069073   0.001407  49.103  < 2e-16 ***
-    ## FRMRSMK     -0.026789   0.001199 -22.348  < 2e-16 ***
-    ## SMOKE       -0.034479   0.001793 -19.227  < 2e-16 ***
-    ## NOEXER      -0.017406   0.001244 -13.996  < 2e-16 ***
-    ## UNDWT       -0.017320   0.004559  -3.799 0.000145 ***
-    ## OVWT        -0.003361   0.001301  -2.583 0.009809 ** 
-    ## OBESE       -0.011321   0.001393  -8.126 4.45e-16 ***
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## Residual standard error: 0.2723 on 266082 degrees of freedom
-    ## Multiple R-squared:  0.06244,    Adjusted R-squared:  0.06235 
-    ## F-statistic: 681.6 on 26 and 266082 DF,  p-value: < 2.2e-16
-    ## 
-    ## 
-    ## > reduced.model <- step(full.model, direction = "backward")
-    ## Start:  AIC=-692294.5
-    ## CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH + MALE + BLACK + HISPANIC + 
-    ##     ASIAN + OTHRACE + AGE1 + AGE2 + AGE3 + LOWED + SOMECOLL + 
-    ##     COLLEGE + INC1 + INC2 + INC3 + INC4 + NODENVST + NODIABETE + 
-    ##     FRMRSMK + SMOKE + NOEXER + UNDWT + OVWT + OBESE
-    ## 
-    ##             Df Sum of Sq   RSS     AIC
-    ## <none>                   19730 -692294
-    ## - SOMECOLL   1     0.254 19731 -692293
-    ## - OVWT       1     0.495 19731 -692290
-    ## - COLLEGE    1     0.530 19731 -692289
-    ## - UNDWT      1     1.070 19731 -692282
-    ## - INC4       1     1.126 19732 -692281
-    ## - INC3       1     1.559 19732 -692275
-    ## - ASIAN      1     1.597 19732 -692275
-    ## - MOSTTEETH  1     2.195 19733 -692267
-    ## - OBESE      1     4.897 19735 -692230
-    ## - OTHRACE    1     4.941 19735 -692230
-    ## - HISPANIC   1     5.243 19736 -692226
-    ## - LOWED      1     6.116 19737 -692214
-    ## - BLACK      1    11.611 19742 -692140
-    ## - NODENVST   1    12.904 19743 -692122
-    ## - INC2       1    14.327 19745 -692103
-    ## - NOEXER     1    14.525 19745 -692101
-    ## - AGE1       1    15.024 19745 -692094
-    ## - INC1       1    22.218 19753 -691997
-    ## - SMOKE      1    27.411 19758 -691927
-    ## - FEWTEETH   1    34.157 19765 -691836
-    ## - FRMRSMK    1    37.032 19767 -691797
-    ## - NOTEETH    1    65.524 19796 -691414
-    ## - AGE2       1    79.574 19810 -691225
-    ## - AGE3       1   140.206 19871 -690412
-    ## - NODIABETE  1   178.788 19909 -689896
-    ## - MALE       1   200.433 19931 -689607
-    ## 
-    ## > summary(reduced.model)
-    ## 
-    ## Call:
-    ## lm(formula = CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH + MALE + 
-    ##     BLACK + HISPANIC + ASIAN + OTHRACE + AGE1 + AGE2 + AGE3 + 
-    ##     LOWED + SOMECOLL + COLLEGE + INC1 + INC2 + INC3 + INC4 + 
-    ##     NODENVST + NODIABETE + FRMRSMK + SMOKE + NOEXER + UNDWT + 
-    ##     OVWT + OBESE, data = BRFSS)
-    ## 
-    ## Residuals:
-    ##      Min       1Q   Median       3Q      Max 
-    ## -1.05550  0.01636  0.06565  0.11897  0.37469 
-    ## 
-    ## Coefficients:
-    ##              Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)  0.960277   0.002339 410.596  < 2e-16 ***
-    ## NOTEETH     -0.062915   0.002116 -29.726  < 2e-16 ***
-    ## FEWTEETH    -0.035902   0.001673 -21.462  < 2e-16 ***
-    ## MOSTTEETH   -0.006902   0.001269  -5.440 5.32e-08 ***
-    ## MALE        -0.057156   0.001099 -51.991  < 2e-16 ***
-    ## BLACK        0.025684   0.002053  12.513  < 2e-16 ***
-    ## HISPANIC     0.021033   0.002501   8.408  < 2e-16 ***
-    ## ASIAN        0.021501   0.004633   4.641 3.47e-06 ***
-    ## OTHRACE     -0.021897   0.002682  -8.163 3.28e-16 ***
-    ## AGE1        -0.019320   0.001357 -14.234  < 2e-16 ***
-    ## AGE2        -0.049538   0.001512 -32.759  < 2e-16 ***
-    ## AGE3        -0.083418   0.001918 -43.483  < 2e-16 ***
-    ## LOWED       -0.020631   0.002272  -9.082  < 2e-16 ***
-    ## SOMECOLL    -0.002666   0.001441  -1.850 0.064246 .  
-    ## COLLEGE      0.003831   0.001433   2.673 0.007522 ** 
-    ## INC1        -0.037064   0.002141 -17.310  < 2e-16 ***
-    ## INC2        -0.023720   0.001706 -13.900  < 2e-16 ***
-    ## INC3        -0.008899   0.001941  -4.585 4.55e-06 ***
-    ## INC4        -0.006672   0.001712  -3.897 9.74e-05 ***
-    ## NODENVST    -0.016985   0.001288 -13.192  < 2e-16 ***
-    ## NODIABETE    0.069073   0.001407  49.103  < 2e-16 ***
-    ## FRMRSMK     -0.026789   0.001199 -22.348  < 2e-16 ***
-    ## SMOKE       -0.034479   0.001793 -19.227  < 2e-16 ***
-    ## NOEXER      -0.017406   0.001244 -13.996  < 2e-16 ***
-    ## UNDWT       -0.017320   0.004559  -3.799 0.000145 ***
-    ## OVWT        -0.003361   0.001301  -2.583 0.009809 ** 
-    ## OBESE       -0.011321   0.001393  -8.126 4.45e-16 ***
+    ## (Intercept)  0.039723   0.002339  16.985  < 2e-16 ***
+    ## NOTEETH      0.062915   0.002116  29.726  < 2e-16 ***
+    ## FEWTEETH     0.035902   0.001673  21.462  < 2e-16 ***
+    ## MOSTTEETH    0.006902   0.001269   5.440 5.32e-08 ***
+    ## MALE         0.057156   0.001099  51.991  < 2e-16 ***
+    ## BLACK       -0.025684   0.002053 -12.513  < 2e-16 ***
+    ## HISPANIC    -0.021033   0.002501  -8.408  < 2e-16 ***
+    ## ASIAN       -0.021501   0.004633  -4.641 3.47e-06 ***
+    ## OTHRACE      0.021897   0.002682   8.163 3.28e-16 ***
+    ## AGE1         0.019320   0.001357  14.234  < 2e-16 ***
+    ## AGE2         0.049538   0.001512  32.759  < 2e-16 ***
+    ## AGE3         0.083418   0.001918  43.483  < 2e-16 ***
+    ## LOWED        0.020631   0.002272   9.082  < 2e-16 ***
+    ## SOMECOLL     0.002666   0.001441   1.850 0.064246 .  
+    ## COLLEGE     -0.003831   0.001433  -2.673 0.007522 ** 
+    ## INC1         0.037064   0.002141  17.310  < 2e-16 ***
+    ## INC2         0.023720   0.001706  13.900  < 2e-16 ***
+    ## INC3         0.008899   0.001941   4.585 4.55e-06 ***
+    ## INC4         0.006672   0.001712   3.897 9.74e-05 ***
+    ## NODENVST     0.016985   0.001288  13.192  < 2e-16 ***
+    ## NODIABETE   -0.069073   0.001407 -49.103  < 2e-16 ***
+    ## FRMRSMK      0.026789   0.001199  22.348  < 2e-16 ***
+    ## SMOKE        0.034479   0.001793  19.227  < 2e-16 ***
+    ## NOEXER       0.017406   0.001244  13.996  < 2e-16 ***
+    ## UNDWT        0.017320   0.004559   3.799 0.000145 ***
+    ## OVWT         0.003361   0.001301   2.583 0.009809 ** 
+    ## OBESE        0.011321   0.001393   8.126 4.45e-16 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
@@ -1035,83 +951,57 @@ source("../code/260_Linear regression models.R", echo = TRUE)
     ## # A tibble: 2 x 5
     ##   term        estimate std.error statistic p.value
     ##   <chr>          <dbl>     <dbl>     <dbl>   <dbl>
-    ## 1 (Intercept)   0.955   0.000760    1257.        0
-    ## 2 RMVTETH5     -0.0424  0.000550     -77.1       0
+    ## 1 (Intercept)   0.0453  0.000760      59.6       0
+    ## 2 RMVTETH5      0.0424  0.000550      77.1       0
     ## 
     ## > tidy(model2)
     ## # A tibble: 4 x 5
     ##   term        estimate std.error statistic  p.value
     ##   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
-    ## 1 (Intercept)   0.949   0.000859    1105.  0.      
-    ## 2 NOTEETH      -0.130   0.00190      -68.2 0.      
-    ## 3 FEWTEETH     -0.0823  0.00158      -52.3 0.      
-    ## 4 MOSTTEETH    -0.0264  0.00126      -20.9 4.11e-97
+    ## 1 (Intercept)   0.0508  0.000859      59.2 0.      
+    ## 2 NOTEETH       0.130   0.00190       68.2 0.      
+    ## 3 FEWTEETH      0.0823  0.00158       52.3 0.      
+    ## 4 MOSTTEETH     0.0264  0.00126       20.9 4.11e-97
     ## 
     ## > tidy(full.model)
     ## # A tibble: 27 x 5
     ##    term        estimate std.error statistic   p.value
     ##    <chr>          <dbl>     <dbl>     <dbl>     <dbl>
-    ##  1 (Intercept)  0.960     0.00234    411.   0.       
-    ##  2 NOTEETH     -0.0629    0.00212    -29.7  7.31e-194
-    ##  3 FEWTEETH    -0.0359    0.00167    -21.5  4.28e-102
-    ##  4 MOSTTEETH   -0.00690   0.00127     -5.44 5.32e-  8
-    ##  5 MALE        -0.0572    0.00110    -52.0  0.       
-    ##  6 BLACK        0.0257    0.00205     12.5  6.45e- 36
-    ##  7 HISPANIC     0.0210    0.00250      8.41 4.18e- 17
-    ##  8 ASIAN        0.0215    0.00463      4.64 3.47e-  6
-    ##  9 OTHRACE     -0.0219    0.00268     -8.16 3.28e- 16
-    ## 10 AGE1        -0.0193    0.00136    -14.2  5.83e- 46
+    ##  1 (Intercept)  0.0397    0.00234     17.0  1.15e- 64
+    ##  2 NOTEETH      0.0629    0.00212     29.7  7.31e-194
+    ##  3 FEWTEETH     0.0359    0.00167     21.5  4.28e-102
+    ##  4 MOSTTEETH    0.00690   0.00127      5.44 5.32e-  8
+    ##  5 MALE         0.0572    0.00110     52.0  0.       
+    ##  6 BLACK       -0.0257    0.00205    -12.5  6.45e- 36
+    ##  7 HISPANIC    -0.0210    0.00250     -8.41 4.18e- 17
+    ##  8 ASIAN       -0.0215    0.00463     -4.64 3.47e-  6
+    ##  9 OTHRACE      0.0219    0.00268      8.16 3.28e- 16
+    ## 10 AGE1         0.0193    0.00136     14.2  5.83e- 46
     ## # ... with 17 more rows
     ## 
     ## > tidy(fwd.model)
     ## # A tibble: 27 x 5
     ##    term        estimate std.error statistic   p.value
     ##    <chr>          <dbl>     <dbl>     <dbl>     <dbl>
-    ##  1 (Intercept)   0.960    0.00234     411.  0.       
-    ##  2 NODIABETE     0.0691   0.00141      49.1 0.       
-    ##  3 NOTEETH      -0.0629   0.00212     -29.7 7.31e-194
-    ##  4 MALE         -0.0572   0.00110     -52.0 0.       
-    ##  5 FEWTEETH     -0.0359   0.00167     -21.5 4.28e-102
-    ##  6 AGE3         -0.0834   0.00192     -43.5 0.       
-    ##  7 AGE2         -0.0495   0.00151     -32.8 6.73e-235
-    ##  8 NODENVST     -0.0170   0.00129     -13.2 1.01e- 39
-    ##  9 NOEXER       -0.0174   0.00124     -14.0 1.71e- 44
-    ## 10 FRMRSMK      -0.0268   0.00120     -22.3 1.61e-110
+    ##  1 (Intercept)   0.0397   0.00234      17.0 1.15e- 64
+    ##  2 NODIABETE    -0.0691   0.00141     -49.1 0.       
+    ##  3 NOTEETH       0.0629   0.00212      29.7 7.31e-194
+    ##  4 MALE          0.0572   0.00110      52.0 0.       
+    ##  5 FEWTEETH      0.0359   0.00167      21.5 4.28e-102
+    ##  6 AGE3          0.0834   0.00192      43.5 0.       
+    ##  7 AGE2          0.0495   0.00151      32.8 6.73e-235
+    ##  8 NODENVST      0.0170   0.00129      13.2 1.01e- 39
+    ##  9 NOEXER        0.0174   0.00124      14.0 1.71e- 44
+    ## 10 FRMRSMK       0.0268   0.00120      22.3 1.61e-110
     ## # ... with 17 more rows
     ## 
-    ## > tidy(reduced.model)
-    ## # A tibble: 27 x 5
-    ##    term        estimate std.error statistic   p.value
-    ##    <chr>          <dbl>     <dbl>     <dbl>     <dbl>
-    ##  1 (Intercept)  0.960     0.00234    411.   0.       
-    ##  2 NOTEETH     -0.0629    0.00212    -29.7  7.31e-194
-    ##  3 FEWTEETH    -0.0359    0.00167    -21.5  4.28e-102
-    ##  4 MOSTTEETH   -0.00690   0.00127     -5.44 5.32e-  8
-    ##  5 MALE        -0.0572    0.00110    -52.0  0.       
-    ##  6 BLACK        0.0257    0.00205     12.5  6.45e- 36
-    ##  7 HISPANIC     0.0210    0.00250      8.41 4.18e- 17
-    ##  8 ASIAN        0.0215    0.00463      4.64 3.47e-  6
-    ##  9 OTHRACE     -0.0219    0.00268     -8.16 3.28e- 16
-    ## 10 AGE1        -0.0193    0.00136    -14.2  5.83e- 46
-    ## # ... with 17 more rows
+    ## > write.csv(tidy(model1), file = "../output/linear/TidyRegressionModel1.csv")
     ## 
-    ## > write.csv(tidy(model1), file = "../output/TidyRegressionModel1.csv")
+    ## > write.csv(tidy(model2), file = "../output/linear/TidyRegressionModel2.csv")
     ## 
-    ## > write.csv(tidy(model2), file = "../output/TidyRegressionModel2.csv")
+    ## > write.csv(tidy(full.model), file = "../output/linear/TidyRegressionModelFull.csv")
     ## 
-    ## > write.csv(tidy(full.model), file = "../output/TidyRegressionModelFull.csv")
-    ## 
-    ## > write.csv(tidy(fwd.model), file = "../output/TidyRegressionModelFWD.csv")
-    ## 
-    ## > write.csv(tidy(reduced.model), file = "../output/TidyRegressionModelBKWD.csv")
-    ## 
-    ## > p1 <- dwplot(list(model1, model2, full.model), vline = geom_vline(xintercept = 0, 
-    ## +     color = "grey60", linetype = 2)) + theme_bw() + xlab("Coeff ..." ... [TRUNCATED] 
-    ## 
-    ## > p1
-
-![](linear-regression_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
-
+    ## > write.csv(tidy(fwd.model), file = "../output/linear/TidyRegressionModelFWD.csv")
     ## 
     ## > percent(summary(model1)$adj.r.squared)
     ## [1] "2.19%"
@@ -1130,6 +1020,172 @@ source("../code/260_Linear regression models.R", echo = TRUE)
     ## 
     ## > summary(full.model)$adj.r.squared
     ## [1] 0.06234753
+    ## 
+    ## > dp1 <- autoplot(model1, label.size = 3) + theme_minimal()
+    ## 
+    ## > ggsave(file = "../output/figures/lmodel1diagnostics.png", 
+    ## +     dp1)
+
+    ## Saving 7 x 5 in image
+
+    ## 
+    ## > dp2 <- autoplot(model2, label.size = 3) + theme_minimal()
+    ## 
+    ## > ggsave(file = "../output/figures/lmodel2diagnostics.png", 
+    ## +     dp2)
+
+    ## Saving 7 x 5 in image
+
+    ## 
+    ## > dp3 <- autoplot(full.model, label.size = 3) + theme_minimal()
+    ## 
+    ## > ggsave(file = "../output/figures/lmfulldiagnostics.png", 
+    ## +     dp3)
+
+    ## Saving 7 x 5 in image
+
+    ## 
+    ## > gvmodel <- gvlma(model1)
+    ## 
+    ## > summary(gvmodel)
+    ## 
+    ## Call:
+    ## lm(formula = CVDINFR5 ~ RMVTETH5, data = BRFSS)
+    ## 
+    ## Residuals:
+    ##      Min       1Q   Median       3Q      Max 
+    ## -0.17242 -0.08767 -0.08767 -0.04530  0.95470 
+    ## 
+    ## Coefficients:
+    ##              Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept) 0.0453000  0.0007598   59.62   <2e-16 ***
+    ## RMVTETH5    0.0423743  0.0005496   77.11   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 0.2781 on 266107 degrees of freedom
+    ## Multiple R-squared:  0.02185,    Adjusted R-squared:  0.02185 
+    ## F-statistic:  5945 on 1 and 266107 DF,  p-value: < 2.2e-16
+    ## 
+    ## 
+    ## ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
+    ## USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:
+    ## Level of Significance =  0.05 
+    ## 
+    ## Call:
+    ##  gvlma(x = model1) 
+    ## 
+    ##                        Value   p-value                   Decision
+    ## Global Stat        811211.42 0.000e+00 Assumptions NOT satisfied!
+    ## Skewness           359288.30 0.000e+00 Assumptions NOT satisfied!
+    ## Kurtosis           451756.85 0.000e+00 Assumptions NOT satisfied!
+    ## Link Function         144.32 0.000e+00 Assumptions NOT satisfied!
+    ## Heteroscedasticity     21.95 2.798e-06 Assumptions NOT satisfied!
+    ## 
+    ## > gvmodel <- gvlma(model2)
+    ## 
+    ## > summary(gvmodel)
+    ## 
+    ## Call:
+    ## lm(formula = CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH, data = BRFSS)
+    ## 
+    ## Residuals:
+    ##      Min       1Q   Median       3Q      Max 
+    ## -0.18069 -0.07726 -0.07726 -0.05084  0.94916 
+    ## 
+    ## Coefficients:
+    ##              Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept) 0.0508387  0.0008588   59.20   <2e-16 ***
+    ## NOTEETH     0.1298464  0.0019032   68.23   <2e-16 ***
+    ## FEWTEETH    0.0823156  0.0015754   52.25   <2e-16 ***
+    ## MOSTTEETH   0.0264187  0.0012628   20.92   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 0.278 on 266105 degrees of freedom
+    ## Multiple R-squared:  0.02258,    Adjusted R-squared:  0.02257 
+    ## F-statistic:  2049 on 3 and 266105 DF,  p-value: < 2.2e-16
+    ## 
+    ## 
+    ## ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
+    ## USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:
+    ## Level of Significance =  0.05 
+    ## 
+    ## Call:
+    ##  gvlma(x = model2) 
+    ## 
+    ##                        Value   p-value                   Decision
+    ## Global Stat        8.115e+05 0.000e+00 Assumptions NOT satisfied!
+    ## Skewness           3.588e+05 0.000e+00 Assumptions NOT satisfied!
+    ## Kurtosis           4.527e+05 0.000e+00 Assumptions NOT satisfied!
+    ## Link Function      8.712e-14 1.000e+00    Assumptions acceptable.
+    ## Heteroscedasticity 2.240e+01 2.212e-06 Assumptions NOT satisfied!
+    ## 
+    ## > gvmodel <- gvlma(full.model)
+    ## 
+    ## > summary(gvmodel)
+    ## 
+    ## Call:
+    ## lm(formula = CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH + MALE + 
+    ##     BLACK + HISPANIC + ASIAN + OTHRACE + AGE1 + AGE2 + AGE3 + 
+    ##     LOWED + SOMECOLL + COLLEGE + INC1 + INC2 + INC3 + INC4 + 
+    ##     NODENVST + NODIABETE + FRMRSMK + SMOKE + NOEXER + UNDWT + 
+    ##     OVWT + OBESE, data = BRFSS)
+    ## 
+    ## Residuals:
+    ##      Min       1Q   Median       3Q      Max 
+    ## -0.37469 -0.11897 -0.06565 -0.01636  1.05550 
+    ## 
+    ## Coefficients:
+    ##              Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept)  0.039723   0.002339  16.985  < 2e-16 ***
+    ## NOTEETH      0.062915   0.002116  29.726  < 2e-16 ***
+    ## FEWTEETH     0.035902   0.001673  21.462  < 2e-16 ***
+    ## MOSTTEETH    0.006902   0.001269   5.440 5.32e-08 ***
+    ## MALE         0.057156   0.001099  51.991  < 2e-16 ***
+    ## BLACK       -0.025684   0.002053 -12.513  < 2e-16 ***
+    ## HISPANIC    -0.021033   0.002501  -8.408  < 2e-16 ***
+    ## ASIAN       -0.021501   0.004633  -4.641 3.47e-06 ***
+    ## OTHRACE      0.021897   0.002682   8.163 3.28e-16 ***
+    ## AGE1         0.019320   0.001357  14.234  < 2e-16 ***
+    ## AGE2         0.049538   0.001512  32.759  < 2e-16 ***
+    ## AGE3         0.083418   0.001918  43.483  < 2e-16 ***
+    ## LOWED        0.020631   0.002272   9.082  < 2e-16 ***
+    ## SOMECOLL     0.002666   0.001441   1.850 0.064246 .  
+    ## COLLEGE     -0.003831   0.001433  -2.673 0.007522 ** 
+    ## INC1         0.037064   0.002141  17.310  < 2e-16 ***
+    ## INC2         0.023720   0.001706  13.900  < 2e-16 ***
+    ## INC3         0.008899   0.001941   4.585 4.55e-06 ***
+    ## INC4         0.006672   0.001712   3.897 9.74e-05 ***
+    ## NODENVST     0.016985   0.001288  13.192  < 2e-16 ***
+    ## NODIABETE   -0.069073   0.001407 -49.103  < 2e-16 ***
+    ## FRMRSMK      0.026789   0.001199  22.348  < 2e-16 ***
+    ## SMOKE        0.034479   0.001793  19.227  < 2e-16 ***
+    ## NOEXER       0.017406   0.001244  13.996  < 2e-16 ***
+    ## UNDWT        0.017320   0.004559   3.799 0.000145 ***
+    ## OVWT         0.003361   0.001301   2.583 0.009809 ** 
+    ## OBESE        0.011321   0.001393   8.126 4.45e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 0.2723 on 266082 degrees of freedom
+    ## Multiple R-squared:  0.06244,    Adjusted R-squared:  0.06235 
+    ## F-statistic: 681.6 on 26 and 266082 DF,  p-value: < 2.2e-16
+    ## 
+    ## 
+    ## ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
+    ## USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:
+    ## Level of Significance =  0.05 
+    ## 
+    ## Call:
+    ##  gvlma(x = full.model) 
+    ## 
+    ##                        Value   p-value                   Decision
+    ## Global Stat        694863.46 0.000e+00 Assumptions NOT satisfied!
+    ## Skewness           314383.05 0.000e+00 Assumptions NOT satisfied!
+    ## Kurtosis           379489.65 0.000e+00 Assumptions NOT satisfied!
+    ## Link Function         969.92 0.000e+00 Assumptions NOT satisfied!
+    ## Heteroscedasticity     20.84 4.984e-06 Assumptions NOT satisfied!
 
 This concluded the linear regression modeling.
 
