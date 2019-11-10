@@ -1,6 +1,6 @@
 Preparing the Data
 ================
-First created on Nov 7, 2019. Updated on Nov 08, 2019
+First created on Nov 7, 2019. Updated on Nov 09, 2019
 
   - [Step 1: Read in the BRFSS 2018 survey data set and only keep key
     variables](#step-1-read-in-the-brfss-2018-survey-data-set-and-only-keep-key-variables)
@@ -841,6 +841,10 @@ making the data set smaller
     eliminated 1548 records.
 3.  Removing participants with invalid independent (exposure) variable
     data eliminated 1548 records.
+
+![Data
+Reduction](https://pgsmith2000.fithub.io/toothheart/output/figures/data_reduction.png
+"Data Reduction")
 
 ## Step 4: Write out final data set for further analyses
 
