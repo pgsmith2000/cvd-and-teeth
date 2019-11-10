@@ -5,6 +5,9 @@ First created on Nov 8, 2019. Updated on Nov 09, 2019
   - [Step 1: Load Libraries](#step-1-load-libraries)
   - [Step 2: Run Linear Regression
     Models](#step-2-run-linear-regression-models)
+      - [Model 1 Diagnostics](#model-1-diagnostics)
+      - [Model 2 Diagnostics](#model-2-diagnostics)
+      - [Full Model Diagnostics](#full-model-diagnostics)
 
 ## Step 1: Load Libraries
 
@@ -1186,6 +1189,24 @@ source("../code/260_Linear regression models.R", echo = TRUE)
     ## Kurtosis           379489.65 0.000e+00 Assumptions NOT satisfied!
     ## Link Function         969.92 0.000e+00 Assumptions NOT satisfied!
     ## Heteroscedasticity     20.84 4.984e-06 Assumptions NOT satisfied!
+
+### Model 1 Diagnostics
+
+![Model 1
+Diagnostics](https://pgsmith2000.github.io/toothheart/output/figures/lmodel1diagnostics.png
+"Model 1 Diagnostics")
+
+### Model 2 Diagnostics
+
+![Model 2
+Diagnostics](https://pgsmith2000.github.io/toothheart/output/figures/lmodel2diagnostics.png
+"Model 2 Diagnostics")
+
+### Full Model Diagnostics
+
+![Full Model
+Diagnostics](https://pgsmith2000.github.io/toothheart/output/figures/lmfulldiagnostics.png
+"Full Model Diagnostics")
 
 This concluded the linear regression modeling.
 
