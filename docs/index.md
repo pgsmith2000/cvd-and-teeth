@@ -42,10 +42,9 @@ was a key tool in this process.
 
 The three main products of this process included:
 
-  - The Main **[Data Dictionary](../output/Data_Dictionary.xlsx)**
-  - A small **[Data Dictionary
-    Supplement](../output/data_dictionary.txt)**
-  - The final **[BRFSS Reduced Data Set](../output/BRFSS.csv)**
+  - The Main **[Data Dictionary](output/Data_Dictionary.xlsx)**
+  - A small **[Data Dictionary Supplement](output/data_dictionary.txt)**
+  - The final **[BRFSS Reduced Data Set](output/BRFSS.csv)**
 
 For the detailed coding and results, explore the **[Stage 1 Preparing,
 Cleaning, and Reducing the Data](preparing-the-data.html).**
