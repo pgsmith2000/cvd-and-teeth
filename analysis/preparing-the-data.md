@@ -840,10 +840,10 @@ making the data set smaller
 2.  Removing participants with invalid dependent (outcome) variable data
     eliminated 1548 records.
 3.  Removing participants with invalid independent (exposure) variable
-    data eliminated 1548 records.
+    data eliminated 8200 records.
 
 ![Data
-Reduction](https://pgsmith2000.fithub.io/toothheart/output/figures/data_reduction.png
+Reduction](https://pgsmith2000.github.io/toothheart/output/figures/data_reduction.png
 "Data Reduction")
 
 ## Step 4: Write out final data set for further analyses

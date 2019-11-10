@@ -47,8 +47,8 @@ The three main products of this process included:
     Supplement](../output/data_dictionary.txt)**
   - The final **[BRFSS Reduced Data Set](../output/BRFSS.csv)**
 
-For the detailed coding and results, explore the **[Stage 1
-Analysis](preparing-the-data.html).**
+For the detailed coding and results, explore the **[Stage 1 Preparing,
+Cleaning, and Reducing the Data](preparing-the-data.html).**
 
 ### Stage 2: Example Descriptive Analysis
 
