@@ -1,5 +1,5 @@
 ---
-title: "Logistial Regression"
+title: "Logistic Regression"
 date: '`r paste("First created on Nov 8, 2019. Updated on", format(Sys.Date(),"%b %d, %Y"))`'
 output: 
   github_document:
@@ -18,7 +18,7 @@ source("../code/100_Dependencies.R", echo = TRUE)
 
 ```
 
-## Step 2: Run Logistical Regression Models
+## Step 2: Run Logistic Regression Models
 
 ```{r echo=TRUE}
 source("../code/265_Logistic regression models.R", echo = TRUE)
@@ -27,12 +27,12 @@ source("../code/265_Logistic regression models.R", echo = TRUE)
 
 ### Full Logistical Model Parameters (with Odds Ratios and Limits)
 
-![Full Logistical Model Parameters](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/LogisticFullModelTable.png "Full Logistical Model Parameters")
+![Full Logistic Model Parameters](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/LogisticFullModelTable.png "Full Logistical Model Parameters")
 
-### Full Logistical Model Odds Ratio Plot
+### Full Logistic Model Odds Ratio Plot
 
-![Logistical Model Odds Ratio Plot](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/OddsProbFullLogisticalModel.png "Logistical Model Odds Ratio Plot")
+![Logistic Model Odds Ratio Plot](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/OddsProbFullLogisticModel.png "Logistical Model Odds Ratio Plot")
 
-This concluded the logistical regression modeling.
+This concluded the logistic regression modeling.
 
 Return to the **[Main Overview](index.html)**

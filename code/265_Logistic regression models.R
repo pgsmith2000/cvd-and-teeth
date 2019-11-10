@@ -4,7 +4,6 @@ BRFSS <- read.csv(file="../output/BRFSS.csv", header=TRUE, sep=",")
 
 logModel1 <- glm(CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH, 
                     data = BRFSS, family = "binomial") 
-temp <-summary(logModel1)
 
 logModel2 <- glm(CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH +
                    NODENVST + NODIABETE , 
@@ -37,12 +36,8 @@ summary(logModel1)$aic
 summary(logModel2)$aic
 summary(logFullModel)$aic
 
-logFullModelProb <- (summary(logFullModel)$aic -summary(logModel1)$aic)/2
-logFullModelProb
-
 #FINAL MODEL
 #arrange covariates in order of table 1
-
 FinalLogisticRegressionModel <- logFullModel
 summary(FinalLogisticRegressionModel)
 
@@ -55,7 +50,7 @@ Tidy_LogFinal$OR <- exp(Tidy_LogFinal$estimate)
 Tidy_LogFinal$LL <- exp(Tidy_LogFinal$estimate - (1.96 * Tidy_LogFinal$std.error))
 Tidy_LogFinal$UL <- exp(Tidy_LogFinal$estimate + (1.96 * Tidy_LogFinal$std.error))
 
-write.csv(Tidy_LogFinal, file = "../output/logistical/LogisticRegressionModel.csv")
+write.csv(Tidy_LogFinal, file = "../output/logistic/LogisticRegressionModel.csv")
 
 #visualize to help interpretation
 p1 <- ggplot(Tidy_LogFinal, 
@@ -67,10 +62,9 @@ p1 <- ggplot(Tidy_LogFinal,
   scale_color_discrete(name = "Term") + 
   coord_flip() + 
   theme_minimal() + xlab("") + 
-  ggtitle("Odds Probabilities for Full Logistical Regression Variables") +
+  ggtitle("Odds Probabilities for Full Logistic Model Regression Variables") +
   theme(legend.position = "none") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
-p1
 
-ggsave("../output/figures/OddsProbFullLogisticalModel.png", p1)
+ggsave("../output/figures/OddsProbFullLogModel.png", p1)
 

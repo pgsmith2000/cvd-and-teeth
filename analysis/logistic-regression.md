@@ -1,14 +1,14 @@
-Logistial Regression
+Logistic Regression
 ================
 First created on Nov 8, 2019. Updated on Nov 10, 2019
 
   - [Step 1: Load Libraries](#step-1-load-libraries)
-  - [Step 2: Run Logistical Regression
-    Models](#step-2-run-logistical-regression-models)
+  - [Step 2: Run Logistic Regression
+    Models](#step-2-run-logistic-regression-models)
       - [Full Logistical Model Parameters (with Odds Ratios and
         Limits)](#full-logistical-model-parameters-with-odds-ratios-and-limits)
-      - [Full Logistical Model Odds Ratio
-        Plot](#full-logistical-model-odds-ratio-plot)
+      - [Full Logistic Model Odds Ratio
+        Plot](#full-logistic-model-odds-ratio-plot)
 
 ## Step 1: Load Libraries
 
@@ -71,7 +71,7 @@ source("../code/100_Dependencies.R", echo = TRUE)
     ## 
     ## > library(gvlma)
 
-## Step 2: Run Logistical Regression Models
+## Step 2: Run Logistic Regression Models
 
 ``` r
 source("../code/265_Logistic regression models.R", echo = TRUE)
@@ -83,8 +83,6 @@ source("../code/265_Logistic regression models.R", echo = TRUE)
     ## 
     ## > logModel1 <- glm(CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH, 
     ## +     data = BRFSS, family = "binomial")
-    ## 
-    ## > temp <- summary(logModel1)
     ## 
     ## > logModel2 <- glm(CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH + 
     ## +     NODENVST + NODIABETE, data = BRFSS, family = "binomial")
@@ -243,11 +241,6 @@ source("../code/265_Logistic regression models.R", echo = TRUE)
     ## > summary(logFullModel)$aic
     ## [1] 140742.7
     ## 
-    ## > logFullModelProb <- (summary(logFullModel)$aic - summary(logModel1)$aic)/2
-    ## 
-    ## > logFullModelProb
-    ## [1] -5276.963
-    ## 
     ## > FinalLogisticRegressionModel <- logFullModel
     ## 
     ## > summary(FinalLogisticRegressionModel)
@@ -315,34 +308,29 @@ source("../code/265_Logistic regression models.R", echo = TRUE)
     ## > Tidy_LogFinal$UL <- exp(Tidy_LogFinal$estimate + (1.96 * 
     ## +     Tidy_LogFinal$std.error))
     ## 
-    ## > write.csv(Tidy_LogFinal, file = "../output/logistical/LogisticRegressionModel.csv")
+    ## > write.csv(Tidy_LogFinal, file = "../output/logistic/LogisticRegressionModel.csv")
     ## 
     ## > p1 <- ggplot(Tidy_LogFinal, aes(x = term, y = OR, 
     ## +     ymin = LL, ymax = UL)) + geom_pointrange(aes(col = factor(term)), 
     ## +     position = positio .... [TRUNCATED] 
     ## 
-    ## > p1
-
-    ## 
-    ## > ggsave("../output/figures/OddsProbFullLogisticalModel.png", 
+    ## > ggsave("../output/figures/OddsProbFullLogModel.png", 
     ## +     p1)
 
     ## Saving 7 x 5 in image
 
-![](logistical-regression_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
-
 ### Full Logistical Model Parameters (with Odds Ratios and Limits)
 
-![Full Logistical Model
+![Full Logistic Model
 Parameters](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/LogisticFullModelTable.png
 "Full Logistical Model Parameters")
 
-### Full Logistical Model Odds Ratio Plot
+### Full Logistic Model Odds Ratio Plot
 
-![Logistical Model Odds Ratio
-Plot](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/OddsProbFullLogisticalModel.png
+![Logistic Model Odds Ratio
+Plot](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/OddsProbFullLogisticModel.png
 "Logistical Model Odds Ratio Plot")
 
-This concluded the logistical regression modeling.
+This concluded the logistic regression modeling.
 
 Return to the **[Main Overview](index.html)**
