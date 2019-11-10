@@ -25,17 +25,14 @@ source("../code/265_Logistic regression models.R", echo = TRUE)
 
 ```
 
-### Full Logistical Model Parameters
-![Model 1 Diagnostics](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/lmodel1diagnostics.png "Model 1 Diagnostics")
+### Full Logistical Model Parameters (with Odds Ratios and Limits)
 
-### Model 2 Diagnostics
+![Full Logistical Model Parameters](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/LogisticFullModelTable.png "Full Logistical Model Parameters")
 
-![Model 2 Diagnostics](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/lmodel2diagnostics.png "Model 2 Diagnostics")
+### Full Logistical Model Odds Ratio Plot
 
-### Full Model Diagnostics
+![Logistical Model Odds Ratio Plot](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/OddsProbFullLogisticalModel.png "Logistical Model Odds Ratio Plot")
 
-![Full Model Diagnostics](https://pgsmith2000.github.io/cvd-and-teeth/output/figures/lmfulldiagnostics.png "Full Model Diagnostics")
-
-This concluded the linear regression modeling.
+This concluded the logistical regression modeling.
 
 Return to the **[Main Overview](index.html)**

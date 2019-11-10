@@ -41,6 +41,9 @@ A linear regression analyis is provided for 3 models. In addition a step-wise mu
 
 For the detailed coding and results, explore the **[Stage 3 Linear Regression](linear-regression.html).**
 
-### Stage 4: Log Regression
+### Stage 4: Logistical Regression
 
-To come...
+Two logistical regression models were constructed with the same parameters as Model1 and the Full Model used in the logistical model. This model results in a series of Odds ratios (with upper and lower limits).
+
+
+For the detailed coding and results from this logistical regression, explore the **[Stage 4 Logistical Regression](logistical-regression.html).**

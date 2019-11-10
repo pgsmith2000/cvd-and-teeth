@@ -72,5 +72,5 @@ p1 <- ggplot(Tidy_LogFinal,
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 p1
 
-ggsave("../output/figures/OddsProbFullLogistialModel.png", p1)
+ggsave("../output/figures/OddsProbFullLogisticalModel.png", p1)
 

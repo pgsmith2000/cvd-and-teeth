@@ -1,14 +1,14 @@
 Revisiting the Cross-Sectional Association Between Missing Teeth and
 Cardiovascular Disease: BRFSS 2018
 ================
-First created on Nov 7, 2019. Updated on Nov 09, 2019
+First created on Nov 7, 2019. Updated on Nov 10, 2019
 
   - [Stage 1: Data Preparation, Cleaning, and
     Reduction](#stage-1-data-preparation-cleaning-and-reduction)
   - [Stage 2: Example Descriptive
     Analysis](#stage-2-example-descriptive-analysis)
   - [Stage 3: Linear Regression](#stage-3-linear-regression)
-  - [Stage 4: Log Regression](#stage-4-log-regression)
+  - [Stage 4: Logistical Regression](#stage-4-logistical-regression)
 
 The relationship between oral health and cardiovascular disease has been
 an important area of research in the last decade. The objective of the
@@ -74,6 +74,13 @@ a result and log regression will follow.
 For the detailed coding and results, explore the **[Stage 3 Linear
 Regression](linear-regression.html).**
 
-### Stage 4: Log Regression
+### Stage 4: Logistical Regression
 
-To come…
+Two logistical regression models were constructed with the same
+parameters as Model1 and the Full Model used in the logistical model.
+This model results in a series of Odds ratios (with upper and lower
+limits).
+
+For the detailed coding and results from this logistical regression,
+explore the **[Stage 4 Logistical
+Regression](logistical-regression.html).**
