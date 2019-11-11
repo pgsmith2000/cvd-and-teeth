@@ -4,10 +4,11 @@ BRFSS <- read.csv(file = "../output/BRFSS.csv", header=TRUE, sep=",")
 str(BRFSS)
 summary(BRFSS)
 
-model1 <- lm(CVDINFR5 ~ RMVTETH5, data = BRFSS)
+model1 <- lm(CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH, data = BRFSS)
 summary(model1)
 
-model2 <- lm(CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH, data = BRFSS)
+model2 <- lm(CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH +
+               MALE + AGE1 + AGE2 + AGE3, data = BRFSS)
 summary(model2)
 
 min.model <- lm(CVDINFR5 ~ 1, data = BRFSS)

@@ -1,6 +1,6 @@
 Linear Regression
 ================
-First created on Nov 8, 2019. Updated on Nov 09, 2019
+First created on Nov 8, 2019. Updated on Nov 11, 2019
 
   - [Step 1: Load Libraries](#step-1-load-libraries)
   - [Step 2: Run Linear Regression
@@ -241,33 +241,10 @@ source("../code/260_Linear regression models.R", echo = TRUE)
     ##  Max.   :9.000   Max.   :1.00000   Max.   :1.0000   Max.   :1.0000  
     ##                                                                     
     ## 
-    ## > model1 <- lm(CVDINFR5 ~ RMVTETH5, data = BRFSS)
-    ## 
-    ## > summary(model1)
-    ## 
-    ## Call:
-    ## lm(formula = CVDINFR5 ~ RMVTETH5, data = BRFSS)
-    ## 
-    ## Residuals:
-    ##      Min       1Q   Median       3Q      Max 
-    ## -0.17242 -0.08767 -0.08767 -0.04530  0.95470 
-    ## 
-    ## Coefficients:
-    ##              Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept) 0.0453000  0.0007598   59.62   <2e-16 ***
-    ## RMVTETH5    0.0423743  0.0005496   77.11   <2e-16 ***
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## Residual standard error: 0.2781 on 266107 degrees of freedom
-    ## Multiple R-squared:  0.02185,    Adjusted R-squared:  0.02185 
-    ## F-statistic:  5945 on 1 and 266107 DF,  p-value: < 2.2e-16
-    ## 
-    ## 
-    ## > model2 <- lm(CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH, 
+    ## > model1 <- lm(CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH, 
     ## +     data = BRFSS)
     ## 
-    ## > summary(model2)
+    ## > summary(model1)
     ## 
     ## Call:
     ## lm(formula = CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH, data = BRFSS)
@@ -288,6 +265,37 @@ source("../code/260_Linear regression models.R", echo = TRUE)
     ## Residual standard error: 0.278 on 266105 degrees of freedom
     ## Multiple R-squared:  0.02258,    Adjusted R-squared:  0.02257 
     ## F-statistic:  2049 on 3 and 266105 DF,  p-value: < 2.2e-16
+    ## 
+    ## 
+    ## > model2 <- lm(CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH + 
+    ## +     MALE + AGE1 + AGE2 + AGE3, data = BRFSS)
+    ## 
+    ## > summary(model2)
+    ## 
+    ## Call:
+    ## lm(formula = CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH + MALE + 
+    ##     AGE1 + AGE2 + AGE3, data = BRFSS)
+    ## 
+    ## Residuals:
+    ##      Min       1Q   Median       3Q      Max 
+    ## -0.25791 -0.11350 -0.07078 -0.02102  0.99960 
+    ## 
+    ## Coefficients:
+    ##              Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept) 0.0004043  0.0012393   0.326    0.744    
+    ## NOTEETH     0.1148229  0.0019111  60.083   <2e-16 ***
+    ## FEWTEETH    0.0695639  0.0015779  44.086   <2e-16 ***
+    ## MOSTTEETH   0.0189619  0.0012570  15.084   <2e-16 ***
+    ## MALE        0.0616769  0.0010787  57.177   <2e-16 ***
+    ## AGE1        0.0206114  0.0013573  15.185   <2e-16 ***
+    ## AGE2        0.0514180  0.0014826  34.682   <2e-16 ***
+    ## AGE3        0.0810020  0.0018611  43.523   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 0.2753 on 266101 degrees of freedom
+    ## Multiple R-squared:  0.04193,    Adjusted R-squared:  0.04191 
+    ## F-statistic:  1664 on 7 and 266101 DF,  p-value: < 2.2e-16
     ## 
     ## 
     ## > min.model <- lm(CVDINFR5 ~ 1, data = BRFSS)
@@ -951,13 +959,6 @@ source("../code/260_Linear regression models.R", echo = TRUE)
     ## 
     ## 
     ## > tidy(model1)
-    ## # A tibble: 2 x 5
-    ##   term        estimate std.error statistic p.value
-    ##   <chr>          <dbl>     <dbl>     <dbl>   <dbl>
-    ## 1 (Intercept)   0.0453  0.000760      59.6       0
-    ## 2 RMVTETH5      0.0424  0.000550      77.1       0
-    ## 
-    ## > tidy(model2)
     ## # A tibble: 4 x 5
     ##   term        estimate std.error statistic  p.value
     ##   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
@@ -965,6 +966,19 @@ source("../code/260_Linear regression models.R", echo = TRUE)
     ## 2 NOTEETH       0.130   0.00190       68.2 0.      
     ## 3 FEWTEETH      0.0823  0.00158       52.3 0.      
     ## 4 MOSTTEETH     0.0264  0.00126       20.9 4.11e-97
+    ## 
+    ## > tidy(model2)
+    ## # A tibble: 8 x 5
+    ##   term        estimate std.error statistic   p.value
+    ##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
+    ## 1 (Intercept) 0.000404   0.00124     0.326 7.44e-  1
+    ## 2 NOTEETH     0.115      0.00191    60.1   0.       
+    ## 3 FEWTEETH    0.0696     0.00158    44.1   0.       
+    ## 4 MOSTTEETH   0.0190     0.00126    15.1   2.15e- 51
+    ## 5 MALE        0.0617     0.00108    57.2   0.       
+    ## 6 AGE1        0.0206     0.00136    15.2   4.65e- 52
+    ## 7 AGE2        0.0514     0.00148    34.7   5.76e-263
+    ## 8 AGE3        0.0810     0.00186    43.5   0.       
     ## 
     ## > tidy(full.model)
     ## # A tibble: 27 x 5
@@ -1007,19 +1021,19 @@ source("../code/260_Linear regression models.R", echo = TRUE)
     ## > write.csv(tidy(fwd.model), file = "../output/linear/TidyRegressionModelFWD.csv")
     ## 
     ## > percent(summary(model1)$adj.r.squared)
-    ## [1] "2.19%"
+    ## [1] "2.26%"
     ## 
     ## > percent(summary(model2)$adj.r.squared)
-    ## [1] "2.26%"
+    ## [1] "4.19%"
     ## 
     ## > percent(summary(full.model)$adj.r.squared)
     ## [1] "6.23%"
     ## 
     ## > summary(model1)$adj.r.squared
-    ## [1] 0.02185046
+    ## [1] 0.0225682
     ## 
     ## > summary(model2)$adj.r.squared
-    ## [1] 0.0225682
+    ## [1] 0.04190584
     ## 
     ## > summary(full.model)$adj.r.squared
     ## [1] 0.06234753
@@ -1053,43 +1067,6 @@ source("../code/260_Linear regression models.R", echo = TRUE)
     ## > summary(gvmodel)
     ## 
     ## Call:
-    ## lm(formula = CVDINFR5 ~ RMVTETH5, data = BRFSS)
-    ## 
-    ## Residuals:
-    ##      Min       1Q   Median       3Q      Max 
-    ## -0.17242 -0.08767 -0.08767 -0.04530  0.95470 
-    ## 
-    ## Coefficients:
-    ##              Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept) 0.0453000  0.0007598   59.62   <2e-16 ***
-    ## RMVTETH5    0.0423743  0.0005496   77.11   <2e-16 ***
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## Residual standard error: 0.2781 on 266107 degrees of freedom
-    ## Multiple R-squared:  0.02185,    Adjusted R-squared:  0.02185 
-    ## F-statistic:  5945 on 1 and 266107 DF,  p-value: < 2.2e-16
-    ## 
-    ## 
-    ## ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
-    ## USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:
-    ## Level of Significance =  0.05 
-    ## 
-    ## Call:
-    ##  gvlma(x = model1) 
-    ## 
-    ##                        Value   p-value                   Decision
-    ## Global Stat        811211.42 0.000e+00 Assumptions NOT satisfied!
-    ## Skewness           359288.30 0.000e+00 Assumptions NOT satisfied!
-    ## Kurtosis           451756.85 0.000e+00 Assumptions NOT satisfied!
-    ## Link Function         144.32 0.000e+00 Assumptions NOT satisfied!
-    ## Heteroscedasticity     21.95 2.798e-06 Assumptions NOT satisfied!
-    ## 
-    ## > gvmodel <- gvlma(model2)
-    ## 
-    ## > summary(gvmodel)
-    ## 
-    ## Call:
     ## lm(formula = CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH, data = BRFSS)
     ## 
     ## Residuals:
@@ -1115,7 +1092,7 @@ source("../code/260_Linear regression models.R", echo = TRUE)
     ## Level of Significance =  0.05 
     ## 
     ## Call:
-    ##  gvlma(x = model2) 
+    ##  gvlma(x = model1) 
     ## 
     ##                        Value   p-value                   Decision
     ## Global Stat        8.115e+05 0.000e+00 Assumptions NOT satisfied!
@@ -1123,6 +1100,50 @@ source("../code/260_Linear regression models.R", echo = TRUE)
     ## Kurtosis           4.527e+05 0.000e+00 Assumptions NOT satisfied!
     ## Link Function      8.712e-14 1.000e+00    Assumptions acceptable.
     ## Heteroscedasticity 2.240e+01 2.212e-06 Assumptions NOT satisfied!
+    ## 
+    ## > gvmodel <- gvlma(model2)
+    ## 
+    ## > summary(gvmodel)
+    ## 
+    ## Call:
+    ## lm(formula = CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH + MALE + 
+    ##     AGE1 + AGE2 + AGE3, data = BRFSS)
+    ## 
+    ## Residuals:
+    ##      Min       1Q   Median       3Q      Max 
+    ## -0.25791 -0.11350 -0.07078 -0.02102  0.99960 
+    ## 
+    ## Coefficients:
+    ##              Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept) 0.0004043  0.0012393   0.326    0.744    
+    ## NOTEETH     0.1148229  0.0019111  60.083   <2e-16 ***
+    ## FEWTEETH    0.0695639  0.0015779  44.086   <2e-16 ***
+    ## MOSTTEETH   0.0189619  0.0012570  15.084   <2e-16 ***
+    ## MALE        0.0616769  0.0010787  57.177   <2e-16 ***
+    ## AGE1        0.0206114  0.0013573  15.185   <2e-16 ***
+    ## AGE2        0.0514180  0.0014826  34.682   <2e-16 ***
+    ## AGE3        0.0810020  0.0018611  43.523   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 0.2753 on 266101 degrees of freedom
+    ## Multiple R-squared:  0.04193,    Adjusted R-squared:  0.04191 
+    ## F-statistic:  1664 on 7 and 266101 DF,  p-value: < 2.2e-16
+    ## 
+    ## 
+    ## ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
+    ## USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:
+    ## Level of Significance =  0.05 
+    ## 
+    ## Call:
+    ##  gvlma(x = model2) 
+    ## 
+    ##                        Value   p-value                   Decision
+    ## Global Stat        751733.62 0.000e+00 Assumptions NOT satisfied!
+    ## Skewness           336638.98 0.000e+00 Assumptions NOT satisfied!
+    ## Kurtosis           414811.49 0.000e+00 Assumptions NOT satisfied!
+    ## Link Function         262.41 0.000e+00 Assumptions NOT satisfied!
+    ## Heteroscedasticity     20.74 5.254e-06 Assumptions NOT satisfied!
     ## 
     ## > gvmodel <- gvlma(full.model)
     ## 

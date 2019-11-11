@@ -4,9 +4,10 @@ BRFSS <- read.csv(file="../output/BRFSS.csv", header=TRUE, sep=",")
 
 logModel1 <- glm(CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH, 
                     data = BRFSS, family = "binomial") 
+summary(logModel1)
 
 logModel2 <- glm(CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH +
-                   NODENVST + NODIABETE , 
+                   MALE + AGE1 + AGE2 + AGE3, 
                    data = BRFSS, family = "binomial") 
 summary(logModel2)
 
@@ -71,5 +72,5 @@ p1 <- ggplot(Tidy_LogFinal,
   theme(legend.position = "none") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
-ggsave("../output/figures/LogistModelOR.png", p1)
+ggsave("../output/figures/LogModelOR.png", p1)
 
