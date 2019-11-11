@@ -21,11 +21,16 @@ logFullModel <- glm(CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH +
                  data = BRFSS, family = "binomial") 
 summary(logFullModel)
 
+stepLogModel <- stepAIC(logFullModel)
+summary(stepLogModel)
+
+# note: the step model and the full model are the same
+
 # remove SOMECOLL (not significant) log full.model
 logFullModel <- glm(CVDINFR5 ~ NOTEETH + FEWTEETH + MOSTTEETH +
                       MALE + BLACK + HISPANIC + ASIAN + OTHRACE +
                       AGE1 + AGE2 + AGE3 +
-                      LOWED + COLLEGE +
+                      LOWED + SOMECOLL + COLLEGE +
                       INC1 + INC2 + INC3 + INC4 +
                       NODENVST + NODIABETE + FRMRSMK + SMOKE +
                       NOEXER + UNDWT + OVWT + OBESE, 
